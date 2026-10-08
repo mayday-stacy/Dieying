@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <StartupObject>Composa.App.Tests.TestProgram</StartupObject>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
