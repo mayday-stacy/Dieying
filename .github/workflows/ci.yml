@@ -6,6 +6,7 @@ name: CI
 # A change to nothing but Markdown cannot break the build, so it does not start one. That matters
 # most for edits made on GitHub straight to main, which would otherwise start two Windows jobs.
 on:
+  workflow_dispatch: # Also validate a newly created fork before its first pull request.
   push:
     branches: [main]
     paths-ignore: ['**.md']
