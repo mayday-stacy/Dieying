@@ -14,7 +14,7 @@ Resample says how the pixels are made, and the dialog opens on the choice last m
 - **Nearest Neighbor** turns every pixel into a hard-edged block, which keeps pixel art crisp instead of blurring it.
 - **Enhance** enlarges each photo layer with a model run on your machine (Real-ESRGAN), which invents fine detail that was not in the picture: textures and edges come out crisp where Automatic would soften them, and faces and lettering can come out wrong, because the detail is made up. The model always enlarges four times and the result is then fitted to the size you asked for; it only applies when enlarging, and it takes about a second for every 65,000 pixels of each layer on a typical computer, so a progress window with Cancel counts the tiles and says how long is left. Cancel changes nothing. Text and shape layers are redrawn from their settings instead, masks are resampled, and where the model is not available the picture is resampled as Automatic does and the status line says why.
 
-Nothing is sent anywhere; the model ships with Composa and runs on your own machine.
+Nothing is sent anywhere; the model ships with Dieying and runs on your own machine.
 
 ## Trim
 

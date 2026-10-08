@@ -13,7 +13,7 @@ public static class TrimDialog
         var basedOn = new StackPanel { Spacing = 4 };
         foreach (var choice in Enum.GetValues<TrimBasedOn>())
         {
-            var radio = new RadioButton { Content = TrimOptions.DisplayName(choice), IsChecked = choice == initial.BasedOn, GroupName = "trim-based-on" };
+            var radio = new RadioButton { Content = L10n.Text(TrimOptions.DisplayName(choice)), IsChecked = choice == initial.BasedOn, GroupName = "trim-based-on" };
             radio.IsCheckedChanged += (_, _) => { if (radio.IsChecked == true) options = options with { BasedOn = choice }; };
             basedOn.Children.Add(radio);
         }

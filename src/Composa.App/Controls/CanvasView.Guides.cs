@@ -28,6 +28,7 @@ public sealed partial class CanvasView
         if (Rulers && !rulersWereShown) origin += new Vector(RulerThickness, RulerThickness);
         else if (!Rulers && rulersWereShown) origin -= new Vector(RulerThickness, RulerThickness);
         ClampOrigin();
+        NotifyImeGeometry();
         InvalidateVisual();
     }
 

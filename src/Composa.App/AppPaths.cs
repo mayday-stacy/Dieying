@@ -4,7 +4,7 @@ using System.Text;
 namespace Composa.App;
 
 /// <summary>
-/// Where Composa keeps its own files, in each platform's own convention: XDG on Linux, the roaming
+/// Where Dieying keeps its own files, in each platform's own convention: XDG on Linux, the roaming
 /// and local application data folders on Windows, and Application Support and Caches on macOS.
 /// Settings and crash-recovery copies both ask here, so a platform is added in one place. The
 /// person's Downloads folder, where an update is saved, is found here too.
@@ -27,25 +27,51 @@ public static partial class AppPaths
     /// <summary>Things that can be lost without harm, which Windows keeps out of the roaming profile.</summary>
     public static string Cache => current.Cache;
 
+    /// <summary>Read-only preferences fallback from the earlier development name; recovery is never migrated.</summary>
+    public static string? LegacyConfig { get; } = LegacyConfigFor(CurrentPlatform, Environment.GetEnvironmentVariable, Environment.GetFolderPath);
+
     /// <summary>The folders for a platform, given how to read its environment. Separate from the running OS so every platform can be tested anywhere.</summary>
     public static Folders For(Platform platform, Func<string, string?> variable, Func<Environment.SpecialFolder, string> folder)
+    {
+        // Keep a local development build's preferences and recovery files separate from an
+        // installed copy. Requiring an absolute path makes the result independent of the
+        // working directory used by a shortcut or launcher.
+        var overrideVariable = variable(AppInfo.DataDirectoryVariable) is { Length: > 0 }
+            ? AppInfo.DataDirectoryVariable : AppInfo.LegacyDataDirectoryVariable;
+        if (variable(overrideVariable) is { Length: > 0 } dataDirectory)
+        {
+            if (!Path.IsPathFullyQualified(dataDirectory))
+                throw new ArgumentException($"{overrideVariable} must be an absolute path.");
+            var root = Path.GetFullPath(dataDirectory);
+            return new(Path.Combine(root, "config"), Path.Combine(root, "cache"));
+        }
+        return DefaultFolders(platform, variable, folder, AppInfo.Id);
+    }
+
+    /// <summary>An explicit data profile stays isolated; only a default profile can inherit old preferences.</summary>
+    public static string? LegacyConfigFor(Platform platform, Func<string, string?> variable, Func<Environment.SpecialFolder, string> folder)
+        => variable(AppInfo.DataDirectoryVariable) is { Length: > 0 } || variable(AppInfo.LegacyDataDirectoryVariable) is { Length: > 0 }
+            ? null : DefaultFolders(platform, variable, folder, AppInfo.LegacyDevelopmentId).Config;
+
+    private static Folders DefaultFolders(Platform platform, Func<string, string?> variable,
+        Func<Environment.SpecialFolder, string> folder, string productId)
     {
         var home = folder(Environment.SpecialFolder.UserProfile);
         switch (platform)
         {
             case Platform.Windows:
-                return new(Path.Combine(folder(Environment.SpecialFolder.ApplicationData), AppInfo.Name),
-                           Path.Combine(folder(Environment.SpecialFolder.LocalApplicationData), AppInfo.Name));
+                return new(Path.Combine(folder(Environment.SpecialFolder.ApplicationData), productId),
+                           Path.Combine(folder(Environment.SpecialFolder.LocalApplicationData), productId));
             case Platform.MacOS:
-                return new(Path.Combine(home, "Library", "Application Support", AppInfo.Name),
-                           Path.Combine(home, "Library", "Caches", AppInfo.Name));
+                return new(Path.Combine(home, "Library", "Application Support", productId),
+                           Path.Combine(home, "Library", "Caches", productId));
             default:
                 // Lowercase, as every other program in ~/.config is.
                 var config = variable("XDG_CONFIG_HOME");
                 if (string.IsNullOrEmpty(config)) config = Path.Combine(home, ".config");
                 var cache = variable("XDG_CACHE_HOME");
                 if (string.IsNullOrEmpty(cache)) cache = Path.Combine(home, ".cache");
-                return new(Path.Combine(config, "composa"), Path.Combine(cache, "composa"));
+                return new(Path.Combine(config, productId), Path.Combine(cache, productId));
         }
     }
 

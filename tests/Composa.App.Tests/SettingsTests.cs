@@ -13,6 +13,34 @@ namespace Composa.App.Tests;
 public class SettingsTests
 {
     [Fact]
+    public void Old_development_preferences_are_read_only_and_subsequent_saves_use_the_new_profile()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "dieying-settings-tests", Guid.NewGuid().ToString("N"));
+        var oldPath = Path.Combine(root, "image-editor-dev", "settings.json");
+        var newPath = Path.Combine(root, "dieying", "settings.json");
+        const string oldJson = """{ "Language": "zh-CN", "JpegQuality": 72, "RecentFiles": ["old.cmps"] }""";
+        Directory.CreateDirectory(Path.GetDirectoryName(oldPath)!);
+        File.WriteAllText(oldPath, oldJson);
+        try
+        {
+            var inherited = Settings.LoadFrom(newPath, oldPath);
+            Assert.Equal("zh-CN", inherited.Language);
+            Assert.Equal(72, inherited.JpegQuality);
+            Assert.Equal(new[] { "old.cmps" }, inherited.RecentFiles);
+            Assert.False(File.Exists(newPath)); // Loading alone never writes or moves anything.
+            inherited.JpegQuality = 85;
+            inherited.SaveTo(newPath);
+            Assert.Equal(oldJson, File.ReadAllText(oldPath));
+            Assert.Equal(85, Settings.LoadFrom(newPath, oldPath).JpegQuality);
+            File.WriteAllText(oldPath, """{ "JpegQuality": 40 }""");
+            Assert.Equal(85, Settings.LoadFrom(newPath, oldPath).JpegQuality); // The new profile always wins.
+            File.WriteAllText(newPath, "broken json");
+            Assert.Equal(90, Settings.LoadFrom(newPath, oldPath).JpegQuality); // A damaged new profile is not an old profile.
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
+    [Fact]
     public void View_options_and_move_tool_toggles_survive_the_settings_file()
     {
         var settings = new Settings

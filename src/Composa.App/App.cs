@@ -11,7 +11,7 @@ public sealed class App : Application
     {
         RequestedThemeVariant = ThemeVariant.Dark;
         Styles.Add(new FluentTheme { DensityStyle = DensityStyle.Compact });
-        Styles.Add(new Avalonia.Markup.Xaml.Styling.StyleInclude(new Uri("avares://composa/")) { Source = new Uri("avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml") });
+        Styles.Add(new Avalonia.Markup.Xaml.Styling.StyleInclude(AppInfo.ResourceUri()) { Source = new Uri("avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml") });
         Styles.Add(Palette.Styles());
     }
 

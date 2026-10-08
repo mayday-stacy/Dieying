@@ -1,13 +1,14 @@
 # Getting started
 
-## Installing
+## Running Dieying
 
-Every release on the [releases page](https://github.com/dvdstelt/Composa/releases) comes in these forms:
+Extract the whole Windows portable ZIP into its own folder and run `dieying.exe`. The package includes the .NET runtime, ImageMagick and local models; it does not install a Start menu entry or register file associations. Current packages are unsigned development builds, with Windows x64 the primary validation target. See [build instructions](../README.md#build-test-and-run-on-windows) to create a package from source.
 
-- **Linux**: an AppImage, a `.deb` for Debian and Ubuntu, an `.rpm` for Fedora and openSUSE, and a plain tarball, each for x86-64 and arm64. The AppImage and the tarball run from wherever you put them. The packages install Composa like any other application and put it in your menu.
-- **Windows**: an installer that needs no administrator rights, and a portable zip, each for x64 and arm64. The installer adds a Start menu entry, registers Composa for its own `.cmps` project files and offers itself under Open with for images without taking any of them over.
+The Composa releases page is the upstream project's distribution, not a Dieying download source. Dieying does not currently ship an independent Windows installer, Linux package or macOS application.
 
-Composa opens HEIC, AVIF and TIFF images and camera RAW files through ImageMagick. The Windows builds include it. On Linux, install your distribution's ImageMagick package (`imagemagick` on Debian, Ubuntu and Fedora) and those formats open too; everything else works without it.
+Dieying opens HEIC, AVIF, TIFF, SVG and camera RAW files through ImageMagick, included in the Windows build. On Linux source builds, an installed ImageMagick command-line tool is preferred when available.
+
+Choose Help > Language for English or Simplified Chinese; restart the application after changing it. This guide uses the English menu names.
 
 ## The window
 
@@ -30,7 +31,7 @@ You can also open an image (File > Open) and it becomes a document with one laye
 
 ## Tabs
 
-Each document has a tab above the canvas. A dot on the tab marks unsaved changes. Close a tab with its button, with a middle click or with File > Close Project (Ctrl+W); Composa asks whether to save changes first. The "+" at the end of the tabs makes a new canvas, and the buttons on the right fit the canvas to the window, show it at 100 percent, and zoom in and out.
+Each document has a tab above the canvas. A dot on the tab marks unsaved changes. Close a tab with its button, with a middle click or with File > Close Project (Ctrl+W); Dieying asks whether to save changes first. The "+" at the end of the tabs makes a new canvas, and the buttons on the right fit the canvas to the window, show it at 100 percent, and zoom in and out.
 
 Right-click a tab for a menu that acts on that document without switching to it: Copy Image copies its whole flattened picture, whatever is selected in it; Duplicate opens a copy in a new tab; Show in Folder opens the file manager with a saved file selected; Close and Close Others close it or every other tab, asking about unsaved changes as usual.
 
@@ -38,16 +39,16 @@ Tool settings, the current colors and the view options carry over from one tab t
 
 ## Undo
 
-Every change is an undoable step: Edit > Undo (Ctrl+Z) and Edit > Redo (Ctrl+Shift+Z or Ctrl+Y). The menu names the step it will undo. Composa keeps up to a hundred steps.
+Every change is an undoable step: Edit > Undo (Ctrl+Z) and Edit > Redo (Ctrl+Shift+Z or Ctrl+Y). The menu names the step it will undo. Dieying keeps up to a hundred steps, with older states also trimmed when their bitmap memory exceeds the history budget.
 
-The History panel under the Layers panel lists every step, oldest first, named as the Edit menu names it, under a first row that says how the document began. Click a step to go back or forward to it in one move, however many steps away it is, or press on the list and drag up and down to scrub through the steps while the canvas follows. The steps after the current one are dimmed and in italics: Redo brings them back, and the next change drops them. The step that is in the saved file carries a small disk, and going back to it clears the tab's unsaved-changes dot, so closing the document then asks nothing. Once more than a hundred steps have been made the oldest go, and the panel says so above the list.
+The History panel under the Layers panel lists every step, oldest first, named as the Edit menu names it, under a first row that says how the document began. Click a step to go back or forward to it in one move, however many steps away it is, or press on the list and drag up and down to scrub through the steps while the canvas follows. The steps after the current one are dimmed and in italics: Redo brings them back, and the next change drops them. The step that is in the saved file carries a small disk, and going back to it clears the tab's unsaved-changes dot, so closing the document then asks nothing. When the history count or memory budget is exceeded, the oldest steps go and the panel says so above the list.
 
-Click the panel's header to collapse it to its title, drag the line above it to make it taller or shorter, and use Window > History to hide or show it. Composa remembers how you left it.
+Click the panel's header to collapse it to its title, drag the line above it to make it taller or shorter, and use Window > History to hide or show it. Dieying remembers how you left it.
 
 ## Recovery
 
-Every two minutes, each document with unsaved changes is written to a recovery copy. If Composa does not close normally, the next launch offers those copies in a "Recover Unsaved Work" dialog. Recover opens them, marked as modified and with "(recovered)" after their names, so you can save them where you want. Cancel discards the copies. A recovery copy is removed as soon as you save or deliberately close the document.
+Every two minutes, each document with unsaved changes is written to a recovery copy. If Dieying does not close normally, the next launch offers those copies in a "Recover Unsaved Work" dialog. Recover opens them, marked as modified and with "(recovered)" after their names, so you can save them where you want. Cancel discards the copies. A recovery copy is removed as soon as you save or deliberately close the document.
 
 ## Getting help
 
-Help > Keyboard Shortcuts (F1) lists every shortcut and lets you change them. Help > About Composa shows the version you are running.
+Help > Keyboard Shortcuts (F1) lists every shortcut and lets you change them. Help > About Dieying shows the version you are running.

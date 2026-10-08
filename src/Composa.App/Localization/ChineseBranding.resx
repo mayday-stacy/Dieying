@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Language saved. Restart {0} to apply." xml:space="preserve"><value>语言设置已保存，重启 {0} 后生效。</value></data>
+  <data name="{0} will convert these {1} features. Nothing is applied until you continue." xml:space="preserve"><value>{0} 将转换以下 {1} 功能。继续后才会应用转换。</value></data>
+  <data name="Another {0} window already allows AI control; agents reach that one." xml:space="preserve"><value>另一个 {0} 窗口已启用 AI 控制，智能体会连接到该窗口。</value></data>
+  <data name="{0} project" xml:space="preserve"><value>{0} 工程</value></data>
+</root>

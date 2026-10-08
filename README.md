@@ -1,12 +1,51 @@
-# Composa
+# 叠影 · Dieying
 
-A layer-based image editor for compositing and retouching, with Photoshop-style tools and shortcuts. It is a from-scratch implementation of [Compositor](https://github.com/robbietilton/Compositor), Robbie Tilton's free and open-source macOS app.
+[GitHub repository](https://github.com/mayday-stacy/Dieying) · [中文说明](README.zh-CN.md) · [User guide](docs/README.md) · [Changelog](CHANGELOG.md) · [Building and releasing](RELEASING.md)
 
-https://github.com/user-attachments/assets/e215c376-2bb3-44d2-af26-3117d2c70348
+Dieying is an open-source, layer-based image editor for everyday retouching and compositing, with Photoshop-style tools and shortcuts. Development focuses on Windows, Chinese text input and an English/Simplified Chinese interface.
 
-The macOS app is written in Swift on top of AppKit, SwiftUI, CoreImage, Metal and Vision, so it cannot be compiled for anything else. Composa rebuilds the same editor from scratch in C# with .NET 10, [Avalonia](https://avaloniaui.net/) and [SkiaSharp](https://github.com/mono/SkiaSharp), which run on Linux, Windows and macOS alike.
+This is an independent MIT-licensed fork of [Composa](https://github.com/dvdstelt/Composa), starting at its `v1.4.0` tag (`86529d3b5355d28ddc28ec3db2e4de1d4d00f63b`). Composa, by Dennis van der Stelt, reimplements Robbie Tilton's macOS [Compositor](https://github.com/robbietilton/Compositor) in C#/.NET, Avalonia and SkiaSharp. Dieying builds on that work; it is not an official release of either upstream project.
 
-Composa is developed on Linux, on X11 and Wayland (through XWayland), and that is where it gets the most use. Windows builds are published too and the full test suite runs on Windows for every change, but the Windows version is newer and has seen far less real use. A macOS build is planned.
+## Current status
+
+Dieying is a development edition. The supported packaging path produces a self-contained Windows portable folder and ZIP; Windows x64 is the primary validation target. `win-arm64` can be built but needs device testing. The source remains cross-platform and Linux CI checks the editor, but independent Linux packages and macOS distribution have not been prepared.
+
+The Windows package includes .NET, ImageMagick and the local image models. Extract the whole ZIP and run **`dieying.exe`**. It does not install an application, register file associations or update another editor. Builds are currently unsigned. See [Windows security and signing](README.zh-CN.md#smart-app-control-与正式签名) for the distinction between a checksum and a trusted signature.
+
+Do not use Composa's downloads or installers to install Dieying. The inherited Composa packaging and public release workflows are disabled; a source repository or CI artifact is not a signed product release. Dieying's `local` update channel does not check for, download or install Composa releases.
+
+## Build, test and run on Windows
+
+Install Git and the .NET 10 SDK selected by [global.json](global.json). Clone the independent repository with its history and tags, then run the PowerShell workflow:
+
+```powershell
+git clone https://github.com/mayday-stacy/Dieying.git
+Set-Location Dieying
+.\scripts\windows.ps1 -Action Run
+.\scripts\windows.ps1 -Action Build
+.\scripts\windows.ps1 -Action Test
+.\scripts\windows.ps1 -Action Publish -Runtime win-x64 -Zip
+```
+
+The first run restores NuGet dependencies and downloads the pinned MODNet model (about 26 MB). All three models are checked by size and SHA-256 before use. The application never downloads models at runtime. `-Action Models` prepares them without building; `-SkipModels` is available only for development actions, not packaging.
+
+`Publish` creates a fresh folder under `dist/`, a ZIP when `-Zip` is passed, and a matching `.zip.sha256` file. It does not upload anything. Compare a downloaded ZIP with its published checksum using `Get-FileHash -Algorithm SHA256 <path-to-zip>`; a matching hash checks the file's bytes, not the identity of its publisher. Keep the licence files next to the program.
+
+All script actions and ordinary source builds use the `local` update channel. `Run` isolates development settings and recovery under `artifacts/local-data`; direct launches use Dieying's own profile. See [settings and paths](docs/settings-and-updates.md).
+
+The version is derived by MinVer from Git history and tags. Clone with history and tags intact; do not hand-edit version numbers. Inherited Composa tags describe the fork's starting history, not a prior Dieying release.
+
+For source development on another platform, prepare models with `scripts/models/fetch.sh` and run `dotnet run --project src/Composa.App`. Source paths and C# namespaces intentionally retain `Composa` to keep the fork easy to compare with upstream.
+
+## What this fork adds
+
+- Independent `dieying` executable, application identity, settings, recovery and MCP connection, preserving `.cmps` projects and upstream credits.
+- A native PowerShell workflow with verified models, portable packaging and test reports that fail if no tests actually ran.
+- Simplified Chinese/English UI, canvas IME preedit and candidate positioning, font fallback, missing-font notices, grapheme-aware editing and common Chinese punctuation line-break rules.
+- Shared PNG/JPEG/WebP export controls for output dimensions, encoded preview and file size, independent quality preferences and JPEG matte; background encoding and safe file replacement without resizing or marking the project saved.
+- Regression coverage for Chinese composition, IME cancellation and resource lifetime, Unicode editing, export, identity separation and recovery.
+
+The layer editor, filters, file readers and local vision models below are inherited from Composa and maintained in this fork. The detailed list is retained to describe the available editing foundation, not to claim each feature was written for Dieying.
 
 ## Features
 
@@ -64,172 +103,45 @@ Composa is developed on Linux, on X11 and Wayland (through XWayland), and that i
 - Zoom In and Zoom Out step through fixed stops, so ten steps in and ten out land back where they started
 - Canvas Size, Image Size, and quarter-turn rotation of the canvas or of single layers
 - Smooth downsampling when zoomed out, crisp pixels and a pixel grid when zoomed in
-- Open PNG, JPEG, WebP, BMP and GIF (and HEIC, AVIF, TIFF and SVG through ImageMagick when it is installed); drop files onto the window; paste images from other apps. An SVG placed into a document is drawn to fit the canvas, so a small icon comes in sharp
-- Open camera RAW files (Canon, Nikon, Sony, Fujifilm, DNG and more) through ImageMagick when it is installed: a develop step with exposure, temperature and tint and a live preview comes first, working on a 16-bit decode, so you choose what to keep before the image becomes an 8-bit layer
+- Open PNG, JPEG, WebP, BMP and GIF (and HEIC, AVIF, TIFF and SVG through ImageMagick, included in the Windows portable build); drop files onto the window; paste images from other apps. An SVG placed into a document is drawn to fit the canvas, so a small icon comes in sharp
+- Open camera RAW files (Canon, Nikon, Sony, Fujifilm, DNG and more) through ImageMagick: a develop step with exposure, temperature and tint and a live preview comes first, working on a 16-bit decode, so you choose what to keep before the image becomes an 8-bit layer
 - Open GIMP files, `.xcf` from 2.10 through 3.2: layers, folders, masks, opacity, blend modes, guides and every precision come in, with the same report of conversions before anything is applied
 - Open Photoshop files, `.psd` and Large Document `.psb`: layers, folders, masks, clipping, opacity, blend modes, solid fill shapes, adjustments and simple horizontal text come in editable, and a report lists everything that has to be converted before anything is applied; dropped onto an open document, a Photoshop file arrives inside a folder
-- Export PNG, JPEG (with a live preview of the compression and the file size) and WebP; Copy Merged
-- Undo history limited by memory, not by a fixed step count
+- Export PNG, JPEG and WebP with output dimensions, aspect-ratio lock, an encoded preview and file size; separate JPEG/WebP quality, JPEG background color and Copy Merged
+- Undo and redo with a History panel; older steps are trimmed by the history count and memory budgets
 - Tools that come in groups open beside their toolbar button when it is held or right-clicked, as in Photoshop: the marquees, the lassos, Magic Wand and Object Selection, Brush and Eraser, the Smear modes and the shapes
 - Tool settings stick between launches: Auto Select, the transform controls, the pixel grid, rulers, guides, the grid and its settings, Snap and the Snap To options keep what you last set them to
-- Autosave for crash recovery: unsaved work is copied to `~/.cache/composa/recovery` every two minutes and offered back after an unclean exit
+- Autosave for crash recovery: unsaved work is copied to Dieying's own recovery folder every two minutes and offered back after an unclean exit; see [settings and paths](docs/settings-and-updates.md)
 
 A user guide covering every tool, menu and the AI control is in [docs/](docs/README.md).
 
-### AI control
+## AI control
 
-Composa can be driven by an AI agent through the [Model Context Protocol](https://modelcontextprotocol.io). Tick **Help > Allow AI Control** (off by default, remembered between launches) and the running application answers on a private, per-user pipe; the status bar says "AI connected" while an agent is attached. Every tool goes through the same editing commands the window uses, so an agent's change shows up as it happens and Ctrl+Z takes it back like any other step.
+Help > Allow AI Control enables a local MCP server; it is off by default. Point your MCP client at the full path to `dieying.exe` with the argument `--mcp`. Add `--launch` to start the editor when connecting if it is not running. See [AI control](docs/ai-control.md) and the [tool reference](docs/ai-tools-reference.md).
 
-An MCP client reaches the application through `composa --mcp`, a bridge that carries the client's stdio to the pipe. The bridge outlives the application: while Composa is not running the tool list is empty, and each time it is started the tools appear again, so Composa can be started, quit and updated without touching the client. For Claude Code, from the folder you work in:
+The Windows pipe is `dieying-mcp`; `DIEYING_MCP_PIPE` overrides it. Existing `composa://` resource URIs are retained for protocol compatibility and do not connect to Composa. An external AI client may send the document content it reads to its own provider; choose that client accordingly.
 
-```bash
-claude mcp add composa -- composa --mcp
-```
+## Compatibility and unfinished work
 
-Add `--launch` after `--mcp` and the bridge starts Composa when it is not running at the moment the client connects; a later quit is yours and is left alone.
+- Native projects use `.cmps`, compatible with the inherited project format. Compositor's macOS `.comp` packages cannot be opened.
+- Photoshop `.psd`/`.psb` import is limited to 8-bit RGB. Unsupported effects, smart objects and some text/adjustments are converted or omitted, with a report before import. PSD export, CMYK and a full 16-bit editing pipeline are not implemented.
+- GIMP XCF imports are converted to the editor's 8-bit sRGB representation; unsupported features are reported. ImageMagick handles camera RAW through a develop step, but editing afterwards is 8-bit.
+- Layer masks stay linked to their layers. Color management and advanced Photoshop feature parity are incomplete.
+- Font fallback and grapheme-aware editing do not provide a complete complex-script shaping or color-emoji pipeline. Windows IME reconversion of committed text is not implemented; additional IMEs and mixed-DPI displays still need device testing.
+- OCR/image-text translation, recorded actions and a complete batch-processing interface remain future work. MCP automation does not replace these user-facing workflows.
+- Large real-world projects, difficult hair/transparency cutouts, graphics tablets and Windows ARM64 need broader practical validation.
+- A Dieying installer, independent file associations and trusted signing are not available yet. These are separate from publishing the open-source repository.
 
-The tools create a document, list and describe the open ones, place an image file as a layer, add a layer, fill it, add text, paint brush strokes, add shapes and lines, apply every adjustment (in place or as an adjustment layer) and every filter but Camera Raw, including Painterly, which repaints a layer in brush strokes that follow the picture so a photo becomes a painting that is still that photo, make and modify selections (marquee, lasso, wand, object, subject), select, rename, hide, reorder, duplicate, delete, move, resize and rotate layers, set opacity and blend mode, open a project or image file, save the project, export it as PNG, JPEG or WebP, undo, and render the canvas to a PNG so the agent can see what it did, with a labelled grid to read coordinates from or a region at full size. For drawing by hand there are the colors at points (sample_color), the picture's edges as polylines in canvas coordinates (trace_edges) and many strokes in one call (paint_strokes), so an agent's lines and colors can come from the picture instead of from a guess. The document list, a document's layers and its render are also resources (`composa://documents`, `composa://documents/1`, `composa://documents/1/image`) for a client that attaches context instead of calling tools. More follow. The macOS app instead watches its project folder for changes made by other programs; Composa has the agent talk to the editor.
+For details, see the [file guide](docs/files.md), [text guide](docs/text.md) and [Chinese development notes](README.zh-CN.md).
 
-## Differences from the macOS app
+## Tests and contributions
 
-- Projects are saved as `.cmps` files: a zip archive with a JSON manifest and one PNG per layer and mask. Projects saved by the macOS app (`.comp` packages) cannot be opened.
-- Remove Background, Select > Subject and the Magic tool's Object mode find the subject with a segmentation model run on your own machine (U²-Net lite for any subject, MODNet for people), where the macOS app uses Apple's Vision framework; the plain-backdrop method, exact on product shots, remains as a choice and as the fallback.
-- HEIC, AVIF, TIFF, SVG and camera RAW open through ImageMagick, because Skia does not decode them itself. The Windows build includes it; on Linux they open when ImageMagick (`magick` or `convert`) is installed. SVG files are drawn by ImageMagick's librsvg rather than by macOS's own renderer, so an SVG that leans on features librsvg lacks may look different.
-- A mask always moves and scales with its layer; it cannot be unlinked and transformed on its own.
-- Layers cannot be dragged between tabs. Copy and paste (Ctrl+C, Ctrl+V) carries whole layers across when nothing is selected, and pixels when something is; layers pasted into another project arrive centered on its canvas.
-- Hue/Saturation offers the master and six fixed color ranges; the ranges' widths are not adjustable.
-- Double-clicking a slider types an exact value; a Reset button then appears on its left. The macOS app resets on double-click and types in a separate field.
-- Point text grows from the edge its alignment reads from (right-aligned text grows leftward); the macOS app keeps the top-left corner.
-- Layer effects are drawn on the CPU from a cached image; while a brush stroke is in progress they follow the pixels the stroke started from and catch up when it ends.
-- Photoshop files are opened, never written. Horizontal text with one style stays editable; vertical, sheared or unevenly scaled text, smart objects and paths other than solid rectangles and ellipses arrive as pixels, layer effects are dropped, and adjustments other than Levels, Curves, Hue/Saturation, Brightness/Contrast, Exposure, Black & White, Color Balance and Invert are skipped; every such change is listed before the import goes ahead. Only 8-bit RGB `.psd` and `.psb` files open (no CMYK or 16-bit).
-- Camera RAW files open only through ImageMagick's LibRaw delegate. The develop step applies exposure and white balance to the 16-bit decoded frame rather than to the sensor data, as Apple's RAW pipeline does on macOS, so its temperature and tint are relative to the camera's reading and there is no tone Boost control.
-- The Camera Raw Filter has no Geometry group (Upright and guided lines), no vectorscope, no Option-drag clipping views, no point colors and no sharpening-mask overlay; its white-balance eyedropper works on the thumbnail in the panel rather than on the canvas, because the panel is a dialog. The filter renders on the full layer while you drag, so a very large layer answers more slowly than the macOS preview does.
-- Layer masks always move with their layer, so the layer menu has no Link Mask item.
-- A project changed on disk by another program while it is open is not reloaded; the macOS app watches its project folder and reloads it. Composa's projects are single files that nothing else edits.
-- The transform bar's angle field has no dial; the dials sit beside the angle fields in the effects and blur dialogs.
-- Composa tells you when a newer version is available and downloads it when you ask, but never installs it by itself: Install hands the checked file to its installer, and nothing is downloaded or replaced behind your back. See [Update checks](#update-checks).
+Use `scripts/windows.ps1 -Action Test` on Windows. It runs both test projects, retains separate console logs and TRX reports under a unique `artifacts/windows-tests/` folder, and requires actual passing test execution. Run `scripts/tests/windows-test-reports.ps1` when changing that runner. On other supported development platforms, use `dotnet test` after preparing dependencies and models.
 
-Beyond the macOS app, this version adds Ctrl-drag to move a layer with any tool, Bold and Italic text, Brightness/Contrast, Sharpen, Dodge and Burn, WebP export, canvas and layer rotation, pen pressure, and autosave with crash recovery. Its Photoshop import also opens flattened files and zip-compressed layers, keeps solid color fill layers live, and maps Brightness/Contrast, Exposure, Invert, Black & White and Color Balance adjustments.
+- `tests/Composa.Core.Tests` drives `EditorSession`: compositing, tools, filters, imports, projects, undo and randomized edit regressions.
+- `tests/Composa.App.Tests` exercises Avalonia headless windows with real Skia rendering. Screenshots go to `artifacts/screenshots/`; Chinese workflow tests also generate editable examples in `artifacts/acceptance/`.
 
-## Download
-
-Every release publishes these on the [releases page](https://github.com/dvdstelt/Composa/releases), for x86-64 and arm64. None of them needs .NET installed.
-
-| Format | For | Notes |
-| --- | --- | --- |
-| `-setup.exe` | Windows 10 and 11 | Installs for your account without administrator rights, adds a Start menu entry and the `.cmps` file type. |
-| `-win-x64.zip` | Windows, no installation | Extract anywhere and run `composa.exe`. |
-| `.AppImage` | Any Linux distribution | One file, no installation. Mark it executable and run it. |
-| `.deb` | Debian, Ubuntu, Mint, Pop!_OS | Installs the launcher, icons and the `.cmps` file type. |
-| `.rpm` | Fedora, RHEL, openSUSE | As above. |
-| `.tar.gz` | Anything else, or no root | Extract and run `install.sh` for a per-user install. |
-
-Check a download against the `sha256sums.txt` published with it:
-
-```bash
-sha256sum -c sha256sums.txt --ignore-missing
-```
-
-On Windows, compare the output of this with the line for that file:
-
-```powershell
-Get-FileHash .\composa-*-setup.exe
-```
-
-### Windows
-
-Run `composa-<version>-win-x64-setup.exe`, or `win-arm64` on a Windows on Arm machine. It installs for your account only; if you have administrator rights it also offers to install for every user. The file type registration makes Composa the program for `.cmps` projects and adds it to **Open with** for images, without taking any image type away from the program that opens it today. Uninstall it from **Settings > Apps** like anything else. Your preferences stay behind in `%APPDATA%\Composa`.
-
-Composa's Windows builds are not code signed yet, so the first time you run the installer or `composa.exe`, Microsoft Defender SmartScreen stops it with "Windows protected your PC". Click **More info**, check that the publisher reads "Unknown publisher" and the file name is the one you downloaded, then click **Run anyway**. SmartScreen shows this for any program that is unsigned or has not yet been downloaded often enough to build a reputation; it is not a detection of anything in the file. Checking the download against `sha256sums.txt` is the way to know it is the file that was published.
-
-### AppImage
-
-```bash
-chmod +x Composa-*.AppImage && ./Composa-*.AppImage
-```
-
-### Debian, Ubuntu and derivatives
-
-```bash
-sudo apt install ./composa_*_amd64.deb
-```
-
-### Fedora, RHEL and openSUSE
-
-```bash
-sudo dnf install ./composa-*.x86_64.rpm
-```
-
-### Tarball, installed for one user
-
-```bash
-tar xzf composa-*-linux-x64.tar.gz && cd composa-*-linux-x64 && ./install.sh
-```
-
-That installs under `~/.local`, so it needs no root. Set `PREFIX` to install elsewhere.
-
-### Update checks
-
-Composa checks once a day whether a newer version has been released, and shows a dismissable strip when there is one, with its release notes, Skip this version and Download.
-
-Download fetches the release's file for the way your copy was installed and the processor it runs on (the `.deb`, `.rpm`, AppImage or tarball, the Windows installer or zip) into your Downloads folder, and checks it against the release's `sha256sums.txt` before offering it. Show in Folder then opens the file manager with it selected, and Install, where there is an installer, hands it over: on Windows Composa quits, asking about unsaved work, and starts the setup; a `.deb` or `.rpm` opens in your software installer, with the `sudo apt install` or `sudo dnf install` command beside it to copy. A downloaded AppImage is made executable. Nothing is downloaded until you press Download, nothing starts until you press Install, and Composa never replaces its own files. The Windows builds are unsigned, so SmartScreen may warn when the setup starts, as it does for a setup downloaded from the releases page. More in [Settings and updates](docs/settings-and-updates.md#updates).
-
-The check is a single anonymous `GET` to `https://api.github.com/repos/dvdstelt/Composa/releases/latest`. It sends no version number, no identifier, no machine details and no telemetry of any kind, and GitHub sees only what any visitor to that URL would show. If the request fails, nothing is reported and nothing is retried until the next day. A download sends the same and nothing more.
-
-Turn it off under **Help > Check for Updates Automatically**, or set `COMPOSA_DISABLE_UPDATE_CHECK=1`, which is there so a distribution packager can switch it off without patching code. **Help > Check for Updates** still works when the automatic check is off.
-
-The `.deb` and `.rpm` check too: they are downloaded from the releases page and installed by hand, so no repository will offer you the next version. Upgrade with Download and Install in the strip, or by installing the new release's file over the old one (`sudo apt install ./composa_*.deb` or `sudo dnf install ./composa-*.rpm`). A package built for a repository with `UPDATE_CHANNEL=managed` never checks on its own; there, the menu item says that the package manager owns updates rather than pointing you around it.
-
-### ImageMagick
-
-HEIC, AVIF, TIFF, SVG and camera RAW files open through ImageMagick.
-
-On Windows it is included: the download carries [Magick.NET](https://github.com/dlemstra/Magick.NET), so nothing has to be installed separately. Its licences, including those of the LGPL libraries it contains for RAW and HEIC, are in `THIRD-PARTY-NOTICES.txt` and `ImageMagick-NOTICE.txt` next to `composa.exe`.
-
-On Linux the packages recommend rather than require it, because every distribution ships ImageMagick and it is needed only for those formats. Install it if you want them; everything else works without it.
-
-## Requirements
-
-- Windows 10 or 11, x64 or arm64. Nothing else: .NET and ImageMagick are bundled.
-- Linux, x86-64 or arm64, with Fontconfig and the usual X11 libraries, present on any desktop distribution. .NET is bundled; ImageMagick is optional, to open HEIC, AVIF, TIFF, SVG and camera RAW.
-- macOS is not built yet.
-- To build from source: the .NET 10 SDK, plus `rpmbuild` if you want the `.rpm` and [Inno Setup 6](https://jrsoftware.org/isinfo.php) if you want the Windows installer.
-
-## Build from source
-
-Build every package for the current architecture:
-```bash
-scripts/package/all.sh
-```
-Or just the portable tarball:
-```bash
-scripts/publish.sh
-```
-The Windows zip and installer, from Git Bash on Windows. On Linux, add `--no-installer` to build the zip alone, since Inno Setup runs only on Windows:
-```bash
-scripts/package/windows.sh win-x64
-```
-
-Run it straight from the checkout while developing:
-
-```bash
-dotnet run --project src/Composa.App
-```
-
-Open files from the command line:
-
-```bash
-dotnet run --project src/Composa.App -- photo.jpg project.cmps
-```
-
-## Tests
-
-```bash
-dotnet test
-```
-
-- `tests/Composa.Core.Tests` drives the editor through `EditorSession`: compositing, selections, every brush mode, healing, filters, canvas operations, project files, regressions found in review, and a fuzz test that runs thousands of random edits, undos and redos while checking the document stays consistent.
-- `tests/Composa.App.Tests` runs the real window with Avalonia's headless platform and Skia rendering. Every tool, the layers panel, typing on the canvas, guides and the dialogs are driven with pointer, key and text events, and screenshots of the window and each dialog are written to `artifacts/screenshots/`, which is the way to review UI changes without a display.
+Headless tests do not replace real IME, graphics tablet, multi-monitor or packaging validation. Generated examples, logs, build outputs and local preferences are not source files and should not be committed. Report reproducible bugs in [this repository's issues](https://github.com/mayday-stacy/Dieying/issues). Before contributing, read [AGENTS.md](AGENTS.md) for the document/history invariants, and use a small change with relevant tests and a clear explanation of its behavior.
 
 ## Shortcuts
 
@@ -259,6 +171,8 @@ dotnet test
 
 Every shortcut can be changed in Help > Keyboard Shortcuts (F1).
 
-## License
+## Licence and provenance
 
-MIT, see [LICENSE](LICENSE). Compositor for macOS is Copyright (c) 2026 Wonder Assembly LLC, also MIT.
+Dieying's application source is distributed under the [MIT licence](LICENSE), retaining the copyright notices for Dennis van der Stelt and Wonder Assembly LLC. No upstream author endorsement is implied.
+
+Redistributed libraries, model weights and film looks have their own notices in [THIRD-PARTY-NOTICES.txt](packaging/THIRD-PARTY-NOTICES.txt); the Windows package also carries ImageMagick's notice. Files adapted from Lolly retain their source and permission headers. Keep these notices with any redistributed build.

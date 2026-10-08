@@ -17,7 +17,7 @@ namespace Composa.App.Mcp;
 public sealed partial class ComposaTools
 {
     [McpServerTool(Name = "open_document")]
-    [Description("Opens a file in a new tab and makes it the active document: a Composa project (.cmps), an image (PNG, JPEG, WebP, BMP, GIF, SVG, and HEIC, AVIF or TIFF when ImageMagick is available) or a GIMP file (.xcf) that needs nothing converted. A file already open just becomes the active document. Photoshop and camera RAW files, and a GIMP file whose layers would be converted, need a dialog, so they are opened from the File menu instead.")]
+    [Description("Opens a file in a new tab and makes it the active document: a Dieying/Composa-compatible project (.cmps), an image (PNG, JPEG, WebP, BMP, GIF, SVG, and HEIC, AVIF or TIFF when ImageMagick is available) or a GIMP file (.xcf) that needs nothing converted. A file already open just becomes the active document. Photoshop and camera RAW files, and a GIMP file whose layers would be converted, need a dialog, so they are opened from the File menu instead.")]
     public async Task<string> OpenDocument([Description("Absolute path of the file")] string path)
     {
         path = Absolute(path);
@@ -46,7 +46,7 @@ public sealed partial class ComposaTools
     }
 
     [McpServerTool(Name = "save_document")]
-    [Description("Saves the document as a Composa project (.cmps) with all its layers, in the background as Ctrl+S does. Without a path it saves to the file the document came from.")]
+    [Description("Saves the document as a Dieying/Composa-compatible project (.cmps) with all its layers, in the background as Ctrl+S does. Without a path it saves to the file the document came from.")]
     public Task<string> SaveDocument(
         [Description("Absolute path ending in .cmps; leave it out to save to the document's own file")] string? path = null,
         [Description("Replace a file that exists at a new path; the document's own file is always replaced")] bool overwrite = false,
@@ -117,7 +117,7 @@ public sealed partial class ComposaTools
             if (baked.Count == 0)
                 throw new McpException(reasons.Count > 0 ? $"None of the adjustment layers can be baked into a look: {string.Join("; ", reasons)}." : "There is no adjustment layer to bake into a look.");
             var baking = string.Join(", ", baked.Select(l => $"\"{l.Name}\""));
-            return (s.Title, LookBake.Bake(baked, size, s.Title).ToCube(s.Title, $"Exported from Composa: {string.Join(", ", baked.Select(l => l.Name))}"), baking, reasons);
+            return (s.Title, LookBake.Bake(baked, size, s.Title).ToCube(s.Title, $"Exported from {AppInfo.Name}: {string.Join(", ", baked.Select(l => l.Name))}"), baking, reasons);
         });
         try { await Task.Run(() => File.WriteAllText(path, text)); }
         catch (Exception error) when (error is not McpException) { throw new McpException($"Couldn't write {Path.GetFileName(path)}: {error.Message}"); }

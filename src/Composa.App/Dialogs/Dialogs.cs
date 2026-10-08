@@ -18,7 +18,7 @@ public class DialogWindow : Window
 
     public DialogWindow(string title, Control body, string okText = "OK", bool cancellable = true)
     {
-        Title = title;
+        Title = L10n.Text(title);
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -56,15 +56,15 @@ public class DialogWindow : Window
 public static class Prompts
 {
     public static Task<bool> Confirm(Window owner, string title, string message, string okText = "OK") =>
-        new DialogWindow(title, new TextBlock { Text = message, MaxWidth = 420, TextWrapping = TextWrapping.Wrap }, okText).Ask(owner);
+        new DialogWindow(title, new TextBlock { Text = L10n.Text(message), MaxWidth = 420, TextWrapping = TextWrapping.Wrap }, okText).Ask(owner);
 
     public static Task Alert(Window owner, string title, string message) =>
-        new DialogWindow(title, new TextBlock { Text = message, MaxWidth = 460, TextWrapping = TextWrapping.Wrap }, cancellable: false).Ask(owner);
+        new DialogWindow(title, new TextBlock { Text = L10n.Text(message), MaxWidth = 460, TextWrapping = TextWrapping.Wrap }, cancellable: false).Ask(owner);
 
     /// <summary>Save / Don't Save / Cancel. Returns null for cancel.</summary>
     public static async Task<bool?> SaveChanges(Window owner, string name)
     {
-        var dialog = new DialogWindow("Unsaved Changes", new TextBlock { Text = $"Save changes to \"{name}\" before closing?", MaxWidth = 420, TextWrapping = TextWrapping.Wrap }, "Save");
+        var dialog = new DialogWindow("Unsaved Changes", new TextBlock { Text = L10n.Format("Save changes to \"{0}\" before closing?", name), MaxWidth = 420, TextWrapping = TextWrapping.Wrap }, "Save");
         bool? result = null;
         var discard = Ui.TextButton("Don't Save", () => { result = false; dialog.Close(false); });
         ((StackPanel)((StackPanel)dialog.Content!).Children[1]).Children.Insert(0, discard);
@@ -132,7 +132,7 @@ public static class CanvasDialogs
         ("A4 at 300 ppi", 2480, 3508), ("Photo 6000 × 4000", 6000, 4000)
     ];
 
-    private static string PresetLabel((string Name, int W, int H) preset) => preset.W == 0 || preset.Name.Contains('×') ? preset.Name : $"{preset.Name}  {preset.W} × {preset.H}";
+    private static string PresetLabel((string Name, int W, int H) preset) => preset.W == 0 || preset.Name.Contains('×') ? L10n.Text(preset.Name) : $"{L10n.Text(preset.Name)}  {preset.W} × {preset.H}";
 
     /// <summary>
     /// With the size of the image on the clipboard, the dialog opens on a Clipboard preset of that size, listed first,
@@ -201,7 +201,7 @@ public static class CanvasDialogs
             anchors.Children.Add(button);
         }
         var body = Ui.Column(12,
-            Ui.Label($"Current size: {currentWidth} × {currentHeight} px", Palette.Secondary),
+            Ui.Label(L10n.Format("Current size: {0} × {1} px", currentWidth, currentHeight), Palette.Secondary),
             Form(("Width", Ui.Row(6, widthBox, Ui.Label("px", Palette.Secondary))), ("Height", Ui.Row(6, heightBox, Ui.Label("px", Palette.Secondary))), ("", relativeBox), ("Anchor", anchors)));
         if (!await new DialogWindow("Canvas Size", body).Ask(owner)) return null;
         if (relative) { width += currentWidth; height += currentHeight; }
@@ -229,14 +229,14 @@ public static class CanvasDialogs
         void Describe()
         {
             var enlarging = width > currentWidth || height > currentHeight;
-            note.Text = mode switch
+            note.Text = L10n.Text(mode switch
             {
                 ResampleMode.Nearest => "Every pixel becomes a hard-edged block, which keeps pixel art crisp.",
-                ResampleMode.Enhance when !Composa.Vision.UpscaleModels.IsAvailable => Composa.Vision.UpscaleModels.UnavailableReason + " The picture is resampled as Automatic does.",
+                ResampleMode.Enhance when !Composa.Vision.UpscaleModels.IsAvailable => L10n.Text(Composa.Vision.UpscaleModels.UnavailableReason ?? "") + L10n.Text(" The picture is resampled as Automatic does."),
                 ResampleMode.Enhance when !enlarging => "Enhance only applies when enlarging; at this size the picture is resampled as Automatic does.",
                 ResampleMode.Enhance => "A model run on this machine enlarges each photo layer four times, inventing fine detail that was not there, then fits it to the new size. It takes about a second per 65,000 pixels of each layer; text and shapes are redrawn instead, and masks are resampled.",
                 _ => "Smooth when shrinking, sharp cubic when enlarging."
-            };
+            });
         }
         widthBox = Ui.Number(width, 1, DocumentLimits.MaxSide, v =>
         {
@@ -252,10 +252,10 @@ public static class CanvasDialogs
         }, width: 120);
         var resolutionBox = Ui.Number(resolution, 1, 9600, v => resolution = v, width: 120);
         var modes = Ui.Combo(ResampleModes, mode, ResampleName, v => { mode = v; Describe(); }, 160);
-        ToolTip.SetTip(modes, "How the pixels are resampled: Automatic for most pictures, Nearest Neighbor for pixel art, Enhance to invent detail with a model while enlarging");
+        ToolTip.SetTip(modes, L10n.Text("How the pixels are resampled: Automatic for most pictures, Nearest Neighbor for pixel art, Enhance to invent detail with a model while enlarging"));
         Describe();
         var body = Ui.Column(12,
-            Ui.Label($"Current size: {currentWidth} × {currentHeight} px", Palette.Secondary),
+            Ui.Label(L10n.Format("Current size: {0} × {1} px", currentWidth, currentHeight), Palette.Secondary),
             Form(("Width", Ui.Row(6, widthBox, Ui.Label("px", Palette.Secondary))), ("Height", Ui.Row(6, heightBox, Ui.Label("px", Palette.Secondary))),
                 ("", Ui.Check("Constrain proportions", true, v => constrain = v)), ("Resolution", Ui.Row(6, resolutionBox, Ui.Label("pixels/inch", Palette.Secondary))),
                 ("Resample", modes)),
@@ -280,7 +280,7 @@ public static class CanvasDialogs
             timer.Stop();
             var mine = ++generation;
             var q = quality;
-            info.Text = "Measuring…";
+            info.Text = L10n.Text("Measuring…");
             // Encoding a large photo takes a moment, so it runs off the UI thread; a newer request supersedes this one.
             var work = Task.Run(() =>
             {

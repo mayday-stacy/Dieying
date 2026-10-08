@@ -53,7 +53,7 @@ public static class Install
     private static readonly Lazy<InstallKind> current = new(() => Detect(Probes()));
 
     /// <summary>How the running copy was installed, found once.</summary>
-    public static InstallKind Current => current.Value;
+    public static InstallKind Current => UpdateCheck.Channel == UpdateChannel.Local ? InstallKind.Developer : current.Value;
 
     public static InstallKind Detect(InstallProbes probe)
     {

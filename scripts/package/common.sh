@@ -10,6 +10,14 @@ SUMMARY="Layer-based image editor for compositing and retouching"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BUILD="$ROOT/dist"
 
+# These retained upstream recipes register Composa's package names, installation ID and file
+# associations. A separately named fork must never ship them as if it were an upstream upgrade.
+if ! grep -Eq '<AssemblyName>[[:space:]]*composa[[:space:]]*</AssemblyName>' "$ROOT/src/Composa.App/Composa.App.csproj"; then
+  echo "Upstream Composa packaging is disabled for this independent development build." >&2
+  echo "Use scripts/windows.ps1 -Action Publish -Zip for the isolated Windows portable package." >&2
+  return 1
+fi
+
 # Every format spells the same architecture differently, which is a classic source of a download
 # that installs nowhere. The mapping lives here once.
 #   .NET RID        linux-x64     linux-arm64      win-x64          win-arm64

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using Composa.Model;
 using Composa.Rendering;
@@ -44,6 +45,8 @@ public sealed class TextLayout
 
     /// <summary>Faces looked up once per process: matching a family through the font manager is slow, and a layout asks for every stretch it draws.</summary>
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<TextFace, SKTypeface> typefaces = new();
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<(TextFace Face, int Codepoint), SKTypeface> fallbackTypefaces = new();
+    private readonly TextElements characters;
 
     /// <summary>
     /// The closest face in the family. A family Skia does not know (Inter is Avalonia's font for the interface and is
@@ -60,20 +63,37 @@ public sealed class TextLayout
         face.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
 
     /// <summary>The font for layout and drawing alike. A face without a bold or italic variant gets them synthesized, as Photoshop's faux styles do.</summary>
-    private SKFont MakeFont(TextFace face)
+    private SKFont MakeFont(TextFace face, SKTypeface typeface)
     {
-        var typeface = TypefaceFor(face);
         var font = new SKFont(typeface, (float)Math.Clamp(Style.Size, 1, 4000)) { Subpixel = true, Edging = SKFontEdging.Antialias, Hinting = SKFontHinting.None };
         if (face.Bold && typeface.FontWeight < (int)SKFontStyleWeight.SemiBold) font.Embolden = true;
         if (face.Italic && typeface.FontSlant == SKFontStyleSlant.Upright) font.SkewX = -0.25f;
         return font;
     }
 
-    /// <summary>One font per face the text uses, made as they are needed and disposed together.</summary>
+    /// <summary>One font per resolved face the text uses, made as they are needed and disposed together.</summary>
     private sealed class Fonts(TextLayout layout) : IDisposable
     {
-        private readonly Dictionary<TextFace, SKFont> fonts = [];
-        public SKFont For(TextFace face) => fonts.TryGetValue(face, out var font) ? font : fonts[face] = layout.MakeFont(face);
+        private readonly Dictionary<(TextFace Face, IntPtr Typeface), SKFont> fonts = [];
+        public SKFont For(TextFace face) => For(face, TypefaceFor(face));
+
+        // Skia's glyph lookup does not perform font fallback. Resolve missing characters before measuring and
+        // drawing them, so a Latin font can still display Chinese text and the caret follows the actual glyphs.
+        public SKFont For(TextFace face, int codepoint)
+        {
+            var primary = For(face);
+            if (codepoint < ' ' || primary.ContainsGlyph(codepoint)) return primary;
+            var typeface = fallbackTypefaces.GetOrAdd((face, codepoint), static key =>
+                SKFontManager.Default.MatchCharacter(key.Face.FontFamily, FontStyle(key.Face), null, key.Codepoint)
+                ?? TypefaceFor(key.Face));
+            return For(face, typeface);
+        }
+
+        private SKFont For(TextFace face, SKTypeface typeface)
+        {
+            var key = (face, typeface.Handle);
+            return fonts.TryGetValue(key, out var font) ? font : fonts[key] = layout.MakeFont(face, typeface);
+        }
         public void Dispose() { foreach (var font in fonts.Values) font.Dispose(); }
     }
 
@@ -81,6 +101,7 @@ public sealed class TextLayout
     {
         Style = style = style.Clamped();
         Text = style.Text.Replace("\r", "");
+        characters = new TextElements(Text);
         using var fonts = new Fonts(this);
         // Line metrics are the style's own face's, whatever faces the letters are in, so lines do not shift as letters change.
         var metrics = fonts.For(style.Face).Metrics;
@@ -151,9 +172,10 @@ public sealed class TextLayout
         for (var start = 0; start < text.Length;)
         {
             var face = Style.FaceAt(start);
-            var end = start + 1;
-            while (end < text.Length && Style.FaceAt(end) == face) end++;
-            var font = fonts.For(face);
+            var font = fonts.For(face, CodepointAt(text, start));
+            var end = start + CharacterLengthAt(text, start);
+            while (end < text.Length && Style.FaceAt(end) == face && ReferenceEquals(fonts.For(face, CodepointAt(text, end)), font))
+                end += CharacterLengthAt(text, end);
             var segment = text.Substring(start, end - start);
             var widths = font.GetGlyphWidths(font.GetGlyphs(segment));
             var glyph = 0;
@@ -174,7 +196,7 @@ public sealed class TextLayout
         return total;
     }
 
-    /// <summary>Greedy word wrap of one paragraph; a word wider than the box breaks between characters.</summary>
+    /// <summary>Greedy word wrap of one paragraph; a word wider than the box breaks between complete text elements.</summary>
     private void Wrap(int start, int end, float[] advances, float available, List<(int, int)> lines)
     {
         if (start == end) { lines.Add((start, end)); return; }
@@ -183,10 +205,11 @@ public sealed class TextLayout
         {
             float width = 0;
             int k = position, lastSpace = -1;
-            for (; k < end; k++)
+            for (; k < end; k = characters.Next(k))
             {
-                if (width + advances[k] > available && k > position) break;
-                width += advances[k];
+                var advance = Sum(advances, k, characters.Next(k));
+                if (width + advance > available && k > position) break;
+                width += advance;
                 if (Text[k] == ' ') lastSpace = k;
             }
             var lineEnd = k;
@@ -194,12 +217,34 @@ public sealed class TextLayout
             {
                 // Spaces at the break stay on this line (they take no visible width); mid-word, go back to the last
                 // space so the next line starts with a letter.
-                if (Text[k] == ' ') { while (lineEnd < end && Text[lineEnd] == ' ') lineEnd++; }
-                else if (lastSpace >= position) lineEnd = lastSpace + 1;
+                if (Text[k] == ' ') { while (lineEnd < end && Text[lineEnd] == ' ') lineEnd = characters.Next(lineEnd); }
+                else if (lastSpace >= position) lineEnd = characters.Next(lastSpace);
+                lineEnd = PunctuationBreak(position, lineEnd, end);
             }
             lines.Add((position, lineEnd));
             position = lineEnd;
         }
+    }
+
+    // Common Chinese line-breaking prohibitions. These are deliberately a small punctuation policy,
+    // not a claim to implement every language's line-breaking or shaping rules.
+    private const string CannotStartLine = "),.:;!?]}，。、；：！？）］｝〉》」』】〕〗〙〛’”";
+    private const string CannotEndLine = "([{（［｛〈《「『【〔〖〘〚‘“";
+
+    private int PunctuationBreak(int start, int proposed, int end)
+    {
+        bool Prohibited(int at) => at < end && (CannotStartLine.Contains(Text[at]) ||
+            CannotEndLine.Contains(Text[characters.Previous(at)]));
+
+        var candidate = proposed;
+        while (candidate > start && Prohibited(candidate)) candidate = characters.Previous(candidate);
+        if (candidate > start) return candidate;
+
+        // In a box narrower than a punctuation pair there is no fitting legal break. Keep the pair
+        // together and allow it to overflow (drawing clips the box), always consuming text.
+        candidate = proposed;
+        while (candidate < end && Prohibited(candidate)) candidate = characters.Next(candidate);
+        return candidate;
     }
 
     // ---- Drawing --------------------------------------------------------------------------------------------------
@@ -227,9 +272,11 @@ public sealed class TextLayout
             {
                 var face = Style.FaceAt(line.Start + k);
                 var color = Style.ColorAt(line.Start + k);
-                var end = k + 1;
-                while (end < line.Length && Style.FaceAt(line.Start + end) == face && Style.ColorAt(line.Start + end) == color) end++;
-                var font = fonts.For(face);
+                var font = fonts.For(face, CodepointAt(Text, line.Start + k));
+                var end = k + CharacterLengthAt(Text, line.Start + k);
+                while (end < line.Length && Style.FaceAt(line.Start + end) == face && Style.ColorAt(line.Start + end) == color
+                    && ReferenceEquals(fonts.For(face, CodepointAt(Text, line.Start + end)), font))
+                    end += CharacterLengthAt(Text, line.Start + end);
                 var segment = Text.Substring(line.Start + k, end - k);
                 var glyphs = font.GetGlyphs(segment);
                 if (glyphs.Length > 0)
@@ -257,10 +304,15 @@ public sealed class TextLayout
 
     // ---- Caret geometry -------------------------------------------------------------------------------------------
 
+    private static int CharacterLengthAt(string text, int index) =>
+        index + 1 < text.Length && char.IsHighSurrogate(text[index]) && char.IsLowSurrogate(text[index + 1]) ? 2 : 1;
+
+    private static int CodepointAt(string text, int index) => Rune.TryGetRuneAt(text, index, out var rune) ? rune.Value : Rune.ReplacementChar.Value;
+
     /// <summary>The line holding a character index. At a soft wrap the caret belongs to the start of the next line.</summary>
     public int LineOf(int index)
     {
-        index = Math.Clamp(index, 0, Text.Length);
+        index = characters.Floor(index);
         for (var i = 0; i < Lines.Count; i++)
         {
             var line = Lines[i];
@@ -275,7 +327,7 @@ public sealed class TextLayout
     /// <summary>Where the caret is drawn before a character index: its x and the top and bottom of the line.</summary>
     public (float X, float Top, float Bottom) CaretAt(int index)
     {
-        index = Math.Clamp(index, 0, Text.Length);
+        index = characters.Floor(index);
         var line = Lines[LineOf(index)];
         var k = Math.Clamp(index - line.Start, 0, line.Positions.Length - 1);
         return (line.X + line.Positions[k], line.Baseline - Ascent, line.Baseline + Descent);
@@ -302,14 +354,16 @@ public sealed class TextLayout
         return line.Start + NearestBoundary(line, x);
     }
 
-    private static int NearestBoundary(Line line, float x)
+    private int NearestBoundary(Line line, float x)
     {
         var best = 0;
         var bestDistance = float.MaxValue;
-        for (var k = 0; k < line.Positions.Length; k++)
+        for (var index = line.Start;; index = characters.Next(index))
         {
+            var k = index - line.Start;
             var distance = Math.Abs(line.X + line.Positions[k] - x);
             if (distance < bestDistance) { bestDistance = distance; best = k; }
+            if (index == line.End) break;
         }
         return best;
     }
@@ -319,8 +373,9 @@ public sealed class TextLayout
     {
         var rects = new List<SKRect>();
         if (end <= start) return rects;
-        start = Math.Clamp(start, 0, Text.Length);
-        end = Math.Clamp(end, 0, Text.Length);
+        start = characters.Floor(start);
+        end = characters.Ceiling(end);
+        if (end <= start) return rects;
         foreach (var line in Lines)
         {
             if (line.End < start || line.Start >= end) { if (!(line.Start == line.End && start <= line.Start && line.Start < end)) continue; }
@@ -338,24 +393,62 @@ public sealed class TextLayout
     /// <summary>The start of the word the index is in (or before it), for Ctrl+Left and double-click.</summary>
     public int WordStart(int index)
     {
-        index = Math.Clamp(index, 0, Text.Length);
-        while (index > 0 && !char.IsLetterOrDigit(Text[index - 1])) index--;
-        while (index > 0 && char.IsLetterOrDigit(Text[index - 1])) index--;
+        index = characters.Ceiling(index);
+        while (index > 0 && !IsWordAt(characters.Previous(index))) index = characters.Previous(index);
+        while (index > 0 && IsWordAt(characters.Previous(index))) index = characters.Previous(index);
         return index;
     }
 
     public int WordEnd(int index)
     {
-        index = Math.Clamp(index, 0, Text.Length);
-        while (index < Text.Length && !char.IsLetterOrDigit(Text[index])) index++;
-        while (index < Text.Length && char.IsLetterOrDigit(Text[index])) index++;
+        index = characters.Floor(index);
+        while (index < Text.Length && !IsWordAt(index)) index = characters.Next(index);
+        while (index < Text.Length && IsWordAt(index)) index = characters.Next(index);
         return index;
     }
+
+    private bool IsWordAt(int index) => Rune.TryGetRuneAt(Text, index, out var rune) && Rune.IsLetterOrDigit(rune);
 
     public override string ToString()
     {
         var builder = new StringBuilder();
         foreach (var line in Lines) builder.Append('[').Append(Text, line.Start, line.Length).Append(']');
         return builder.ToString();
+    }
+}
+
+/// <summary>
+/// Extended Unicode grapheme boundaries, still expressed as UTF-16 offsets for styles and file IO.
+/// The runtime handles combining marks, variation selectors, emoji modifiers, ZWJ sequences and flags.
+/// Kept separate from font layout so plain caret movement never needs to measure or render text.
+/// </summary>
+internal sealed class TextElements
+{
+    private readonly int[] boundaries;
+
+    public TextElements(string text) => boundaries = [.. StringInfo.ParseCombiningCharacters(text), text.Length];
+
+    public int Floor(int index)
+    {
+        var at = Array.BinarySearch(boundaries, Math.Clamp(index, 0, boundaries[^1]));
+        return boundaries[at >= 0 ? at : ~at - 1];
+    }
+
+    public int Ceiling(int index)
+    {
+        var at = Array.BinarySearch(boundaries, Math.Clamp(index, 0, boundaries[^1]));
+        return boundaries[at >= 0 ? at : ~at];
+    }
+
+    public int Previous(int index)
+    {
+        var at = Array.BinarySearch(boundaries, Math.Clamp(index, 0, boundaries[^1]));
+        return boundaries[Math.Max(0, at >= 0 ? at - 1 : ~at - 1)];
+    }
+
+    public int Next(int index)
+    {
+        var at = Array.BinarySearch(boundaries, Math.Clamp(index, 0, boundaries[^1]));
+        return boundaries[Math.Min(boundaries.Length - 1, at >= 0 ? at + 1 : ~at)];
     }
 }

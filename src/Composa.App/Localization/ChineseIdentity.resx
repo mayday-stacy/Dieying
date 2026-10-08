@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Dieying" xml:space="preserve"><value>叠影 · Dieying</value></data>
+  <data name="About {0}" xml:space="preserve"><value>关于 {0}</value></data>
+  <data name="An independent development fork of Composa by Dennis van der Stelt (MIT license). Composa reimplements the macOS image editor Compositor by Robbie Tilton. This is not an official Composa release." xml:space="preserve"><value>本开发版是基于 Dennis van der Stelt 的 Composa（MIT 许可）继续开发的独立分支。Composa 重新实现了 Robbie Tilton 的 macOS 图像编辑器 Compositor。这不是 Composa 官方发行版。</value></data>
+  <data name="{0} did not close normally last time. These documents had unsaved changes:&#10;&#10;{1}&#10;&#10;Recover them? Choosing Cancel discards the autosaved copies." xml:space="preserve"><value>{0} 上次未正常关闭。以下文档存在未保存的修改：
+
+{1}
+
+是否恢复？选择“取消”会丢弃自动保存的副本。</value></data>
+</root>

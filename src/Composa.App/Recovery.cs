@@ -15,7 +15,9 @@ public sealed class Recovery
 {
     public sealed record Entry(string ProjectPath, string InfoPath, string Title, string? OriginalPath, DateTime SavedAt);
 
-    private sealed record Info(string Title, string? OriginalPath, DateTime SavedAt, int ProcessId);
+    private sealed record Info(string Title, string? OriginalPath, DateTime SavedAt, int ProcessId, DateTime? ProcessStartedUtc = null);
+
+    private static readonly DateTime processStartedUtc = CurrentProcessStartedUtc();
 
     private readonly string directory;
     private readonly Dictionary<EditorSession, (Guid Id, int Revision)> saved = [];
@@ -36,7 +38,7 @@ public sealed class Recovery
             var id = known ? state.Id : Guid.NewGuid();
             saved[session] = (id, session.Revision);
             work.Add((session.Document.Clone(), Path.Combine(directory, id + ProjectFile.Extension),
-                new Info(session.Title, session.FilePath, DateTime.Now, Environment.ProcessId)));
+                new Info(session.Title, session.FilePath, DateTime.Now, Environment.ProcessId, processStartedUtc)));
         }
         if (work.Count == 0) return Task.CompletedTask;
         return running = Task.Run(() =>
@@ -77,7 +79,7 @@ public sealed class Recovery
             try
             {
                 var info = JsonSerializer.Deserialize<Info>(File.ReadAllText(infoPath));
-                if (info == null || !File.Exists(projectPath) || IsAlive(info.ProcessId)) continue;
+                if (info == null || !File.Exists(projectPath) || IsAlive(info.ProcessId, info.ProcessStartedUtc)) continue;
                 found.Add(new Entry(projectPath, infoPath, info.Title, info.OriginalPath, info.SavedAt));
             }
             catch (Exception error) when (error is IOException or JsonException or UnauthorizedAccessException) { /* An unreadable entry cannot be recovered; leave it alone. */ }
@@ -97,14 +99,26 @@ public sealed class Recovery
         catch (Exception error) when (error is IOException or UnauthorizedAccessException) { /* It will be offered again next launch. */ }
     }
 
-    private static bool IsAlive(int processId)
+    private static DateTime CurrentProcessStartedUtc()
     {
-        if (processId == Environment.ProcessId) return true;
+        using var process = Process.GetCurrentProcess();
+        return process.StartTime.ToUniversalTime();
+    }
+
+    private static bool IsAlive(int processId, DateTime? startedUtc)
+    {
+        if (processId == Environment.ProcessId) return startedUtc == null || startedUtc == processStartedUtc;
         try
         {
             using var process = Process.GetProcessById(processId);
-            return !process.HasExited && process.ProcessName.Contains("composa", StringComparison.OrdinalIgnoreCase);
+            if (process.HasExited) return false;
+            // A start time also distinguishes a reused PID. It works with a renamed executable,
+            // dotnet run, and Unix process names that truncate long application IDs.
+            if (startedUtc is { } started) return process.StartTime.ToUniversalTime() == started;
+            return string.Equals(Path.GetFileNameWithoutExtension(process.MainModule?.FileName), AppInfo.Id, StringComparison.OrdinalIgnoreCase);
         }
-        catch (ArgumentException) { return false; }
+        catch (Exception error) when (error is ArgumentException or InvalidOperationException) { return false; }
+        // Failure to inspect a live process must not offer its working copies for deletion.
+        catch (System.ComponentModel.Win32Exception) { return true; }
     }
 }

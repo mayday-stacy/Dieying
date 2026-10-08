@@ -9,7 +9,19 @@ namespace Composa.App;
 /// </summary>
 public static class AppInfo
 {
-    public const string Name = "Composa";
+    /// <summary>The product identity, kept independent of upstream Composa.</summary>
+    public const string Id = "dieying";
+    public const string Name = "Dieying";
+    public const string DataDirectoryVariable = "DIEYING_DATA_DIR";
+    public const string LegacyDevelopmentId = "image-editor-dev";
+    public const string LegacyDataDirectoryVariable = "IMAGE_EDITOR_DEV_DATA_DIR";
+    public const string RepositoryUrl = "https://github.com/mayday-stacy/Dieying";
+    public const string UpstreamUrl = "https://github.com/dvdstelt/Composa";
+    public const string Attribution = "An independent development fork of Composa by Dennis van der Stelt (MIT license). " +
+        "Composa reimplements the macOS image editor Compositor by Robbie Tilton. This is not an official Composa release.";
+
+    public static string DisplayName => L10n.Text(Name);
+    public static Uri ResourceUri(string path = "") => new($"avares://{Id}/{path}");
 
     /// <summary>The release URL a user is sent to when a newer version exists.</summary>
     public const string ReleasesUrl = "https://github.com/dvdstelt/Composa/releases";

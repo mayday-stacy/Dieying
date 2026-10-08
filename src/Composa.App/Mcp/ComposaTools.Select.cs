@@ -108,7 +108,7 @@ public sealed partial class ComposaTools
         return Selected(s);
     });
 
-    private const string DetectHelp = "detect picks how: 'any' runs the U²-Net model on this machine for any subject, 'person' runs MODNet for people with soft hair, 'plain' takes everything that is not the near-uniform backdrop touching the picture's edges (fast, exact on product shots, defeated by busy backgrounds). Left out, the choice in Composa's Object Selection options applies. A model that is not available here falls back to 'plain'.";
+    private const string DetectHelp = "detect picks how: 'any' runs the U²-Net model on this machine for any subject, 'person' runs MODNet for people with soft hair, 'plain' takes everything that is not the near-uniform backdrop touching the picture's edges (fast, exact on product shots, defeated by busy backgrounds). Left out, the choice in the Object Selection options applies. A model that is not available here falls back to 'plain'.";
     private const string Detect = "any, person or plain; see the tool description";
 
     private static SubjectDetect? ParseDetect(string? detect) => detect?.ToLowerInvariant() switch

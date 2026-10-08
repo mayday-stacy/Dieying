@@ -13,7 +13,7 @@ namespace Composa.App.Mcp;
 public sealed partial class ComposaTools
 {
     [McpServerResource(UriTemplate = "composa://documents", Name = "documents", Title = "Open documents", MimeType = "text/plain")]
-    [Description("The documents open in Composa, numbered as their tabs are.")]
+    [Description("The documents open in " + AppInfo.Name + ", numbered as their tabs are.")]
     public async Task<TextResourceContents> DocumentsResource(RequestContext<ReadResourceRequestParams> context) =>
         new() { Uri = context.Params!.Uri!, MimeType = "text/plain", Text = await ListDocuments() };
 

@@ -12,7 +12,10 @@ public sealed class TextEditor
     private readonly List<(TextStyle Style, int Caret, int Anchor)> undo = [];
     private readonly List<(TextStyle Style, int Caret, int Anchor)> redo = [];
     private TextLayout? layout;
+    private TextElements? characters;
     private bool lastWasTyping;
+
+    private TextElements Characters => characters ??= new TextElements(Text);
 
     public TextEditor(TextStyle style)
     {
@@ -44,10 +47,10 @@ public sealed class TextEditor
     {
         text = text.Replace("\r\n", "\n").Replace('\r', '\n').Replace("\t", "    ");
         if (text.Length == 0 && !HasSelection) return;
-        Record(typing: text.Length <= 2 && !text.Contains('\n'));
         int start = SelectionStart, end = SelectionEnd;
+        if (text.Length > TextStyle.MaxLength - (Text.Length - (end - start))) return;
         var content = Text.Remove(start, end - start).Insert(start, text);
-        if (content.Length > TextStyle.MaxLength) return;
+        Record(typing: text.Length <= 2 && !text.Contains('\n'));
         Apply(Style.WithReplacedCharacters(start, end, text.Length) with { Text = content }, start + text.Length);
     }
 
@@ -55,7 +58,7 @@ public sealed class TextEditor
     {
         if (HasSelection) { DeleteSelection(); return; }
         if (Caret == 0) return;
-        var to = word ? Layout.WordStart(Caret) : Caret - Step(Caret, -1);
+        var to = word ? Layout.WordStart(Caret) : Characters.Previous(Caret);
         Record(typing: !word);
         Apply(Style.WithReplacedCharacters(to, Caret, 0) with { Text = Text.Remove(to, Caret - to) }, to);
     }
@@ -64,7 +67,7 @@ public sealed class TextEditor
     {
         if (HasSelection) { DeleteSelection(); return; }
         if (Caret >= Text.Length) return;
-        var to = word ? Layout.WordEnd(Caret) : Caret + Step(Caret, 1);
+        var to = word ? Layout.WordEnd(Caret) : Characters.Next(Caret);
         Record(typing: false);
         Apply(Style.WithReplacedCharacters(Caret, to, 0) with { Text = Text.Remove(Caret, to - Caret) }, Caret);
     }
@@ -74,13 +77,6 @@ public sealed class TextEditor
         Record(typing: false);
         int start = SelectionStart, end = SelectionEnd;
         Apply(Style.WithReplacedCharacters(start, end, 0) with { Text = Text.Remove(start, end - start) }, start);
-    }
-
-    /// <summary>A surrogate pair is one character to the caret.</summary>
-    private int Step(int index, int direction)
-    {
-        if (direction < 0) return index >= 2 && char.IsLowSurrogate(Text[index - 1]) && char.IsHighSurrogate(Text[index - 2]) ? 2 : 1;
-        return index + 1 < Text.Length && char.IsHighSurrogate(Text[index]) && char.IsLowSurrogate(Text[index + 1]) ? 2 : 1;
     }
 
     /// <summary>Changes anything but the content (font, size, color, spacing, box). Undoable within the editor.</summary>
@@ -124,7 +120,8 @@ public sealed class TextEditor
 
     public void MoveTo(int index, bool select)
     {
-        Caret = Math.Clamp(index, 0, Text.Length);
+        // A collapsed caret snaps left; extending a selection includes the whole touched element.
+        Caret = select && index > Anchor ? Characters.Ceiling(index) : Characters.Floor(index);
         if (!select) Anchor = Caret;
         lastWasTyping = false;
         Changed?.Invoke();
@@ -132,10 +129,11 @@ public sealed class TextEditor
 
     public void MoveHorizontal(int direction, bool select, bool word = false)
     {
+        if (direction == 0) return;
         if (!select && HasSelection && !word) { MoveTo(direction < 0 ? SelectionStart : SelectionEnd, false); return; }
         var target = word
             ? (direction < 0 ? Layout.WordStart(Caret) : Layout.WordEnd(Caret))
-            : Caret + direction * Step(Caret, direction);
+            : (direction < 0 ? Characters.Previous(Caret) : Characters.Next(Caret));
         MoveTo(target, select);
     }
 
@@ -181,10 +179,20 @@ public sealed class TextEditor
 
     private void Apply(TextStyle style, int caret, int? anchor = null)
     {
+        if (style.Text != Text) characters = null;
         Style = style;
         layout = null;
-        Caret = Math.Clamp(caret, 0, Text.Length);
-        Anchor = Math.Clamp(anchor ?? Caret, 0, Text.Length);
+        if (anchor.HasValue && anchor.Value != caret)
+        {
+            Caret = caret > anchor.Value ? Characters.Ceiling(caret) : Characters.Floor(caret);
+            Anchor = caret > anchor.Value ? Characters.Floor(anchor.Value) : Characters.Ceiling(anchor.Value);
+        }
+        else
+        {
+            // Insertion can join the characters on either side (a combining mark or a ZWJ, for example).
+            // Keep the caret after that complete element, never in the newly formed sequence.
+            Caret = Anchor = Characters.Ceiling(caret);
+        }
         Changed?.Invoke();
     }
 

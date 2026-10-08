@@ -8,7 +8,7 @@ Files can also be dropped onto the window. Dropped projects open in tabs. Droppe
 
 ### What opens
 
-- **Composa projects**: `.cmps` files, with all their layers.
+- **Dieying / Composa projects**: `.cmps` files, with all their layers; the shared project format is preserved.
 - **Images**: PNG, JPEG, WebP, BMP, GIF and ICO, plus HEIC, HEIF, AVIF and TIFF when ImageMagick is available. The orientation stored by a camera is honoured.
 - **SVG**: drawn at the size the file declares. The result is pixels; it does not stay a vector drawing.
 - **Photoshop**: `.psd` and `.psb` files, 8-bit RGB. See [Photoshop files](#photoshop-files).
@@ -29,33 +29,33 @@ A project is a `.cmps` file. It keeps the canvas size and resolution, every laye
 
 Saving happens in the background. The document as it is when you press Save goes to disk while you keep working, and the status bar shows "Saving" with the file name until it is done. Only the state that was saved counts as saved: an edit you make meanwhile leaves the document modified. Closing a document or quitting waits for a save still in progress, so a file is never cut short.
 
-Projects saved by the macOS app cannot be opened; Composa has its own format.
+Projects saved by Compositor for macOS (`.comp` packages) cannot be opened; Dieying uses the `.cmps` format inherited from Composa.
 
 ## Exporting
 
-Exporting flattens the document to a single image and leaves the project as it is.
+Exporting flattens a snapshot of the document to a single image and leaves the project dimensions and saved state as they are. All three image formats offer width, height, an aspect-ratio lock, a return to original size, and an encoded preview with the resulting file size. Encoding and file writing run in the background; closing waits for pending exports. Failed writes leave an existing destination unchanged.
 
 - **File > Export PNG** (Ctrl+Shift+E): lossless, with transparency.
-- **File > Export JPEG** (Ctrl+Alt+Shift+S): shows a preview with a quality slider from 1 to 100, the image size and the resulting file size, and composites transparent areas over white. The quality you choose is remembered.
-- **File > Export WebP**: uses the quality last chosen for JPEG.
+- **File > Export JPEG** (Ctrl+Alt+Shift+S): quality from 1 to 100, with a white or black background for transparent areas. The quality you choose is remembered.
+- **File > Export WebP**: preserves transparency and has its own remembered quality, separate from JPEG.
 - **Save Look…** in the [Camera Raw Filter](camera-raw.md) writes that grade's color stages as a `.cube` in the same way.
-- **File > Export Look as .cube**: bakes the document's adjustment layers into one 3D lookup table, at 17, 33 or 65 points, that any editor with a Color Lookup can load, so a look built here from Curves, Hue/Saturation and a Gradient Map can go to DaVinci Resolve or Photoshop. Only what changes a color by its color alone can go into a table: a layer with a mask, a clipped layer, a layer inside a folder, and Grain, Add Noise and the blurs are left out, and the dialog lists them before anything is written. The table is written at the layers' opacities, bottom to top, and reads back in Composa's own Color Lookup as the same look.
+- **File > Export Look as .cube**: bakes the document's adjustment layers into one 3D lookup table, at 17, 33 or 65 points, that any editor with a Color Lookup can load, so a look built here from Curves, Hue/Saturation and a Gradient Map can go to DaVinci Resolve or Photoshop. Only what changes a color by its color alone can go into a table: a layer with a mask, a clipped layer, a layer inside a folder, and Grain, Add Noise and the blurs are left out, and the dialog lists them before anything is written. The table is written at the layers' opacities, bottom to top, and reads back in Dieying's own Color Lookup as the same look.
 
 ## Photoshop files
 
-Composa reads Photoshop files and never writes them. A file opens as an unsaved document; save it as a Composa project to keep your work.
+Dieying reads Photoshop files and never writes them. A file opens as an unsaved document; save it as a Dieying project to keep your work.
 
-What survives: layers and folders, visibility, opacity and fill, masks, clipping, and blend modes (Dissolve, Darker Color and Lighter Color become Normal). Levels, Curves, Hue/Saturation, Brightness/Contrast, Exposure, Invert, Color Balance and Black & White adjustment layers arrive as Composa adjustment layers, and so does a Color Lookup made from a `.cube` or `.3dl` file, whose table Photoshop keeps inside the document. Horizontal text with one style arrives as editable text; vertical, sheared or unevenly scaled text becomes pixels. Solid fills and simple vector shapes become live shapes where possible.
+What survives: layers and folders, visibility, opacity and fill, masks, clipping, and blend modes (Dissolve, Darker Color and Lighter Color become Normal). Levels, Curves, Hue/Saturation, Brightness/Contrast, Exposure, Invert, Color Balance and Black & White adjustment layers arrive as Dieying adjustment layers, and so does a Color Lookup made from a `.cube` or `.3dl` file, whose table Photoshop keeps inside the document. Horizontal text with one style arrives as editable text; vertical, sheared or unevenly scaled text becomes pixels. Solid fills and simple vector shapes become live shapes where possible.
 
 What does not: layer effects are dropped, smart objects arrive as pixels, gradient and pattern fills arrive empty, and a Color Lookup through an ICC profile or a SpeedGrade `.look` is skipped. When anything has to be converted, an "Open" dialog lists what will change, layer by layer, before the file is opened; Import goes ahead. A file too large for memory has its layers cropped to the canvas rather than being refused, and the dialog lists every layer that was cut.
 
 ## GIMP files
 
-Composa reads GIMP's `.xcf` files, and `.xcf.gz`, and never writes them. A `.xcf.bz2` or `.xcf.xz` is refused with a message; save it from GIMP as `.xcf` or `.xcf.gz`. A file opens as an unsaved document; save it as a Composa project to keep your work. Dropped onto an open document, a GIMP file arrives inside a folder named after it.
+Dieying reads GIMP's `.xcf` files, and `.xcf.gz`, and never writes them. A `.xcf.bz2` or `.xcf.xz` is refused with a message; save it from GIMP as `.xcf` or `.xcf.gz`. A file opens as an unsaved document; save it as a Dieying project to keep your work. Dropped onto an open document, a GIMP file arrives inside a folder named after it.
 
-What survives: layers and folders (folded as they were), offsets, visibility, opacity, masks and whether they apply, guides and the resolution, blend modes where the math agrees here, including GIMP's older set from before 2.10, and text in one style, which can be retyped: its wording, font, size, color, alignment, box and spacing come across. Grayscale and indexed files become RGB. Every precision opens, 8 to 32 bits per channel and 16 to 64-bit floating point, linear or not; the pixels become Composa's 8-bit sRGB and a deep file is reported as having lost precision.
+What survives: layers and folders (folded as they were), offsets, visibility, opacity, masks and whether they apply, guides and the resolution, blend modes where the math agrees here, including GIMP's older set from before 2.10, and text in one style, which can be retyped: its wording, font, size, color, alignment, box and spacing come across. Grayscale and indexed files become RGB. Every precision opens, 8 to 32 bits per channel and 16 to 64-bit floating point, linear or not; the pixels become Dieying's 8-bit sRGB and a deep file is reported as having lost precision.
 
-What does not: text that mixes fonts or colors arrives as pixels, GIMP 3's layer effects (its non-destructive filters) are dropped and the layer shows as GIMP would with them switched off, vector and link layers arrive as pixels, saved channels, paths and color profiles are left out, and the painting modes (Dissolve, Behind, Color Erase, Erase, Merge, Split) become Normal. GIMP blends most layers in linear light where Composa blends in sRGB, which makes no difference to a Normal layer at full opacity but a little to the others, so those are listed. As with Photoshop files, an "Open" dialog lists every conversion, layer by layer, before anything is opened; a file that needs none opens straight away. A file too large for memory has its layers cropped to the canvas rather than being refused.
+What does not: text that mixes fonts or colors arrives as pixels, GIMP 3's layer effects (its non-destructive filters) are dropped and the layer shows as GIMP would with them switched off, vector and link layers arrive as pixels, saved channels, paths and color profiles are left out, and the painting modes (Dissolve, Behind, Color Erase, Erase, Merge, Split) become Normal. GIMP blends most layers in linear light where Dieying blends in sRGB, which makes no difference to a Normal layer at full opacity but a little to the others, so those are listed. As with Photoshop files, an "Open" dialog lists every conversion, layer by layer, before anything is opened; a file that needs none opens straight away. A file too large for memory has its layers cropped to the canvas rather than being refused.
 
 ## Camera RAW files
 

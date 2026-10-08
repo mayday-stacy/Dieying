@@ -49,6 +49,7 @@ public sealed partial class CanvasView : Control
     {
         Focusable = true;
         ClipToBounds = true;
+        InitializeTextInput();
         antsTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(120), DispatcherPriority.Background, (_, _) =>
         {
             if (session?.Selection == null && polygon.Count == 0 && session?.TextEdit == null) return;
@@ -91,6 +92,7 @@ public sealed partial class CanvasView : Control
         set
         {
             if (session == value) return;
+            ReleaseTextInput();
             if (session != null)
             {
                 CancelInteraction();
@@ -98,6 +100,7 @@ public sealed partial class CanvasView : Control
                 session.SelectionChanged -= OnSelectionChanged;
                 session.ColorRangeChanged -= OnColorRangeChanged;
                 session.LayersChanged -= OnLayersChanged;
+                session.TextChanged -= OnImeTextChanged;
             }
             session = value;
             if (session != null)
@@ -106,6 +109,7 @@ public sealed partial class CanvasView : Control
                 session.SelectionChanged += OnSelectionChanged;
                 session.ColorRangeChanged += OnColorRangeChanged;
                 session.LayersChanged += OnLayersChanged;
+                session.TextChanged += OnImeTextChanged;
             }
             // A crop rectangle belongs to the document it was drawn on.
             cropRect = null;
@@ -113,6 +117,7 @@ public sealed partial class CanvasView : Control
             outlineStale = true;
             fitPending = true;
             viewStale = true;
+            SynchronizeTextInput();
             UpdateCursor();
             InvalidateVisual();
             ViewChanged?.Invoke();
@@ -121,6 +126,8 @@ public sealed partial class CanvasView : Control
 
     private void OnCanvasChanged(SKRectI? area)
     {
+        SynchronizeTextInput();
+        NotifyImeGeometry();
         if (area is { } changed && !viewStale)
         {
             var (scale, shown, _, _) = viewKey;
@@ -144,7 +151,12 @@ public sealed partial class CanvasView : Control
         InvalidateVisual();
     }
 
-    private void OnLayersChanged() => InvalidateVisual();
+    private void OnLayersChanged()
+    {
+        SynchronizeTextInput();
+        NotifyImeGeometry();
+        InvalidateVisual();
+    }
 
     // ---- Viewport -----------------------------------------------------------------------------------------------
 
@@ -213,6 +225,7 @@ public sealed partial class CanvasView : Control
     {
         origin += delta;
         ClampOrigin();
+        NotifyImeGeometry();
         InvalidateVisual();
     }
 
@@ -233,6 +246,7 @@ public sealed partial class CanvasView : Control
             origin += new Vector((e.NewSize.Width - e.PreviousSize.Width) / 2, (e.NewSize.Height - e.PreviousSize.Height) / 2);
             ClampOrigin();
         }
+        NotifyImeGeometry();
     }
 
     // ---- Rendering ----------------------------------------------------------------------------------------------
@@ -368,7 +382,7 @@ public sealed partial class CanvasView : Control
         viewKey = key;
         viewStale = false;
         viewDirty = SKRectI.Empty;
-        if (!dirty.IsEmpty) session.RenderView(viewCache, dirty, new RenderView(scale, viewOrigin));
+        if (!dirty.IsEmpty) (textInputClient?.Preview ?? session).RenderView(viewCache, dirty, new RenderView(scale, viewOrigin));
         return (viewCache, new SKRect(0, 0, width, height), target);
     }
 

@@ -61,17 +61,18 @@ public sealed class McpBridge
     /// </summary>
     private static void LaunchApplication()
     {
-        var start = new ProcessStartInfo(Environment.ProcessPath!) { UseShellExecute = false, RedirectStandardInput = true, RedirectStandardOutput = true };
-        if (Path.GetFileNameWithoutExtension(Environment.ProcessPath).Equals("dotnet", StringComparison.OrdinalIgnoreCase))
-            start.ArgumentList.Add(Environment.GetCommandLineArgs()[0]);
         try
         {
-            var process = Process.Start(start);
-            process?.StandardInput.Close();
-            process?.BeginOutputReadLine();
-            Console.Error.WriteLine("Starting Composa.");
+            var executable = Environment.ProcessPath ?? throw new InvalidOperationException("The current executable path is unavailable.");
+            var start = new ProcessStartInfo(executable) { UseShellExecute = false, RedirectStandardInput = true, RedirectStandardOutput = true };
+            if (string.Equals(Path.GetFileNameWithoutExtension(executable), "dotnet", StringComparison.OrdinalIgnoreCase))
+                start.ArgumentList.Add(Environment.GetCommandLineArgs()[0]);
+            var process = Process.Start(start) ?? throw new InvalidOperationException("The application could not be started.");
+            process.StandardInput.Close();
+            process.BeginOutputReadLine();
+            Console.Error.WriteLine($"Starting {AppInfo.Name}.");
         }
-        catch (Exception error) { Console.Error.WriteLine($"Couldn't start Composa: {error.Message}"); }
+        catch (Exception error) { Console.Error.WriteLine($"Couldn't start {AppInfo.Name}: {error.Message}"); }
     }
 
     /// <summary>Runs until the client closes its end.</summary>
@@ -104,7 +105,7 @@ public sealed class McpBridge
                 firstAttemptDone = true;
                 await RefuseHeldAsync();
                 if (launch != null && !launched) { launched = true; launch(); }
-                if (!said) { await Console.Error.WriteLineAsync("Composa is not running, or Help > Allow AI Control is off; waiting for it."); said = true; }
+                if (!said) { await Console.Error.WriteLineAsync($"{AppInfo.Name} is not running, or Help > Allow AI Control is off; waiting for it."); said = true; }
                 try { await Task.Delay(500, stop.Token); } catch (OperationCanceledException) { return; }
                 continue;
             }
@@ -138,7 +139,7 @@ public sealed class McpBridge
         firstAttemptDone = true;
         List<string> owed;
         lock (gate) { owed = [.. inFlight]; inFlight.Clear(); }
-        foreach (var id in owed) await ToClientAsync(Error(JsonNode.Parse(id), "Composa closed while this was running."));
+        foreach (var id in owed) await ToClientAsync(Error(JsonNode.Parse(id), $"{AppInfo.Name} closed while this was running."));
         await RefuseHeldAsync();
         if (wasReady && clientInitialized) await AnnounceListsChangedAsync();
     }
@@ -229,7 +230,7 @@ public sealed class McpBridge
         else if (method == "resources/list") await ToClientAsync(Result(id, new JsonObject { ["resources"] = new JsonArray() }));
         else if (method == "resources/templates/list") await ToClientAsync(Result(id, new JsonObject { ["resourceTemplates"] = new JsonArray() }));
         else if (method == "ping") await ToClientAsync(Result(id, new JsonObject()));
-        else await ToClientAsync(Error(id, "Composa is not running, or Help > Allow AI Control is off. Start it and the tools appear by themselves."));
+        else await ToClientAsync(Error(id, $"{AppInfo.Name} is not running, or Help > Allow AI Control is off. Start it and the tools appear by themselves."));
     }
 
     private async Task ForwardAsync(string line)
@@ -252,11 +253,11 @@ public sealed class McpBridge
     {
         ["protocolVersion"] = protocolVersion ?? "2025-06-18",
         ["capabilities"] = new JsonObject { ["tools"] = new JsonObject { ["listChanged"] = true }, ["resources"] = new JsonObject { ["listChanged"] = true } },
-        ["serverInfo"] = new JsonObject { ["name"] = "composa", ["title"] = "Composa", ["version"] = AppInfo.Version },
-        ["instructions"] = "Composa is a layer-based image editor. The tools act on the documents open in its window; " +
+        ["serverInfo"] = new JsonObject { ["name"] = AppInfo.Id, ["title"] = AppInfo.Name, ["version"] = AppInfo.Version },
+        ["instructions"] = AppInfo.Name + " is a layer-based image editor. The tools act on the documents open in its window; " +
                            "every change is an undoable step the person can see and undo. Coordinates are canvas pixels " +
                            "with the origin at the top left. Call render to see the result of your changes. " +
-                           "When the tool list is empty, Composa is not running or Help > Allow AI Control is off; the tools appear once it is."
+                           $"When the tool list is empty, {AppInfo.Name} is not running or Help > Allow AI Control is off; the tools appear once it is."
     });
 
     private static string Result(JsonNode? id, JsonNode result) =>

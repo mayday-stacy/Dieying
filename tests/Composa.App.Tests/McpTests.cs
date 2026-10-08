@@ -21,7 +21,7 @@ namespace Composa.App.Tests;
 /// </summary>
 public class McpTests
 {
-    private static readonly string App = Path.Combine(AppContext.BaseDirectory, "composa.dll");
+    private static readonly string App = typeof(AppInfo).Assembly.Location;
 
     private static string PipeName() => OperatingSystem.IsWindows()
         ? $"composa-test-{Guid.NewGuid():N}"

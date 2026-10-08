@@ -29,11 +29,11 @@ public static class ReleaseAssets
     }
 
     /// <summary>
-    /// The file the update strip offers to download. A build from a repository never gets one: its
-    /// package manager owns updates, and a download would go around it.
+    /// The file the update strip offers to download. Managed builds leave updates to their package
+    /// manager, and local builds are rebuilt from source: neither offers a release download.
     /// </summary>
     public static ReleaseAsset? Offered(UpdateChannel channel, InstallKind kind, Architecture architecture, ReleaseInfo release) =>
-        channel == UpdateChannel.Managed ? null : For(kind, architecture, release);
+        channel == UpdateChannel.GitHub ? For(kind, architecture, release) : null;
 
     /// <summary>How the file for an install begins and ends, spelling the architecture as each format does (see <c>scripts/package/common.sh</c>).</summary>
     private static (string Prefix, string Suffix)? Pattern(InstallKind kind, Architecture architecture)

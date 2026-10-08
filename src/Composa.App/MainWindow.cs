@@ -42,7 +42,7 @@ public sealed partial class MainWindow : Window
 
     public MainWindow()
     {
-        Title = "Composa";
+        Title = AppInfo.DisplayName;
         Width = Math.Clamp(settings.WindowWidth, 800, 10000);
         Height = Math.Clamp(settings.WindowHeight, 520, 10000);
         if (settings.Maximized) WindowState = WindowState.Maximized;
@@ -55,7 +55,7 @@ public sealed partial class MainWindow : Window
         MinWidth = 800;
         MinHeight = 520;
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        Icon = new WindowIcon(Avalonia.Platform.AssetLoader.Open(new Uri("avares://composa/Assets/icon.png")));
+        Icon = new WindowIcon(Avalonia.Platform.AssetLoader.Open(AppInfo.ResourceUri("Assets/icon.png")));
 
         welcome = BuildWelcome();
         var canvasHost = new Panel { Children = { canvas, welcome } };
@@ -88,7 +88,7 @@ public sealed partial class MainWindow : Window
 
         canvas.ViewChanged += UpdateStatus;
         canvas.PointerAt += point => positionText.Text = point is { } p ? $"{p.X}, {p.Y}" : "";
-        canvas.Problem += message => { problem = message; UpdateStatus(); };
+        canvas.Problem += message => { problem = L10n.Text(message); UpdateStatus(); };
         canvas.ToolStateChanged += () => { refreshOptions?.Invoke(); UpdateColors(); };
         // Opening text from the canvas with another tool switches to the Type tool, so the toolbar has to follow.
         canvas.TextEditingChanged += () => { if (session != null) ShowTool(session.Tool); RebuildOptions(); UpdateStatus(); };
@@ -124,7 +124,7 @@ public sealed partial class MainWindow : Window
         if (abandoned.Count == 0) return;
         var names = string.Join("\n", abandoned.Select(e => $"• {e.Title} (autosaved {e.SavedAt:g})"));
         var recover = await Dialogs.Prompts.Confirm(this, "Recover Unsaved Work",
-            $"Composa did not close normally last time. These documents had unsaved changes:\n\n{names}\n\nRecover them? Choosing Cancel discards the autosaved copies.", "Recover");
+            L10n.Format("{0} did not close normally last time. These documents had unsaved changes:\n\n{1}\n\nRecover them? Choosing Cancel discards the autosaved copies.", AppInfo.DisplayName, names), "Recover");
         foreach (var entry in abandoned)
         {
             if (recover)
@@ -234,7 +234,7 @@ public sealed partial class MainWindow : Window
         tabs.Children.Clear();
         foreach (var item in sessions)
         {
-            var label = Ui.Label(item.Title + (item.IsModified ? " •" : ""), item == session ? Palette.Foreground : Palette.Secondary);
+            var label = Ui.RawLabel(item.Title + (item.IsModified ? " •" : ""), item == session ? Palette.Foreground : Palette.Secondary);
             var close = new Button { Classes = { "flat" }, Padding = new Thickness(3), Content = Icons.Create(Icons.Close, 10), VerticalAlignment = VerticalAlignment.Center };
             close.Click += (_, e) => { _ = CloseSession(item); e.Handled = true; };
             var tab = new Border
@@ -252,7 +252,7 @@ public sealed partial class MainWindow : Window
             tab.ContextMenu = TabMenu(item);
             tabs.Children.Add(tab);
         }
-        Title = session == null ? "Composa" : $"{session.Title}{(session.IsModified ? " •" : "")} - Composa";
+        Title = session == null ? AppInfo.DisplayName : $"{session.Title}{(session.IsModified ? " •" : "")} - {AppInfo.DisplayName}";
     }
 
     /// <summary>A click or a scrub in the History panel. Like any command it waits for a drag on the canvas to end.</summary>
@@ -272,7 +272,7 @@ public sealed partial class MainWindow : Window
     {
         MenuItem Entry(string header, Action run, bool enabled = true)
         {
-            var entry = new MenuItem { Header = header, IsEnabled = enabled };
+            var entry = new MenuItem { Header = L10n.Text(header), IsEnabled = enabled };
             entry.Click += (_, _) => run();
             return entry;
         }
@@ -310,6 +310,7 @@ public sealed partial class MainWindow : Window
     {
         // A save still writing finishes first, so its file is never cut short and the prompt knows whether it is needed.
         while (saving.TryGetValue(item, out var writing)) await writing.Task;
+        await WaitForExports(item);
         // Text still being typed is an open edit: commit it so it counts as a change and is in what gets saved.
         if (item.IsEditingText) item.FinishText();
         if (item.IsModified)
@@ -366,7 +367,7 @@ public sealed partial class MainWindow : Window
             var host = new Mcp.McpHost(this);
             host.ConnectionsChanged += UpdateAiText;
             if (await host.StartAsync()) aiControl = host;
-            else ShowProblem("Another Composa window already allows AI control; agents reach that one.");
+            else ShowProblem(L10n.Format("Another {0} window already allows AI control; agents reach that one.", AppInfo.DisplayName));
         }
         else
         {
@@ -380,7 +381,7 @@ public sealed partial class MainWindow : Window
     {
         var connected = aiControl?.Connections ?? 0;
         aiText.IsVisible = connected > 0;
-        aiText.Text = connected == 1 ? "AI connected" : $"{connected} AIs connected";
+        aiText.Text = connected == 1 ? L10n.Text("AI connected") : L10n.Format("{0} AIs connected", connected);
     }
 
     private async void OnClosing(object? sender, WindowClosingEventArgs e)
@@ -388,7 +389,7 @@ public sealed partial class MainWindow : Window
         RememberWindow();
         aiControl?.Dispose();
         if (session?.IsEditingText == true) session.FinishText();
-        if (closingConfirmed || (saving.Count == 0 && sessions.All(s => !s.IsModified) && download == null)) return;
+        if (closingConfirmed || (saving.Count == 0 && exporting.Count == 0 && sessions.All(s => !s.IsModified) && download == null)) return;
         e.Cancel = true;
         if (!await ConfirmQuit()) return;
         closingConfirmed = true;
@@ -406,6 +407,7 @@ public sealed partial class MainWindow : Window
         // so it is committed first or quitting would pass it by without asking.
         foreach (var typing in sessions.Where(s => s.IsEditingText)) typing.FinishText();
         while (saving.Count > 0) await Task.WhenAll(saving.Values.Select(w => w.Task).ToList());
+        await WaitForExports();
         foreach (var item in sessions.Where(s => s.IsModified).ToList())
             if (!await CloseSession(item)) return false;
         await StopDownload();
@@ -492,8 +494,8 @@ public sealed partial class MainWindow : Window
         }
 
         foregroundSwatch.Cursor = backgroundSwatch.Cursor = new Cursor(StandardCursorType.Hand);
-        ToolTip.SetTip(foregroundSwatch, "Foreground color");
-        ToolTip.SetTip(backgroundSwatch, "Background color");
+        ToolTip.SetTip(foregroundSwatch, L10n.Text("Foreground color"));
+        ToolTip.SetTip(backgroundSwatch, L10n.Text("Background color"));
         foregroundSwatch.PointerPressed += (_, _) => _ = PickColor(foreground: true);
         backgroundSwatch.PointerPressed += (_, _) => _ = PickColor(foreground: false);
         backgroundSwatch.Margin = new Thickness(14, 14, 0, 0);
@@ -532,7 +534,7 @@ public sealed partial class MainWindow : Window
 
     private Panel BuildWelcome()
     {
-        var title = Ui.Label("Composa", size: 26, weight: FontWeight.SemiBold);
+        var title = Ui.Label(AppInfo.Name, size: 26, weight: FontWeight.SemiBold);
         title.HorizontalAlignment = HorizontalAlignment.Center;
         var subtitle = Ui.Label("Create a canvas, open a project or image, or drop files here.", Palette.Secondary);
         subtitle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -548,7 +550,7 @@ public sealed partial class MainWindow : Window
             box.Children.Add(heading);
             foreach (var path in recent)
             {
-                var link = new Button { Classes = { "flat" }, Content = Ui.Label(Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar)), Palette.Accent), HorizontalAlignment = HorizontalAlignment.Center, Padding = new Thickness(8, 3) };
+                var link = new Button { Classes = { "flat" }, Content = Ui.RawLabel(Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar)), Palette.Accent), HorizontalAlignment = HorizontalAlignment.Center, Padding = new Thickness(8, 3) };
                 ToolTip.SetTip(link, path);
                 link.Click += (_, _) => _ = OpenPaths([path]);
                 box.Children.Add(link);
@@ -624,18 +626,18 @@ public sealed partial class MainWindow : Window
         {
             zoomText.Text = "";
             sizeText.Text = "";
-            hintText.Text = "Ready when you are";
+            hintText.Text = L10n.Text("Ready when you are");
             return;
         }
         zoomText.Text = canvas.Zoom >= 0.1 ? $"{canvas.Zoom * 100:0.#}%" : $"{canvas.Zoom * 100:0.##}%";
         sizeText.Text = $"{session.Document.Width} × {session.Document.Height} px · {session.Document.Resolution:0.#} ppi · sRGB";
-        hintText.Text = problem ?? (saving.Count > 0 ? "Saving " + string.Join(", ", saving.Values.Select(w => Path.GetFileName(w.Path))) + "…" : note ?? Hint(session));
+        hintText.Text = problem ?? (saving.Count > 0 ? L10n.Format("Saving {0}…", string.Join(", ", saving.Values.Select(w => Path.GetFileName(w.Path)))) : note ?? Hint(session));
         hintText.Foreground = problem != null ? new SolidColorBrush(Color.Parse("#FFB454")) : Palette.Secondary;
     }
 
-    private static string Hint(EditorSession s) => s.Tool == Tool.Move ? ToolHint(s) : ToolHint(s) + " · Ctrl-drag moves the layer";
+    private static string Hint(EditorSession s) => s.Tool == Tool.Move ? ToolHint(s) : ToolHint(s) + L10n.Text(" · Ctrl-drag moves the layer");
 
-    private static string ToolHint(EditorSession s) => s.Tool switch
+    private static string ToolHint(EditorSession s) => L10n.Text(s.Tool switch
     {
         Tool.Move => "Drag to move · Handles resize (Shift free, Alt from center) · Outside a corner rotates · Ctrl-drag a corner distorts · Ctrl-click picks a layer · 1–0 opacity",
         Tool.Marquee => "Drag to select · Shift add · Alt subtract · Shift+Alt intersect · Drag inside to move · Delete clears · Ctrl+D deselect",
@@ -652,7 +654,7 @@ public sealed partial class MainWindow : Window
         Tool.Eyedropper => "Click to pick the foreground color · Alt-click for the background",
         Tool.Hand => "Drag to pan · Ctrl+wheel zooms",
         _ => "Click to zoom in · Alt-click to zoom out · Drag right or left to zoom smoothly"
-    };
+    });
 
     private bool reportingFailure;
 
@@ -678,13 +680,13 @@ public sealed partial class MainWindow : Window
 
     public void ShowProblem(string message)
     {
-        problem = message;
+        problem = L10n.Text(message);
         UpdateStatus();
     }
 
     private void ShowNote(string message)
     {
-        note = message;
+        note = L10n.Text(message);
         UpdateStatus();
     }
 }

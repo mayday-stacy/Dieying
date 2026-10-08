@@ -93,12 +93,13 @@ public class ImageSizeUiTests
         ProgressWindow.Delay = TimeSpan.FromMilliseconds(1);
         try
         {
-            // A larger layer, so the model takes several tiles and the window is up long enough to cancel.
+            // Keep the large layer at its pixel size: fitting it to the small canvas introduces a
+            // transform that enhancement skips, leaving only the tiny original layer to beat Escape.
             var big = Pixels.NewColor(600, 400);
             big.Erase(SKColors.Teal);
-            session.AddImageLayer("big", big, new SKPoint(30, 20));
+            session.AddImageLayer("big", big, new SKPoint(30, 20), fit: false);
             var before = session.History.CurrentId;
-            var task = window.ResizeImage(session, 1200, 800, 72, ResampleMode.Enhance);
+            var task = window.ResizeImage(session, 120, 80, 72, ResampleMode.Enhance);
             PumpUntil(() => window.OwnedWindows.OfType<ProgressWindow>().Any(w => w.IsVisible), 5);
             window.OwnedWindows.OfType<ProgressWindow>().Single().KeyPressQwerty(PhysicalKey.Escape, RawInputModifiers.None);
             PumpUntil(() => task.IsCompleted);

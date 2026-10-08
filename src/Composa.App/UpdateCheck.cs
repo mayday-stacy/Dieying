@@ -11,7 +11,9 @@ public enum UpdateChannel
     /// <summary>Downloaded from the releases page: nothing else will tell the user a new version exists.</summary>
     GitHub,
     /// <summary>Installed from a repository by apt, dnf or similar. The package manager owns updates and this must stay quiet.</summary>
-    Managed
+    Managed,
+    /// <summary>A local development build that is updated by rebuilding its own source checkout.</summary>
+    Local
 }
 
 /// <summary>One file attached to a release: what it is called, where it downloads from and how large it is.</summary>
@@ -102,10 +104,11 @@ public sealed record UpdateResult(UpdateOutcome Outcome, ReleaseVersion Version 
 /// the same test would exercise a stable version the day of a release and a pre-release the day
 /// after.
 /// </param>
-public sealed class UpdateCheck(IReleaseSource source, Settings settings, Func<DateTime>? now = null, string? runningVersion = null)
+public sealed class UpdateCheck(IReleaseSource source, Settings settings, Func<DateTime>? now = null, string? runningVersion = null, UpdateChannel? channel = null)
 {
     private readonly Func<DateTime> now = now ?? (() => DateTime.UtcNow);
     private readonly string runningVersion = runningVersion ?? AppInfo.Version;
+    private readonly UpdateChannel channel = channel ?? Channel;
 
     /// <summary>How long an automatic check waits before asking again. A manual check ignores it.</summary>
     public static readonly TimeSpan Interval = TimeSpan.FromHours(24);
@@ -114,25 +117,34 @@ public sealed class UpdateCheck(IReleaseSource source, Settings settings, Func<D
     /// Set at build time by the packaging scripts. Every download on the releases page is "github",
     /// the .deb and .rpm included, since a file installed by hand has no repository to update it. A
     /// package that comes from a repository is built as "managed", because telling someone to
-    /// sidestep their package manager is worse than saying nothing.
+    /// sidestep their package manager is worse than saying nothing. A "local" build is updated
+    /// from its own source checkout and must never offer an upstream package.
     /// </summary>
-    public static UpdateChannel Channel { get; } =
+    public static UpdateChannel Channel { get; } = ParseChannel(
         typeof(UpdateCheck).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-            .FirstOrDefault(a => a.Key == "UpdateChannel")?.Value?.Equals("managed", StringComparison.OrdinalIgnoreCase) == true
-            ? UpdateChannel.Managed
-            : UpdateChannel.GitHub;
+            .FirstOrDefault(a => a.Key == "UpdateChannel")?.Value);
+
+    /// <summary>Missing or unknown channels are local: a fork must explicitly opt in to any release service.</summary>
+    public static UpdateChannel ParseChannel(string? value) => value?.ToLowerInvariant() switch
+    {
+        "managed" => UpdateChannel.Managed,
+        "local" => UpdateChannel.Local,
+        "github" => UpdateChannel.GitHub,
+        _ => UpdateChannel.Local
+    };
 
     /// <summary>A packager can switch the check off without patching code.</summary>
     public static bool DisabledByEnvironment =>
         Environment.GetEnvironmentVariable("COMPOSA_DISABLE_UPDATE_CHECK") is { Length: > 0 } value &&
         value != "0" && !value.Equals("false", StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>Whether the check runs by itself at launch. A manual check is always allowed.</summary>
+    /// <summary>Whether the check runs by itself at launch. Local builds never query releases.</summary>
     public bool RunsAutomatically =>
-        Channel == UpdateChannel.GitHub && settings.CheckForUpdates && !DisabledByEnvironment;
+        channel == UpdateChannel.GitHub && settings.CheckForUpdates && !DisabledByEnvironment;
 
     public async Task<UpdateResult> Run(bool manual, CancellationToken cancel = default)
     {
+        if (channel == UpdateChannel.Local) return new UpdateResult(UpdateOutcome.Disabled);
         if (!manual)
         {
             if (!RunsAutomatically) return new UpdateResult(UpdateOutcome.Disabled);

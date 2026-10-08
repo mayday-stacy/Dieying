@@ -1,4 +1,7 @@
-name: Release
+name: Release (not configured for Dieying)
+
+# Public publishing is deliberately disconnected in this fork. The retained upstream recipes
+# below share Composa's installer identity and must be replaced before an independent release.
 
 # Publishing a release on GitHub is the trigger, and GitHub creates the tag itself, so a release
 # never depends on a tag being pushed from a terminal. MinVer then derives the version from that
@@ -8,8 +11,6 @@ name: Release
 # a published release is live with no downloads attached to it, which is worse than no release,
 # because the update check will eventually point people at whatever the latest release is.
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       draft_tag:
@@ -18,14 +19,22 @@ on:
         default: ""
 
 permissions:
-  contents: write # Needed to attach artifacts to the release.
+  contents: read
 
 concurrency:
   group: release-${{ github.event.release.tag_name || github.ref }}
   cancel-in-progress: false # Never interrupt a release build half-way.
 
 jobs:
+  development-only:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: |
+          echo 'Public releases are not configured for Dieying.'
+          echo 'Use the Packages workflow for a portable development build. Configure the repository, installer identity and signing publisher before enabling releases.'
+          exit 1
   linux:
+    if: ${{ false }}
     # 22.04 rather than latest: a self-contained build links against the build machine's glibc, and
     # 24.04 would produce binaries that refuse to start on Debian 12 or Ubuntu 22.04.
     #
@@ -85,6 +94,7 @@ jobs:
   # arrives prebuilt, so nothing here depends on the runner's own architecture the way the Linux
   # glibc floor does.
   windows:
+    if: ${{ false }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -135,7 +145,7 @@ jobs:
     needs: [linux, windows]
     runs-on: ubuntu-22.04
     # Either a real release, or a dispatch that named a draft to fill.
-    if: github.event_name == 'release' || inputs.draft_tag != ''
+    if: ${{ false }}
     steps:
       - uses: actions/download-artifact@v4
         with:

@@ -77,7 +77,7 @@ public sealed class McpHost : IDisposable
         Count(+1);
         try
         {
-            await using var transport = new StreamServerTransport(pipe, pipe, "composa");
+            await using var transport = new StreamServerTransport(pipe, pipe, AppInfo.Id);
             await using var server = McpServer.Create(transport, Options());
             await server.RunAsync(stop.Token);
         }
@@ -101,8 +101,8 @@ public sealed class McpHost : IDisposable
         var tools = new ComposaTools(window);
         return new McpServerOptions
         {
-            ServerInfo = new Implementation { Name = "composa", Title = "Composa", Version = AppInfo.Version },
-            ServerInstructions = "Composa is a layer-based image editor. The tools act on the documents open in its window; " +
+            ServerInfo = new Implementation { Name = AppInfo.Id, Title = AppInfo.Name, Version = AppInfo.Version },
+            ServerInstructions = AppInfo.Name + " is a layer-based image editor. The tools act on the documents open in its window; " +
                                  "every change is an undoable step the person can see and undo. Coordinates are canvas pixels " +
                                  "with the origin at the top left. Call render to see the result of your changes.",
             ToolCollection = tools.Collection(),

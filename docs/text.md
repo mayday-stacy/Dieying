@@ -24,6 +24,14 @@ While typing, select some of the text and pick a color from the bar's swatch or 
 
 ## Letters in their own fonts
 
-The font, Bold and Italic work the same way: while typing, select some of the text and choose a family from the menu or tick Bold or Italic, and only those letters change. With nothing selected the change goes on all of the text, and a family chosen for all of it keeps the letters that were bold or italic as they were. When the selected letters use more than one family the menu says (Multiple), and choosing one from it puts all of them in that family. New letters take the face of the letter before them. Projects that use this are format version 5 and need Composa 1.3 or later to open.
+The font, Bold and Italic work the same way: while typing, select some of the text and choose a family from the menu or tick Bold or Italic, and only those letters change. With nothing selected the change goes on all of the text, and a family chosen for all of it keeps the letters that were bold or italic as they were. When the selected letters use more than one family the menu says (Multiple), and choosing one from it puts all of them in that family. New letters take the face of the letter before them. Projects that use this are format version 5 and are supported by Dieying and by upstream Composa 1.3 or later.
 
-If a font has no bold or italic face, Composa substitutes one or synthesizes the weight and slant, so Bold and Italic always show.
+If a font has no bold or italic face, Dieying substitutes one or synthesizes the weight and slant, so Bold and Italic always show.
+
+## Chinese input, fallback fonts and Unicode
+
+While editing text, a Windows input method can show preedit text and position its candidate list near the caret. Choosing a candidate commits text; cancelling preedit leaves the original text and selection intact. IME reconversion of already committed text is not implemented. Menu/tool shortcuts do not consume printable keys while the editor is typing.
+
+Missing glyphs use system font fallback, with the same font choices used for measurement and rendering. If a project's requested font is not installed, the Type bar reports it while preserving its name in the project. Install the original font for the closest layout match on another computer.
+
+Caret movement, selection and deletion follow Unicode grapheme clusters so combining marks, surrogate pairs and emoji sequences stay together. Chinese paragraph wrapping avoids common punctuation at inappropriate line boundaries. These features do not promise complete complex-script shaping or color-emoji rendering; additional IMEs and multi-monitor candidate positioning still need practical testing.

@@ -11,6 +11,8 @@ namespace Composa.App;
 /// </summary>
 public sealed class UpdateEnvironment
 {
+    public UpdateChannel Channel { get; init; } = UpdateCheck.Channel;
+
     public IReleaseSource Source { get; init; } = new GitHubReleaseSource();
 
     /// <summary>Stands in for the network for downloads; null uses a real connection.</summary>
@@ -41,7 +43,7 @@ public sealed partial class MainWindow
 
     public UpdateNotice UpdateNotice => updateNotice;
 
-    private UpdateCheck NewUpdateCheck() => new(Updates.Source, settings);
+    private UpdateCheck NewUpdateCheck() => new(Updates.Source, settings, channel: Updates.Channel);
 
     private ReleaseVersion? pendingUpdateVersion;
     private string? pendingUpdateUrl;
@@ -90,11 +92,11 @@ public sealed partial class MainWindow
         });
     }
 
-    /// <summary>The file this install would download from the release, if any: never for a build whose package manager owns updates.</summary>
+    /// <summary>The file this install would download from the release, if any: only for a GitHub build.</summary>
     private (InstallKind Kind, ReleaseAsset? Asset) Downloadable(UpdateResult result)
     {
         var kind = Updates.Kind();
-        return (kind, result.Release is { } release ? ReleaseAssets.Offered(UpdateCheck.Channel, kind, RuntimeInformation.ProcessArchitecture, release) : null);
+        return (kind, result.Release is { } release ? ReleaseAssets.Offered(Updates.Channel, kind, RuntimeInformation.ProcessArchitecture, release) : null);
     }
 
     private void Offer(UpdateResult result, InstallKind kind, ReleaseAsset? asset)
@@ -118,7 +120,14 @@ public sealed partial class MainWindow
     /// <summary>Help &gt; Check for Updates. Unlike the automatic check, this always reports what happened.</summary>
     private async Task CheckForUpdatesNow()
     {
-        if (UpdateCheck.Channel == UpdateChannel.Managed)
+        if (Updates.Channel == UpdateChannel.Local)
+        {
+            await Prompts.Alert(this, "Check for Updates",
+                $"{AppInfo.DisplayName} {AppInfo.Version} is a local development build. " +
+                "To update this copy, update its source checkout and rebuild it using the project's build instructions.");
+            return;
+        }
+        if (Updates.Channel == UpdateChannel.Managed)
         {
             await Prompts.Alert(this, "Check for Updates",
                 $"Composa {AppInfo.Version} was installed through your package manager, which is where updates come from. " +

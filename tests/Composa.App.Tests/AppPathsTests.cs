@@ -14,13 +14,69 @@ public class AppPathsTests
 
     private static Func<string, string?> Variables(params (string Name, string Value)[] set) => name => set.FirstOrDefault(v => v.Name == name).Value;
 
-    /// <summary>Exactly what every Linux build before this one used, so nobody's preferences go missing on an update.</summary>
+    [Theory]
+    [InlineData(Platform.Windows)]
+    [InlineData(Platform.Linux)]
+    [InlineData(Platform.MacOS)]
+    public void A_local_data_directory_isolates_preferences_and_recovery(Platform platform)
+    {
+        var root = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "Composa development", "中文"));
+        var result = For(platform, Variables((AppInfo.DataDirectoryVariable, root)),
+            _ => throw new InvalidOperationException("The installed profile must not be consulted."));
+        Assert.Equal(new Folders(Path.Combine(root, "config"), Path.Combine(root, "cache")), result);
+    }
+
+    [Theory]
+    [InlineData("local-data")]
+    [InlineData("../local-data")]
+    public void A_relative_data_override_cannot_silently_use_a_different_profile(string root)
+    {
+        Assert.Throws<ArgumentException>(() => For(Platform.Windows,
+            Variables((AppInfo.DataDirectoryVariable, root)), Folder));
+    }
+
+    [Theory]
+    [InlineData(Platform.Windows)]
+    [InlineData(Platform.Linux)]
+    [InlineData(Platform.MacOS)]
+    public void The_new_data_override_wins_and_the_old_development_override_remains_supported(Platform platform)
+    {
+        var oldRoot = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "old-development-profile"));
+        var newRoot = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "dieying-profile"));
+        var legacy = Variables((AppInfo.LegacyDataDirectoryVariable, oldRoot));
+        var both = Variables((AppInfo.LegacyDataDirectoryVariable, oldRoot), (AppInfo.DataDirectoryVariable, newRoot));
+        Assert.Equal(new Folders(Path.Combine(oldRoot, "config"), Path.Combine(oldRoot, "cache")), For(platform, legacy, Folder));
+        Assert.Equal(new Folders(Path.Combine(newRoot, "config"), Path.Combine(newRoot, "cache")), For(platform, both, Folder));
+        Assert.Null(LegacyConfigFor(platform, legacy, Folder));
+        Assert.Null(LegacyConfigFor(platform, both, Folder));
+        Assert.Equal("image-editor-dev", Path.GetFileName(LegacyConfigFor(platform, Variables(), Folder)));
+    }
+
+    [Fact]
+    public void An_invalid_new_override_does_not_fall_back_to_the_old_one()
+    {
+        var oldRoot = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "old-development-profile"));
+        Assert.Throws<ArgumentException>(() => For(Platform.Windows,
+            Variables((AppInfo.DataDirectoryVariable, "relative"), (AppInfo.LegacyDataDirectoryVariable, oldRoot)), Folder));
+        Assert.Throws<ArgumentException>(() => For(Platform.Windows,
+            Variables((AppInfo.LegacyDataDirectoryVariable, "relative")), Folder));
+    }
+
+    [Fact]
+    public void A_local_profile_does_not_redirect_the_users_downloads()
+    {
+        var root = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "Composa development"));
+        Assert.Equal(@"D:\Downloads", Downloads(Platform.Windows,
+            Variables((AppInfo.DataDirectoryVariable, root)), known: @"D:\Downloads"));
+    }
+
+    /// <summary>The fork respects XDG without sharing upstream Composa's profile.</summary>
     [Fact]
     public void Linux_follows_xdg_and_falls_back_to_the_home_directory()
     {
-        Assert.Equal(new Folders(Path.Combine("/home/ada", ".config", "composa"), Path.Combine("/home/ada", ".cache", "composa")),
+        Assert.Equal(new Folders(Path.Combine("/home/ada", ".config", "dieying"), Path.Combine("/home/ada", ".cache", "dieying")),
             For(Platform.Linux, Variables(), Folder));
-        Assert.Equal(new Folders(Path.Combine("/xdg/config", "composa"), Path.Combine("/xdg/cache", "composa")),
+        Assert.Equal(new Folders(Path.Combine("/xdg/config", "dieying"), Path.Combine("/xdg/cache", "dieying")),
             For(Platform.Linux, Variables(("XDG_CONFIG_HOME", "/xdg/config"), ("XDG_CACHE_HOME", "/xdg/cache")), Folder));
     }
 
@@ -29,16 +85,16 @@ public class AppPathsTests
     public void Windows_keeps_preferences_roaming_and_the_cache_local()
     {
         var folders = For(Platform.Windows, Variables(("XDG_CONFIG_HOME", "/ignored")), Folder);
-        Assert.Equal(Path.Combine(@"C:\Users\ada\AppData\Roaming", "Composa"), folders.Config);
-        Assert.Equal(Path.Combine(@"C:\Users\ada\AppData\Local", "Composa"), folders.Cache);
+        Assert.Equal(Path.Combine(@"C:\Users\ada\AppData\Roaming", "dieying"), folders.Config);
+        Assert.Equal(Path.Combine(@"C:\Users\ada\AppData\Local", "dieying"), folders.Cache);
     }
 
     [Fact]
     public void MacOS_uses_application_support_and_caches()
     {
         var folders = For(Platform.MacOS, Variables(("XDG_CONFIG_HOME", "/ignored")), Folder);
-        Assert.Equal(Path.Combine("/home/ada", "Library", "Application Support", "Composa"), folders.Config);
-        Assert.Equal(Path.Combine("/home/ada", "Library", "Caches", "Composa"), folders.Cache);
+        Assert.Equal(Path.Combine("/home/ada", "Library", "Application Support", "dieying"), folders.Config);
+        Assert.Equal(Path.Combine("/home/ada", "Library", "Caches", "dieying"), folders.Cache);
     }
 
     private static Func<string, string?> Files(params (string Path, string Text)[] files) => path => files.FirstOrDefault(f => f.Path == path).Text;

@@ -69,10 +69,10 @@ public sealed partial class MainWindow
                     else
                     {
                         var edge = Ui.Number(s.ObjectEdgeOffset, -10, 10, v => s.ObjectEdgeOffset = (int)v, 1, "0", 52);
-                        ToolTip.SetTip(edge, "Positive values tighten the detected outline inward; negative values loosen it outward");
+                        ToolTip.SetTip(edge, L10n.Text("Positive values tighten the detected outline inward; negative values loosen it outward"));
                         Add(Ui.Row(5, Ui.Scrub(Ui.Label("Edge", Palette.Secondary), edge), edge, Ui.Label("px", Palette.Secondary)));
                         var detect = Ui.Combo(Detects, s.Detect, Composa.Vision.SubjectFinder.DisplayName, v => { s.Detect = v; RememberToolSettings(); }, 128);
-                        ToolTip.SetTip(detect, "How the subject is found: a model for any subject or for a person, run on this machine, or the plain backdrop that touches the picture's edges. The same choice drives Select > Subject and Remove Background.");
+                        ToolTip.SetTip(detect, L10n.Text("How the subject is found: a model for any subject or for a person, run on this machine, or the plain backdrop that touches the picture's edges. The same choice drives Select > Subject and Remove Background."));
                         Add(Ui.Row(5, Ui.Label("Detect", Palette.Secondary), detect));
                     }
                     Add(Ui.Check("Sample all layers", s.SampleAllLayers, v => s.SampleAllLayers = v));
@@ -115,7 +115,7 @@ public sealed partial class MainWindow
             case Tool.Crop:
                 Add(Title("Crop"));
                 var ratio = Ui.Combo(EditorSession.CropRatios, s.CropRatio, r => r, r => { s.CropRatio = r; canvas.ChangeCropRatio(); }, 100);
-                ToolTip.SetTip(ratio, "The shape the crop box keeps while you drag it");
+                ToolTip.SetTip(ratio, L10n.Text("The shape the crop box keeps while you drag it"));
                 Add(Ui.Row(6, Ui.Label("Ratio", Palette.Secondary), ratio));
                 var readout = Ui.Label("Drag on the canvas to choose the area to keep", Palette.Secondary);
                 var apply = Ui.TextButton("Apply", canvas.ApplyCrop, accent: true);
@@ -124,7 +124,7 @@ public sealed partial class MainWindow
                 refreshOptions = () =>
                 {
                     apply.IsEnabled = cancel.IsEnabled = canvas.HasCrop;
-                    readout.Text = canvas.CropRect is { } crop ? $"{Math.Round(crop.Width)} × {Math.Round(crop.Height)} px" : "Drag on the canvas to choose the area to keep";
+                    readout.Text = canvas.CropRect is { } crop ? $"{Math.Round(crop.Width)} × {Math.Round(crop.Height)} px" : L10n.Text("Drag on the canvas to choose the area to keep");
                 };
                 refreshOptions();
                 break;
@@ -153,13 +153,17 @@ public sealed partial class MainWindow
         // A long font name is cut off rather than widening the bar.
         // While typing, the family, Bold and Italic land on the selected letters only, as the color does.
         void ChangeFace(Func<TextFace, TextFace> change) { if (!updating) s.SetTextFace(change); }
-        var font = Ui.Combo(families, family, f => f, f => ChangeFace(face => face with { FontFamily = f }), 190);
+        var font = Ui.Combo(families, family, f => f, f => ChangeFace(face => face with { FontFamily = f }), 190, localize: false);
+        font.Name = "TextFontFamily";
         font.MaxWidth = 190;
+        var missingFont = Ui.Label("Missing font", Palette.Secondary, size: 11);
+        missingFont.Name = "MissingTextFont";
+        missingFont.IsVisible = false;
         var size = Ui.Number(style.Size, 1, 2000, v => Change(st => st with { Size = v }), 1, "0.#", 64);
         var bold = Ui.Check("Bold", style.Bold, v => ChangeFace(face => face with { Bold = v }));
         var italic = Ui.Check("Italic", style.Italic, v => ChangeFace(face => face with { Italic = v }));
         var swatch = new Border { Width = 34, Height = 22, CornerRadius = new Avalonia.CornerRadius(3), BorderBrush = Avalonia.Media.Brushes.White, BorderThickness = new Avalonia.Thickness(1), Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand) };
-        ToolTip.SetTip(swatch, "Text color");
+        ToolTip.SetTip(swatch, L10n.Text("Text color"));
         swatch.PointerPressed += async (_, _) =>
         {
             // The picker's working color shows on the canvas as it changes. Text being typed takes it as any bar change;
@@ -194,20 +198,20 @@ public sealed partial class MainWindow
         foreach (var (alignment, icon) in new[] { (TextAlignment.Left, Icons.AlignLeft), (TextAlignment.Center, Icons.AlignCenter), (TextAlignment.Right, Icons.AlignRight) })
         {
             var button = new ToggleButton { Classes = { "tool" }, Width = 30, Height = 26, Content = Icons.Create(icon, 15), IsChecked = style.Alignment == alignment };
-            ToolTip.SetTip(button, "Align " + alignment.ToString().ToLowerInvariant());
+            ToolTip.SetTip(button, L10n.Format("Align {0}", L10n.Text(alignment.ToString())));
             button.Click += (_, _) => { Change(st => st with { Alignment = alignment }); refreshOptions?.Invoke(); };
             alignments[alignment] = button;
             alignRow.Children.Add(button);
         }
         var tracking = Ui.Number(style.Tracking, -100, 1000, v => Change(st => st with { Tracking = v }), 1, "0", 58);
-        ToolTip.SetTip(tracking, "Tracking: extra space after every character, in pixels");
+        ToolTip.SetTip(tracking, L10n.Text("Tracking: extra space after every character, in pixels"));
         var leading = Ui.Number(style.Leading, 0, 5000, v => Change(st => st with { Leading = v }), 1, "0", 58);
-        ToolTip.SetTip(leading, "Leading: line height baseline to baseline, in pixels. 0 is Auto: 120% of the size");
+        ToolTip.SetTip(leading, L10n.Text("Leading: line height baseline to baseline, in pixels. 0 is Auto: 120% of the size"));
         var done = Ui.TextButton("Done", () => { s.FinishText(); canvas.Focus(); RebuildOptions(); UpdateStatus(); }, accent: true);
         var cancel = Ui.TextButton("Cancel", () => { s.CancelText(); canvas.Focus(); RebuildOptions(); UpdateStatus(); });
         var edit = Ui.TextButton("Edit Text", () => { if (s.ActiveLayer is { Text: not null } layer) BeginTextEdit(layer); });
         foreach (var button in new[] { done, cancel, edit }) button.MinWidth = 0;
-        row.Children.AddRange([font, Ui.Row(4, size, Ui.Scrub(Ui.Label("px", Palette.Secondary), size)), bold, italic, swatch, alignRow,
+        row.Children.AddRange([font, missingFont, Ui.Row(4, size, Ui.Scrub(Ui.Label("px", Palette.Secondary), size)), bold, italic, swatch, alignRow,
             Ui.Row(5, Ui.Scrub(Ui.Label("Tracking", Palette.Secondary), tracking), tracking), Ui.Row(5, Ui.Scrub(Ui.Label("Leading", Palette.Secondary), leading), leading), Ui.Separator()]);
         if (s.IsEditingText) row.Children.AddRange([done, cancel]);
         else { edit.IsEnabled = s.ActiveLayer?.Text != null; row.Children.Add(edit); }
@@ -224,8 +228,11 @@ public sealed partial class MainWindow
             // Selected letters in more than one family: the menu says so instead of naming one.
             var uniform = s.CurrentUniformTextFamily;
             var index = uniform == null ? -1 : families.ToList().IndexOf(uniform);
-            font.PlaceholderText = uniform ?? "(Multiple)";
+            font.PlaceholderText = uniform ?? L10n.Text("(Multiple)");
             if (font.SelectedIndex != index) font.SelectedIndex = index;
+            missingFont.IsVisible = uniform != null && index < 0;
+            ToolTip.SetTip(missingFont, missingFont.IsVisible
+                ? L10n.Format("Font ‘{0}’ is not installed. A system font is used for display; choose an installed font to replace it.", uniform!) : null);
             swatch.Background = new Avalonia.Media.SolidColorBrush(new SKColor(s.CurrentTextColor).ToAvalonia());
             foreach (var (alignment, button) in alignments) button.IsChecked = current.Alignment == alignment;
             updating = false;
@@ -245,7 +252,7 @@ public sealed partial class MainWindow
         var s = session!;
         var layer = s.ActiveLayer;
         var autoSelect = Ui.Check("Auto Select", canvas.AutoSelect, v => { canvas.AutoSelect = v; RememberToolSettings(); });
-        ToolTip.SetTip(autoSelect, "Click a layer's pixels to select it. Off, a drag moves the current layer from anywhere; Ctrl-click still picks.");
+        ToolTip.SetTip(autoSelect, L10n.Text("Click a layer's pixels to select it. Off, a drag moves the current layer from anywhere; Ctrl-click still picks."));
         row.Children.Add(autoSelect);
         row.Children.Add(Ui.Check("Transform controls", canvas.ShowTransformControls, v => { canvas.ShowTransformControls = v; canvas.InvalidateVisual(); RememberToolSettings(); }));
         if (layer?.Pixels == null)

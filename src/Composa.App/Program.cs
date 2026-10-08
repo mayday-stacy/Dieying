@@ -13,6 +13,7 @@ internal static class Program
 #if BUNDLED_IMAGEMAGICK
         IO.ImageMagick.Bundled = BundledImageMagick.TryLoad;
 #endif
+        L10n.SetLanguage(Settings.Load().Language);
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         return 0;
     }

@@ -1,7 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>composa</AssemblyName>
+    <AssemblyName>dieying</AssemblyName>
+    <Product>Dieying</Product>
+    <Title>Dieying</Title>
+    <AssemblyTitle>Dieying</AssemblyTitle>
+    <Description>Dieying is an independent development fork of Composa. Not an official Composa release.</Description>
+    <Company>Independent fork contributors</Company>
+    <Authors>$(Authors);Independent fork contributors</Authors>
+    <UpdateChannel Condition="'$(UpdateChannel)' == ''">local</UpdateChannel>
     <RootNamespace>Composa.App</RootNamespace>
     <ApplicationIcon>../../packaging/icons/composa.ico</ApplicationIcon>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
@@ -51,8 +58,8 @@
     <AvaloniaResource Include="Assets/**" />
     <!--
       How this build was distributed, read back at runtime by UpdateCheck. The packaging scripts
-      pass "managed" for the .deb and .rpm, where apt or dnf owns updates and the application must
-      not nag about them. Anything else, including a developer build, is "github".
+      may explicitly pass "managed" or "github". This independent fork defaults to "local" so
+      an ordinary build can never offer upstream Composa as its own replacement.
     -->
     <AssemblyMetadata Include="UpdateChannel" Value="$(UpdateChannel)" Condition="'$(UpdateChannel)' != ''" />
     <!--

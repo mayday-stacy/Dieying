@@ -16,14 +16,14 @@ public static class ImportConversionDialog
             var message = Ui.Label(item.Message, Palette.Foreground);
             message.TextWrapping = TextWrapping.Wrap;
             message.MaxWidth = 470;
-            rows.Children.Add(Ui.Column(2, Ui.Label(item.LayerName, Palette.Foreground, weight: FontWeight.SemiBold), message));
+            rows.Children.Add(Ui.Column(2, Ui.RawLabel(item.LayerName, Palette.Foreground, weight: FontWeight.SemiBold), message));
         }
-        if (conversions.Count > 500) rows.Children.Add(Ui.Label($"…and {conversions.Count - 500} more.", Palette.Secondary));
-        var intro = Ui.Label($"Composa will convert these {format} features. Nothing is applied until you continue.", Palette.Secondary);
+        if (conversions.Count > 500) rows.Children.Add(Ui.Label(L10n.Format("…and {0} more.", conversions.Count - 500), Palette.Secondary));
+        var intro = Ui.Label(L10n.Format("{0} will convert these {1} features. Nothing is applied until you continue.", AppInfo.DisplayName, format), Palette.Secondary);
         intro.TextWrapping = TextWrapping.Wrap;
         intro.MaxWidth = 500;
         var list = new ScrollViewer { Content = rows, MaxHeight = 320, Width = 500, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled };
         var body = Ui.Column(12, intro, list);
-        return new DialogWindow($"Open {fileName}?", body, "Import").Ask(owner);
+        return new DialogWindow(L10n.Format("Open {0}?", fileName), body, "Import").Ask(owner);
     }
 }

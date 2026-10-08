@@ -5,11 +5,14 @@ namespace Composa.App;
 /// <summary>Preferences remembered between launches, stored in the platform's config directory (<see cref="AppPaths.Config"/>).</summary>
 public sealed class Settings
 {
+    /// <summary>UI language for the next launch: system, en or zh-CN. Document data and numeric formats are unchanged.</summary>
+    public string Language { get; set; } = "system";
     public List<string> RecentFiles { get; set; } = [];
     public double WindowWidth { get; set; } = 1280;
     public double WindowHeight { get; set; } = 820;
     public bool Maximized { get; set; }
     public int JpegQuality { get; set; } = 90;
+    public int WebpQuality { get; set; } = 90;
     public bool ShowPixelGrid { get; set; } = true;
     /// <summary>Toggles that belong to the person rather than to a document, kept the way Photoshop keeps its tool options.</summary>
     public bool ShowTransformControls { get; set; } = true;
@@ -42,17 +45,34 @@ public sealed class Settings
     public static Settings Load()
     {
         if (!Persist) return new Settings();
-        try { return File.Exists(FilePath) ? JsonSerializer.Deserialize<Settings>(File.ReadAllText(FilePath)) ?? new Settings() : new Settings(); }
+        return LoadFrom(FilePath, AppPaths.LegacyConfig is { } legacy ? Path.Combine(legacy, "settings.json") : null);
+    }
+
+    /// <summary>Read previous development preferences only when this profile has no settings file yet.</summary>
+    public static Settings LoadFrom(string filePath, string? legacyFilePath = null)
+    {
+        try
+        {
+            var source = File.Exists(filePath) ? filePath : legacyFilePath;
+            return source != null && File.Exists(source)
+                ? JsonSerializer.Deserialize<Settings>(File.ReadAllText(source)) ?? new Settings() : new Settings();
+        }
         catch { return new Settings(); } // A damaged settings file only costs the remembered preferences.
     }
 
     public void Save()
     {
         if (!Persist) return;
+        SaveTo(FilePath);
+    }
+
+    /// <summary>Write to the current profile; loading old preferences never changes their original file.</summary>
+    public void SaveTo(string filePath)
+    {
         try
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
-            File.WriteAllText(FilePath, JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true }));
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+            File.WriteAllText(filePath, JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true }));
         }
         catch { /* Preferences are a convenience; failing to store them must not interrupt editing. */ }
     }

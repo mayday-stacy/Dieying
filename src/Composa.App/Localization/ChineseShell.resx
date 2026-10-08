@@ -1,0 +1,2628 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name=" and " xml:space="preserve">
+    <value> 和 </value>
+  </data>
+  <data name=" and …" xml:space="preserve">
+    <value> 和 …</value>
+  </data>
+  <data name=" · Ctrl-drag moves the layer" xml:space="preserve">
+    <value> · Ctrl+拖动移动图层</value>
+  </data>
+  <data name=" · Ctrl-drag moves the layer…" xml:space="preserve">
+    <value> · Ctrl+拖动移动图层…</value>
+  </data>
+  <data name="(Multiple)" xml:space="preserve">
+    <value>（多种字体）</value>
+  </data>
+  <data name="(Multiple)…" xml:space="preserve">
+    <value>（多种字体）…</value>
+  </data>
+  <data name="AI connected" xml:space="preserve">
+    <value>AI 已连接</value>
+  </data>
+  <data name="AI connected…" xml:space="preserve">
+    <value>AI 已连接…</value>
+  </data>
+  <data name="About Composa" xml:space="preserve">
+    <value>关于 Composa</value>
+  </data>
+  <data name="About Composa…" xml:space="preserve">
+    <value>关于 Composa…</value>
+  </data>
+  <data name="Actual Pixels" xml:space="preserve">
+    <value>实际像素</value>
+  </data>
+  <data name="Actual Pixels…" xml:space="preserve">
+    <value>实际像素…</value>
+  </data>
+  <data name="Add Mask" xml:space="preserve">
+    <value>添加蒙版</value>
+  </data>
+  <data name="Add Mask…" xml:space="preserve">
+    <value>添加蒙版…</value>
+  </data>
+  <data name="Add Noise" xml:space="preserve">
+    <value>添加杂色</value>
+  </data>
+  <data name="Add Noise…" xml:space="preserve">
+    <value>添加杂色…</value>
+  </data>
+  <data name="Align {0}" xml:space="preserve">
+    <value>{0}对齐</value>
+  </data>
+  <data name="Align {0}…" xml:space="preserve">
+    <value>{0}对齐…</value>
+  </data>
+  <data name="Aligned" xml:space="preserve">
+    <value>对齐</value>
+  </data>
+  <data name="Aligned…" xml:space="preserve">
+    <value>对齐…</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Allow AI Control" xml:space="preserve">
+    <value>允许 AI 控制</value>
+  </data>
+  <data name="Allow AI Control…" xml:space="preserve">
+    <value>允许 AI 控制…</value>
+  </data>
+  <data name="All…" xml:space="preserve">
+    <value>全部…</value>
+  </data>
+  <data name="Alt-click sets the source · Drag to clone · [ ] size · 1–0 opacity" xml:space="preserve">
+    <value>Alt+单击设置来源 · 拖动仿制 · [ ] 大小 · 1–0 不透明度</value>
+  </data>
+  <data name="Alt-click sets the source · Drag to clone · [ ] size · 1–0 opacity…" xml:space="preserve">
+    <value>Alt+单击设置来源 · 拖动仿制 · [ ] 大小 · 1–0 不透明度…</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Apply Mask" xml:space="preserve">
+    <value>应用蒙版</value>
+  </data>
+  <data name="Apply Mask…" xml:space="preserve">
+    <value>应用蒙版…</value>
+  </data>
+  <data name="Apply…" xml:space="preserve">
+    <value>应用…</value>
+  </data>
+  <data name="Arrow keys or scroll wheel" xml:space="preserve">
+    <value>方向键或鼠标滚轮</value>
+  </data>
+  <data name="Arrow keys or scroll wheel…" xml:space="preserve">
+    <value>方向键或鼠标滚轮…</value>
+  </data>
+  <data name="Auto Levels" xml:space="preserve">
+    <value>自动色阶</value>
+  </data>
+  <data name="Auto Levels…" xml:space="preserve">
+    <value>自动色阶…</value>
+  </data>
+  <data name="Auto Select" xml:space="preserve">
+    <value>自动选择</value>
+  </data>
+  <data name="Auto Select…" xml:space="preserve">
+    <value>自动选择…</value>
+  </data>
+  <data name="Background Color" xml:space="preserve">
+    <value>背景色</value>
+  </data>
+  <data name="Background Color…" xml:space="preserve">
+    <value>背景色…</value>
+  </data>
+  <data name="Bevel &amp; Emboss" xml:space="preserve">
+    <value>斜面和浮雕</value>
+  </data>
+  <data name="Bevel &amp; Emboss…" xml:space="preserve">
+    <value>斜面和浮雕…</value>
+  </data>
+  <data name="Black &amp; White" xml:space="preserve">
+    <value>黑白</value>
+  </data>
+  <data name="Black &amp; White…" xml:space="preserve">
+    <value>黑白…</value>
+  </data>
+  <data name="Bloom / Glow" xml:space="preserve">
+    <value>泛光/辉光</value>
+  </data>
+  <data name="Bloom / Glow…" xml:space="preserve">
+    <value>泛光/辉光…</value>
+  </data>
+  <data name="Blur" xml:space="preserve">
+    <value>模糊</value>
+  </data>
+  <data name="Blur…" xml:space="preserve">
+    <value>模糊…</value>
+  </data>
+  <data name="Bold" xml:space="preserve">
+    <value>粗体</value>
+  </data>
+  <data name="Bold…" xml:space="preserve">
+    <value>粗体…</value>
+  </data>
+  <data name="Brightness/Contrast" xml:space="preserve">
+    <value>亮度/对比度</value>
+  </data>
+  <data name="Brightness/Contrast…" xml:space="preserve">
+    <value>亮度/对比度…</value>
+  </data>
+  <data name="Brush" xml:space="preserve">
+    <value>画笔</value>
+  </data>
+  <data name="Brush (B) · Eraser (E)" xml:space="preserve">
+    <value>画笔（B）· 橡皮擦（E）</value>
+  </data>
+  <data name="Brush (B) · Eraser (E)…" xml:space="preserve">
+    <value>画笔（B）· 橡皮擦（E）…</value>
+  </data>
+  <data name="Brush Strokes" xml:space="preserve">
+    <value>画笔描画</value>
+  </data>
+  <data name="Brush Strokes…" xml:space="preserve">
+    <value>画笔描画…</value>
+  </data>
+  <data name="Brush…" xml:space="preserve">
+    <value>画笔…</value>
+  </data>
+  <data name="Burn" xml:space="preserve">
+    <value>加深</value>
+  </data>
+  <data name="Burn…" xml:space="preserve">
+    <value>加深…</value>
+  </data>
+  <data name="Camera Raw Filter…" xml:space="preserve">
+    <value>Camera Raw 滤镜…</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Cancel…" xml:space="preserve">
+    <value>取消…</value>
+  </data>
+  <data name="Canvas Size" xml:space="preserve">
+    <value>画布大小</value>
+  </data>
+  <data name="Canvas Size…" xml:space="preserve">
+    <value>画布大小…</value>
+  </data>
+  <data name="Center" xml:space="preserve">
+    <value>居中</value>
+  </data>
+  <data name="Center…" xml:space="preserve">
+    <value>居中…</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>调整</value>
+  </data>
+  <data name="Change Text Style" xml:space="preserve">
+    <value>更改文字样式</value>
+  </data>
+  <data name="Change Text Style…" xml:space="preserve">
+    <value>更改文字样式…</value>
+  </data>
+  <data name="Change…" xml:space="preserve">
+    <value>调整…</value>
+  </data>
+  <data name="Check for Updates Automatically" xml:space="preserve">
+    <value>自动检查更新</value>
+  </data>
+  <data name="Check for Updates Automatically…" xml:space="preserve">
+    <value>自动检查更新…</value>
+  </data>
+  <data name="Check for Updates…" xml:space="preserve">
+    <value>检查更新…</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="Clear Guides" xml:space="preserve">
+    <value>清除参考线</value>
+  </data>
+  <data name="Clear Guides…" xml:space="preserve">
+    <value>清除参考线…</value>
+  </data>
+  <data name="Clear…" xml:space="preserve">
+    <value>清除…</value>
+  </data>
+  <data name="Click a layer's pixels to select it. Off, a drag moves the current layer from anywhere; Ctrl-click still picks." xml:space="preserve">
+    <value>单击像素选择图层；关闭后可从任意位置拖动当前图层，Ctrl+单击仍可选择图层。</value>
+  </data>
+  <data name="Click a layer's pixels to select it. Off, a drag moves the current layer from anywhere; Ctrl-click still picks.…" xml:space="preserve">
+    <value>单击像素选择图层；关闭后可从任意位置拖动当前图层，Ctrl+单击仍可选择图层。…</value>
+  </data>
+  <data name="Click an object to select its outline · Drag a box around a small one · Tab for Wand · Shift add · Alt subtract" xml:space="preserve">
+    <value>单击对象选择轮廓 · 拖框选择小对象 · Tab 切换魔棒 · Shift 添加 · Alt 减去</value>
+  </data>
+  <data name="Click an object to select its outline · Drag a box around a small one · Tab for Wand · Shift add · Alt subtract…" xml:space="preserve">
+    <value>单击对象选择轮廓 · 拖框选择小对象 · Tab 切换魔棒 · Shift 添加 · Alt 减去…</value>
+  </data>
+  <data name="Click corners · Click the start, double-click or Enter to close · Backspace removes a corner · Escape cancels" xml:space="preserve">
+    <value>单击添加角点 · 单击起点、双击或 Enter 闭合 · 退格删除角点 · Esc 取消</value>
+  </data>
+  <data name="Click corners · Click the start, double-click or Enter to close · Backspace removes a corner · Escape cancels…" xml:space="preserve">
+    <value>单击添加角点 · 单击起点、双击或 Enter 闭合 · 退格删除角点 · Esc 取消…</value>
+  </data>
+  <data name="Click for point text · Drag a box for paragraph text · Click text to edit it" xml:space="preserve">
+    <value>单击输入点文字 · 拖出段落框 · 单击已有文字进行编辑</value>
+  </data>
+  <data name="Click for point text · Drag a box for paragraph text · Click text to edit it…" xml:space="preserve">
+    <value>单击输入点文字 · 拖出段落框 · 单击已有文字进行编辑…</value>
+  </data>
+  <data name="Click to pick the foreground color · Alt-click for the background" xml:space="preserve">
+    <value>单击拾取前景色 · Alt+单击拾取背景色</value>
+  </data>
+  <data name="Click to pick the foreground color · Alt-click for the background…" xml:space="preserve">
+    <value>单击拾取前景色 · Alt+单击拾取背景色…</value>
+  </data>
+  <data name="Click to select similar colors · Tab for Object · Shift add · Alt subtract" xml:space="preserve">
+    <value>单击选择相似颜色 · Tab 切换对象选择 · Shift 添加 · Alt 减去</value>
+  </data>
+  <data name="Click to select similar colors · Tab for Object · Shift add · Alt subtract…" xml:space="preserve">
+    <value>单击选择相似颜色 · Tab 切换对象选择 · Shift 添加 · Alt 减去…</value>
+  </data>
+  <data name="Click to select, double-click to edit, Alt-drag onto another layer to copy {0}" xml:space="preserve">
+    <value>单击选择，双击编辑，Alt+拖到其他图层以复制{0}</value>
+  </data>
+  <data name="Click to select, double-click to edit, Alt-drag onto another layer to copy {0}…" xml:space="preserve">
+    <value>单击选择，双击编辑，Alt+拖到其他图层以复制{0}…</value>
+  </data>
+  <data name="Click to zoom in · Alt-click to zoom out · Drag right or left to zoom smoothly" xml:space="preserve">
+    <value>单击放大 · Alt+单击缩小 · 左右拖动连续缩放</value>
+  </data>
+  <data name="Click to zoom in · Alt-click to zoom out · Drag right or left to zoom smoothly…" xml:space="preserve">
+    <value>单击放大 · Alt+单击缩小 · 左右拖动连续缩放…</value>
+  </data>
+  <data name="Clone Stamp" xml:space="preserve">
+    <value>仿制图章</value>
+  </data>
+  <data name="Clone Stamp (S) · Alt-click sets the source" xml:space="preserve">
+    <value>仿制图章（S）· Alt+单击设置来源</value>
+  </data>
+  <data name="Clone Stamp (S) · Alt-click sets the source…" xml:space="preserve">
+    <value>仿制图章（S）· Alt+单击设置来源…</value>
+  </data>
+  <data name="Clone Stamp…" xml:space="preserve">
+    <value>仿制图章…</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Close Others" xml:space="preserve">
+    <value>关闭其他</value>
+  </data>
+  <data name="Close Others…" xml:space="preserve">
+    <value>关闭其他…</value>
+  </data>
+  <data name="Close Project" xml:space="preserve">
+    <value>关闭工程</value>
+  </data>
+  <data name="Close Project…" xml:space="preserve">
+    <value>关闭工程…</value>
+  </data>
+  <data name="Close…" xml:space="preserve">
+    <value>关闭…</value>
+  </data>
+  <data name="Collapse {0}" xml:space="preserve">
+    <value>折叠{0}</value>
+  </data>
+  <data name="Collapse {0}…" xml:space="preserve">
+    <value>折叠{0}…</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="Color Balance" xml:space="preserve">
+    <value>色彩平衡</value>
+  </data>
+  <data name="Color Balance…" xml:space="preserve">
+    <value>色彩平衡…</value>
+  </data>
+  <data name="Color Burn" xml:space="preserve">
+    <value>颜色加深</value>
+  </data>
+  <data name="Color Burn…" xml:space="preserve">
+    <value>颜色加深…</value>
+  </data>
+  <data name="Color Dodge" xml:space="preserve">
+    <value>颜色减淡</value>
+  </data>
+  <data name="Color Dodge…" xml:space="preserve">
+    <value>颜色减淡…</value>
+  </data>
+  <data name="Color Lookup" xml:space="preserve">
+    <value>颜色查找</value>
+  </data>
+  <data name="Color Lookup…" xml:space="preserve">
+    <value>颜色查找…</value>
+  </data>
+  <data name="Color Overlay" xml:space="preserve">
+    <value>颜色叠加</value>
+  </data>
+  <data name="Color Overlay…" xml:space="preserve">
+    <value>颜色叠加…</value>
+  </data>
+  <data name="Color Range" xml:space="preserve">
+    <value>色彩范围</value>
+  </data>
+  <data name="Color Range…" xml:space="preserve">
+    <value>色彩范围…</value>
+  </data>
+  <data name="Color…" xml:space="preserve">
+    <value>颜色…</value>
+  </data>
+  <data name="Content-Aware Fill" xml:space="preserve">
+    <value>内容识别填充</value>
+  </data>
+  <data name="Content-Aware Fill…" xml:space="preserve">
+    <value>内容识别填充…</value>
+  </data>
+  <data name="Contiguous" xml:space="preserve">
+    <value>连续</value>
+  </data>
+  <data name="Contiguous…" xml:space="preserve">
+    <value>连续…</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>收缩</value>
+  </data>
+  <data name="Contract Selection" xml:space="preserve">
+    <value>收缩选区</value>
+  </data>
+  <data name="Contract Selection…" xml:space="preserve">
+    <value>收缩选区…</value>
+  </data>
+  <data name="Contract by" xml:space="preserve">
+    <value>收缩量</value>
+  </data>
+  <data name="Contract by…" xml:space="preserve">
+    <value>收缩量…</value>
+  </data>
+  <data name="Contract…" xml:space="preserve">
+    <value>收缩…</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Copy Image" xml:space="preserve">
+    <value>复制图像</value>
+  </data>
+  <data name="Copy Image…" xml:space="preserve">
+    <value>复制图像…</value>
+  </data>
+  <data name="Copy Merged" xml:space="preserve">
+    <value>合并拷贝</value>
+  </data>
+  <data name="Copy Merged…" xml:space="preserve">
+    <value>合并拷贝…</value>
+  </data>
+  <data name="Copy…" xml:space="preserve">
+    <value>复制…</value>
+  </data>
+  <data name="Corner radius" xml:space="preserve">
+    <value>圆角半径</value>
+  </data>
+  <data name="Corner radius…" xml:space="preserve">
+    <value>圆角半径…</value>
+  </data>
+  <data name="Couldn't export" xml:space="preserve">
+    <value>导出失败</value>
+  </data>
+  <data name="Couldn't export…" xml:space="preserve">
+    <value>导出失败…</value>
+  </data>
+  <data name="Couldn't open {0}" xml:space="preserve">
+    <value>无法打开 {0}</value>
+  </data>
+  <data name="Couldn't open {0}…" xml:space="preserve">
+    <value>无法打开 {0}…</value>
+  </data>
+  <data name="Couldn't save" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="Couldn't save…" xml:space="preserve">
+    <value>保存失败…</value>
+  </data>
+  <data name="Create Clipping Mask" xml:space="preserve">
+    <value>创建剪贴蒙版</value>
+  </data>
+  <data name="Create Clipping Mask…" xml:space="preserve">
+    <value>创建剪贴蒙版…</value>
+  </data>
+  <data name="Create a canvas, open a project or image, or drop files here." xml:space="preserve">
+    <value>新建画布、打开工程或图像，或将文件拖到这里。</value>
+  </data>
+  <data name="Create a canvas, open a project or image, or drop files here.…" xml:space="preserve">
+    <value>新建画布、打开工程或图像，或将文件拖到这里。…</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>裁剪</value>
+  </data>
+  <data name="Crop (C)" xml:space="preserve">
+    <value>裁剪（C）</value>
+  </data>
+  <data name="Crop (C)…" xml:space="preserve">
+    <value>裁剪（C）…</value>
+  </data>
+  <data name="Crop…" xml:space="preserve">
+    <value>裁剪…</value>
+  </data>
+  <data name="Curves" xml:space="preserve">
+    <value>曲线</value>
+  </data>
+  <data name="Curves…" xml:space="preserve">
+    <value>曲线…</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>剪切</value>
+  </data>
+  <data name="Cut…" xml:space="preserve">
+    <value>剪切…</value>
+  </data>
+  <data name="Darken" xml:space="preserve">
+    <value>变暗</value>
+  </data>
+  <data name="Darken…" xml:space="preserve">
+    <value>变暗…</value>
+  </data>
+  <data name="Darker Color" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Darker Color…" xml:space="preserve">
+    <value>深色…</value>
+  </data>
+  <data name="Delete Layer" xml:space="preserve">
+    <value>删除图层</value>
+  </data>
+  <data name="Delete Layers" xml:space="preserve">
+    <value>删除图层</value>
+  </data>
+  <data name="Delete Layers…" xml:space="preserve">
+    <value>删除图层…</value>
+  </data>
+  <data name="Delete Layer…" xml:space="preserve">
+    <value>删除图层…</value>
+  </data>
+  <data name="Delete Mask" xml:space="preserve">
+    <value>删除蒙版</value>
+  </data>
+  <data name="Delete Mask…" xml:space="preserve">
+    <value>删除蒙版…</value>
+  </data>
+  <data name="Deselect" xml:space="preserve">
+    <value>取消选择</value>
+  </data>
+  <data name="Deselect…" xml:space="preserve">
+    <value>取消选择…</value>
+  </data>
+  <data name="Detect" xml:space="preserve">
+    <value>检测</value>
+  </data>
+  <data name="Detect…" xml:space="preserve">
+    <value>检测…</value>
+  </data>
+  <data name="Difference" xml:space="preserve">
+    <value>差值</value>
+  </data>
+  <data name="Difference…" xml:space="preserve">
+    <value>差值…</value>
+  </data>
+  <data name="Disable Mask" xml:space="preserve">
+    <value>停用蒙版</value>
+  </data>
+  <data name="Disable Mask…" xml:space="preserve">
+    <value>停用蒙版…</value>
+  </data>
+  <data name="Distort" xml:space="preserve">
+    <value>扭曲</value>
+  </data>
+  <data name="Distort…" xml:space="preserve">
+    <value>扭曲…</value>
+  </data>
+  <data name="Dither" xml:space="preserve">
+    <value>抖色</value>
+  </data>
+  <data name="Dither…" xml:space="preserve">
+    <value>抖色…</value>
+  </data>
+  <data name="Divide" xml:space="preserve">
+    <value>划分</value>
+  </data>
+  <data name="Divide…" xml:space="preserve">
+    <value>划分…</value>
+  </data>
+  <data name="Document Bounds" xml:space="preserve">
+    <value>文档边界</value>
+  </data>
+  <data name="Document Bounds…" xml:space="preserve">
+    <value>文档边界…</value>
+  </data>
+  <data name="Dodge" xml:space="preserve">
+    <value>减淡</value>
+  </data>
+  <data name="Dodge…" xml:space="preserve">
+    <value>减淡…</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Done…" xml:space="preserve">
+    <value>完成…</value>
+  </data>
+  <data name="Double-click to type" xml:space="preserve">
+    <value>双击输入</value>
+  </data>
+  <data name="Double-click to type…" xml:space="preserve">
+    <value>双击输入…</value>
+  </data>
+  <data name="Double-click, then Reset" xml:space="preserve">
+    <value>双击后选择“重置”</value>
+  </data>
+  <data name="Double-click, then Reset…" xml:space="preserve">
+    <value>双击后选择“重置”…</value>
+  </data>
+  <data name="Drag left or right" xml:space="preserve">
+    <value>左右拖动</value>
+  </data>
+  <data name="Drag left or right…" xml:space="preserve">
+    <value>左右拖动…</value>
+  </data>
+  <data name="Drag on the canvas to choose the area to keep" xml:space="preserve">
+    <value>在画布上拖动，选择保留区域</value>
+  </data>
+  <data name="Drag on the canvas to choose the area to keep…" xml:space="preserve">
+    <value>在画布上拖动，选择保留区域…</value>
+  </data>
+  <data name="Drag over blemishes to heal · [ ] size" xml:space="preserve">
+    <value>拖过瑕疵进行修复 · [ ] 调整大小</value>
+  </data>
+  <data name="Drag over blemishes to heal · [ ] size…" xml:space="preserve">
+    <value>拖过瑕疵进行修复 · [ ] 调整大小…</value>
+  </data>
+  <data name="Drag to crop · Shift keeps proportions · Alt symmetric · Enter applies · Escape cancels" xml:space="preserve">
+    <value>拖动裁剪 · Shift 保持比例 · Alt 对称 · Enter 应用 · Esc 取消</value>
+  </data>
+  <data name="Drag to crop · Shift keeps proportions · Alt symmetric · Enter applies · Escape cancels…" xml:space="preserve">
+    <value>拖动裁剪 · Shift 保持比例 · Alt 对称 · Enter 应用 · Esc 取消…</value>
+  </data>
+  <data name="Drag to draw a line on a new layer · Shift snaps to 45° · Tab for the next shape" xml:space="preserve">
+    <value>拖动在新图层画线 · Shift 吸附到 45° · Tab 切换形状</value>
+  </data>
+  <data name="Drag to draw a line on a new layer · Shift snaps to 45° · Tab for the next shape…" xml:space="preserve">
+    <value>拖动在新图层画线 · Shift 吸附到 45° · Tab 切换形状…</value>
+  </data>
+  <data name="Drag to draw a shape on a new layer · Shift square · Alt from center · Tab for the next shape" xml:space="preserve">
+    <value>拖动在新图层绘制形状 · Shift 等比 · Alt 从中心 · Tab 切换形状</value>
+  </data>
+  <data name="Drag to draw a shape on a new layer · Shift square · Alt from center · Tab for the next shape…" xml:space="preserve">
+    <value>拖动在新图层绘制形状 · Shift 等比 · Alt 从中心 · Tab 切换形状…</value>
+  </data>
+  <data name="Drag to move · Handles resize (Shift free, Alt from center) · Outside a corner rotates · Ctrl-drag a corner distorts · Ctrl-click picks a layer · 1–0 opacity" xml:space="preserve">
+    <value>拖动移动 · 手柄缩放（Shift 自由，Alt 从中心）· 角外旋转 · Ctrl+拖角扭曲 · Ctrl+单击选图层 · 1–0 不透明度</value>
+  </data>
+  <data name="Drag to move · Handles resize (Shift free, Alt from center) · Outside a corner rotates · Ctrl-drag a corner distorts · Ctrl-click picks a layer · 1–0 opacity…" xml:space="preserve">
+    <value>拖动移动 · 手柄缩放（Shift 自由，Alt 从中心）· 角外旋转 · Ctrl+拖角扭曲 · Ctrl+单击选图层 · 1–0 不透明度…</value>
+  </data>
+  <data name="Drag to pan · Ctrl+wheel zooms" xml:space="preserve">
+    <value>拖动平移 · Ctrl+滚轮缩放</value>
+  </data>
+  <data name="Drag to pan · Ctrl+wheel zooms…" xml:space="preserve">
+    <value>拖动平移 · Ctrl+滚轮缩放…</value>
+  </data>
+  <data name="Drag to select · Shift add · Alt subtract · Drag inside to move" xml:space="preserve">
+    <value>拖动选择 · Shift 添加 · Alt 减去 · 选区内拖动移动</value>
+  </data>
+  <data name="Drag to select · Shift add · Alt subtract · Drag inside to move…" xml:space="preserve">
+    <value>拖动选择 · Shift 添加 · Alt 减去 · 选区内拖动移动…</value>
+  </data>
+  <data name="Drag to select · Shift add · Alt subtract · Shift+Alt intersect · Drag inside to move · Delete clears · Ctrl+D deselect" xml:space="preserve">
+    <value>拖动选择 · Shift 添加 · Alt 减去 · Shift+Alt 交集 · 选区内拖动移动 · Delete 清除 · Ctrl+D 取消选择</value>
+  </data>
+  <data name="Drag to select · Shift add · Alt subtract · Shift+Alt intersect · Drag inside to move · Delete clears · Ctrl+D deselect…" xml:space="preserve">
+    <value>拖动选择 · Shift 添加 · Alt 减去 · Shift+Alt 交集 · 选区内拖动移动 · Delete 清除 · Ctrl+D 取消选择…</value>
+  </data>
+  <data name="Draws in the foreground color · Shift snaps to 45°" xml:space="preserve">
+    <value>以前景色绘制 · Shift 吸附到 45°</value>
+  </data>
+  <data name="Draws in the foreground color · Shift snaps to 45°…" xml:space="preserve">
+    <value>以前景色绘制 · Shift 吸附到 45°…</value>
+  </data>
+  <data name="Drop Shadow" xml:space="preserve">
+    <value>投影</value>
+  </data>
+  <data name="Drop Shadow…" xml:space="preserve">
+    <value>投影…</value>
+  </data>
+  <data name="Duplicate" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Duplicate Layer" xml:space="preserve">
+    <value>复制图层</value>
+  </data>
+  <data name="Duplicate Layers" xml:space="preserve">
+    <value>复制图层</value>
+  </data>
+  <data name="Duplicate Layers…" xml:space="preserve">
+    <value>复制图层…</value>
+  </data>
+  <data name="Duplicate Layer…" xml:space="preserve">
+    <value>复制图层…</value>
+  </data>
+  <data name="Duplicate Selection" xml:space="preserve">
+    <value>复制选区</value>
+  </data>
+  <data name="Duplicate Selection…" xml:space="preserve">
+    <value>复制选区…</value>
+  </data>
+  <data name="Duplicate…" xml:space="preserve">
+    <value>复制…</value>
+  </data>
+  <data name="Edge" xml:space="preserve">
+    <value>边缘</value>
+  </data>
+  <data name="Edge…" xml:space="preserve">
+    <value>边缘…</value>
+  </data>
+  <data name="Edit Adjustment…" xml:space="preserve">
+    <value>编辑调整…</value>
+  </data>
+  <data name="Edit Text" xml:space="preserve">
+    <value>编辑文字</value>
+  </data>
+  <data name="Edit Text…" xml:space="preserve">
+    <value>编辑文字…</value>
+  </data>
+  <data name="Ellipse" xml:space="preserve">
+    <value>椭圆</value>
+  </data>
+  <data name="Ellipse Marquee" xml:space="preserve">
+    <value>椭圆选框</value>
+  </data>
+  <data name="Ellipse Marquee…" xml:space="preserve">
+    <value>椭圆选框…</value>
+  </data>
+  <data name="Ellipse…" xml:space="preserve">
+    <value>椭圆…</value>
+  </data>
+  <data name="Elliptical Marquee" xml:space="preserve">
+    <value>椭圆选框</value>
+  </data>
+  <data name="Elliptical Marquee…" xml:space="preserve">
+    <value>椭圆选框…</value>
+  </data>
+  <data name="Enable Mask" xml:space="preserve">
+    <value>启用蒙版</value>
+  </data>
+  <data name="Enable Mask…" xml:space="preserve">
+    <value>启用蒙版…</value>
+  </data>
+  <data name="Enhance Resolution" xml:space="preserve">
+    <value>增强分辨率</value>
+  </data>
+  <data name="Enhance Resolution…" xml:space="preserve">
+    <value>增强分辨率…</value>
+  </data>
+  <data name="Eraser" xml:space="preserve">
+    <value>橡皮擦</value>
+  </data>
+  <data name="Eraser…" xml:space="preserve">
+    <value>橡皮擦…</value>
+  </data>
+  <data name="Exact value" xml:space="preserve">
+    <value>精确数值</value>
+  </data>
+  <data name="Exact value…" xml:space="preserve">
+    <value>精确数值…</value>
+  </data>
+  <data name="Exclusion" xml:space="preserve">
+    <value>排除</value>
+  </data>
+  <data name="Exclusion…" xml:space="preserve">
+    <value>排除…</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>扩展</value>
+  </data>
+  <data name="Expand Selection" xml:space="preserve">
+    <value>扩展选区</value>
+  </data>
+  <data name="Expand Selection…" xml:space="preserve">
+    <value>扩展选区…</value>
+  </data>
+  <data name="Expand by" xml:space="preserve">
+    <value>扩展量</value>
+  </data>
+  <data name="Expand by…" xml:space="preserve">
+    <value>扩展量…</value>
+  </data>
+  <data name="Expand {0}" xml:space="preserve">
+    <value>展开{0}</value>
+  </data>
+  <data name="Expand {0}…" xml:space="preserve">
+    <value>展开{0}…</value>
+  </data>
+  <data name="Expand…" xml:space="preserve">
+    <value>扩展…</value>
+  </data>
+  <data name="Export JPEG…" xml:space="preserve">
+    <value>导出 JPEG…</value>
+  </data>
+  <data name="Export Look" xml:space="preserve">
+    <value>导出调色预设</value>
+  </data>
+  <data name="Export Look as .cube…" xml:space="preserve">
+    <value>导出调色预设为 .cube…</value>
+  </data>
+  <data name="Export Look…" xml:space="preserve">
+    <value>导出调色预设…</value>
+  </data>
+  <data name="Export PNG…" xml:space="preserve">
+    <value>导出 PNG…</value>
+  </data>
+  <data name="Export WebP…" xml:space="preserve">
+    <value>导出 WebP…</value>
+  </data>
+  <data name="Export {0}" xml:space="preserve">
+    <value>导出 {0}</value>
+  </data>
+  <data name="Export {0}…" xml:space="preserve">
+    <value>导出 {0}…</value>
+  </data>
+  <data name="Exposure" xml:space="preserve">
+    <value>曝光度</value>
+  </data>
+  <data name="Exposure…" xml:space="preserve">
+    <value>曝光度…</value>
+  </data>
+  <data name="Eyedropper" xml:space="preserve">
+    <value>吸管</value>
+  </data>
+  <data name="Eyedropper (I)" xml:space="preserve">
+    <value>吸管（I）</value>
+  </data>
+  <data name="Eyedropper (I)…" xml:space="preserve">
+    <value>吸管（I）…</value>
+  </data>
+  <data name="Eyedropper…" xml:space="preserve">
+    <value>吸管…</value>
+  </data>
+  <data name="Feather" xml:space="preserve">
+    <value>羽化</value>
+  </data>
+  <data name="Feather Selection" xml:space="preserve">
+    <value>羽化选区</value>
+  </data>
+  <data name="Feather Selection…" xml:space="preserve">
+    <value>羽化选区…</value>
+  </data>
+  <data name="Feather radius" xml:space="preserve">
+    <value>羽化半径</value>
+  </data>
+  <data name="Feather radius…" xml:space="preserve">
+    <value>羽化半径…</value>
+  </data>
+  <data name="Feather…" xml:space="preserve">
+    <value>羽化…</value>
+  </data>
+  <data name="Fill" xml:space="preserve">
+    <value>填充</value>
+  </data>
+  <data name="Fill with Background Color" xml:space="preserve">
+    <value>填充背景色</value>
+  </data>
+  <data name="Fill with Background Color…" xml:space="preserve">
+    <value>填充背景色…</value>
+  </data>
+  <data name="Fill with Foreground Color" xml:space="preserve">
+    <value>填充前景色</value>
+  </data>
+  <data name="Fill with Foreground Color…" xml:space="preserve">
+    <value>填充前景色…</value>
+  </data>
+  <data name="Fills with the foreground color" xml:space="preserve">
+    <value>以前景色填充</value>
+  </data>
+  <data name="Fills with the foreground color…" xml:space="preserve">
+    <value>以前景色填充…</value>
+  </data>
+  <data name="Fill…" xml:space="preserve">
+    <value>填充…</value>
+  </data>
+  <data name="Fine steps" xml:space="preserve">
+    <value>精细调整</value>
+  </data>
+  <data name="Fine steps…" xml:space="preserve">
+    <value>精细调整…</value>
+  </data>
+  <data name="Fit" xml:space="preserve">
+    <value>适合</value>
+  </data>
+  <data name="Fit on Screen" xml:space="preserve">
+    <value>适合屏幕</value>
+  </data>
+  <data name="Fit on Screen…" xml:space="preserve">
+    <value>适合屏幕…</value>
+  </data>
+  <data name="Fit…" xml:space="preserve">
+    <value>适合…</value>
+  </data>
+  <data name="Flatten Image" xml:space="preserve">
+    <value>拼合图像</value>
+  </data>
+  <data name="Flatten Image…" xml:space="preserve">
+    <value>拼合图像…</value>
+  </data>
+  <data name="Flip Canvas" xml:space="preserve">
+    <value>翻转画布</value>
+  </data>
+  <data name="Flip Canvas…" xml:space="preserve">
+    <value>翻转画布…</value>
+  </data>
+  <data name="Follow system" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="Follow system…" xml:space="preserve">
+    <value>跟随系统…</value>
+  </data>
+  <data name="Foreground Color" xml:space="preserve">
+    <value>前景色</value>
+  </data>
+  <data name="Foreground Color…" xml:space="preserve">
+    <value>前景色…</value>
+  </data>
+  <data name="Foreground to transparent" xml:space="preserve">
+    <value>前景色到透明</value>
+  </data>
+  <data name="Foreground to transparent…" xml:space="preserve">
+    <value>前景色到透明…</value>
+  </data>
+  <data name="Freehand Lasso" xml:space="preserve">
+    <value>自由套索</value>
+  </data>
+  <data name="Freehand Lasso…" xml:space="preserve">
+    <value>自由套索…</value>
+  </data>
+  <data name="Gaussian Blur" xml:space="preserve">
+    <value>高斯模糊</value>
+  </data>
+  <data name="Gaussian Blur…" xml:space="preserve">
+    <value>高斯模糊…</value>
+  </data>
+  <data name="Gradient" xml:space="preserve">
+    <value>渐变</value>
+  </data>
+  <data name="Gradient (G)" xml:space="preserve">
+    <value>渐变（G）</value>
+  </data>
+  <data name="Gradient (G)…" xml:space="preserve">
+    <value>渐变（G）…</value>
+  </data>
+  <data name="Gradient Map" xml:space="preserve">
+    <value>渐变映射</value>
+  </data>
+  <data name="Gradient Map…" xml:space="preserve">
+    <value>渐变映射…</value>
+  </data>
+  <data name="Gradient Overlay" xml:space="preserve">
+    <value>渐变叠加</value>
+  </data>
+  <data name="Gradient Overlay…" xml:space="preserve">
+    <value>渐变叠加…</value>
+  </data>
+  <data name="Gradient…" xml:space="preserve">
+    <value>渐变…</value>
+  </data>
+  <data name="Grain Extract" xml:space="preserve">
+    <value>颗粒提取</value>
+  </data>
+  <data name="Grain Extract…" xml:space="preserve">
+    <value>颗粒提取…</value>
+  </data>
+  <data name="Grain Merge" xml:space="preserve">
+    <value>颗粒合并</value>
+  </data>
+  <data name="Grain Merge…" xml:space="preserve">
+    <value>颗粒合并…</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>网格</value>
+  </data>
+  <data name="Grid Settings…" xml:space="preserve">
+    <value>网格设置…</value>
+  </data>
+  <data name="Grid…" xml:space="preserve">
+    <value>网格…</value>
+  </data>
+  <data name="Guides" xml:space="preserve">
+    <value>参考线</value>
+  </data>
+  <data name="Guides…" xml:space="preserve">
+    <value>参考线…</value>
+  </data>
+  <data name="Hand" xml:space="preserve">
+    <value>抓手</value>
+  </data>
+  <data name="Hand (H) · hold Space with any tool" xml:space="preserve">
+    <value>抓手（H）· 任意工具下按住空格</value>
+  </data>
+  <data name="Hand (H) · hold Space with any tool…" xml:space="preserve">
+    <value>抓手（H）· 任意工具下按住空格…</value>
+  </data>
+  <data name="Hand…" xml:space="preserve">
+    <value>抓手…</value>
+  </data>
+  <data name="Hard Light" xml:space="preserve">
+    <value>强光</value>
+  </data>
+  <data name="Hard Light…" xml:space="preserve">
+    <value>强光…</value>
+  </data>
+  <data name="Hard Mix" xml:space="preserve">
+    <value>实色混合</value>
+  </data>
+  <data name="Hard Mix…" xml:space="preserve">
+    <value>实色混合…</value>
+  </data>
+  <data name="Hardness" xml:space="preserve">
+    <value>硬度</value>
+  </data>
+  <data name="Hardness…" xml:space="preserve">
+    <value>硬度…</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>高度</value>
+  </data>
+  <data name="Height…" xml:space="preserve">
+    <value>高度…</value>
+  </data>
+  <data name="Hide {0}" xml:space="preserve">
+    <value>隐藏{0}</value>
+  </data>
+  <data name="Hide {0}…" xml:space="preserve">
+    <value>隐藏{0}…</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>历史记录</value>
+  </data>
+  <data name="History…" xml:space="preserve">
+    <value>历史记录…</value>
+  </data>
+  <data name="Hold Alt while dragging" xml:space="preserve">
+    <value>拖动时按住 Alt</value>
+  </data>
+  <data name="Hold Alt while dragging…" xml:space="preserve">
+    <value>拖动时按住 Alt…</value>
+  </data>
+  <data name="How the subject is found: a model for any subject or for a person, run on this machine, or the plain backdrop that touches the picture's edges. The same choice drives Select &gt; Subject and Remove Background." xml:space="preserve">
+    <value>主体检测方式：本机运行的通用/人像模型，或从图像边缘识别纯色背景。“选择主体”和“移除背景”共用此设置。</value>
+  </data>
+  <data name="How the subject is found: a model for any subject or for a person, run on this machine, or the plain backdrop that touches the picture's edges. The same choice drives Select &gt; Subject and Remove Background.…" xml:space="preserve">
+    <value>主体检测方式：本机运行的通用/人像模型，或从图像边缘识别纯色背景。“选择主体”和“移除背景”共用此设置。…</value>
+  </data>
+  <data name="Hue" xml:space="preserve">
+    <value>色相</value>
+  </data>
+  <data name="Hue/Saturation" xml:space="preserve">
+    <value>色相/饱和度</value>
+  </data>
+  <data name="Hue/Saturation…" xml:space="preserve">
+    <value>色相/饱和度…</value>
+  </data>
+  <data name="Hue…" xml:space="preserve">
+    <value>色相…</value>
+  </data>
+  <data name="Image Size" xml:space="preserve">
+    <value>图像大小</value>
+  </data>
+  <data name="Image Size…" xml:space="preserve">
+    <value>图像大小…</value>
+  </data>
+  <data name="Import couldn't finish" xml:space="preserve">
+    <value>导入未完成</value>
+  </data>
+  <data name="Import couldn't finish…" xml:space="preserve">
+    <value>导入未完成…</value>
+  </data>
+  <data name="Inner Glow" xml:space="preserve">
+    <value>内发光</value>
+  </data>
+  <data name="Inner Glow…" xml:space="preserve">
+    <value>内发光…</value>
+  </data>
+  <data name="Inner Shadow" xml:space="preserve">
+    <value>内阴影</value>
+  </data>
+  <data name="Inner Shadow…" xml:space="preserve">
+    <value>内阴影…</value>
+  </data>
+  <data name="Inverse" xml:space="preserve">
+    <value>反选</value>
+  </data>
+  <data name="Inverse…" xml:space="preserve">
+    <value>反选…</value>
+  </data>
+  <data name="Invert" xml:space="preserve">
+    <value>反相</value>
+  </data>
+  <data name="Invert Mask" xml:space="preserve">
+    <value>反相蒙版</value>
+  </data>
+  <data name="Invert Mask…" xml:space="preserve">
+    <value>反相蒙版…</value>
+  </data>
+  <data name="Invert…" xml:space="preserve">
+    <value>反相…</value>
+  </data>
+  <data name="Italic" xml:space="preserve">
+    <value>斜体</value>
+  </data>
+  <data name="Italic…" xml:space="preserve">
+    <value>斜体…</value>
+  </data>
+  <data name="Keyboard Shortcuts…" xml:space="preserve">
+    <value>键盘快捷键…</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Language saved. Restart Composa to apply." xml:space="preserve">
+    <value>语言设置已保存，重启 Composa 后生效。</value>
+  </data>
+  <data name="Language saved. Restart Composa to apply.…" xml:space="preserve">
+    <value>语言设置已保存，重启 Composa 后生效。…</value>
+  </data>
+  <data name="Language…" xml:space="preserve">
+    <value>语言…</value>
+  </data>
+  <data name="Lasso" xml:space="preserve">
+    <value>套索</value>
+  </data>
+  <data name="Lasso (L)" xml:space="preserve">
+    <value>套索（L）</value>
+  </data>
+  <data name="Lasso (L)…" xml:space="preserve">
+    <value>套索（L）…</value>
+  </data>
+  <data name="Lasso…" xml:space="preserve">
+    <value>套索…</value>
+  </data>
+  <data name="Layer Blend Mode" xml:space="preserve">
+    <value>图层混合模式</value>
+  </data>
+  <data name="Layer Blend Mode…" xml:space="preserve">
+    <value>图层混合模式…</value>
+  </data>
+  <data name="Layer Effects" xml:space="preserve">
+    <value>图层效果</value>
+  </data>
+  <data name="Layer Effects…" xml:space="preserve">
+    <value>图层效果…</value>
+  </data>
+  <data name="Layer Opacity" xml:space="preserve">
+    <value>图层不透明度</value>
+  </data>
+  <data name="Layer Opacity…" xml:space="preserve">
+    <value>图层不透明度…</value>
+  </data>
+  <data name="Layer mask: click to paint on it, Shift-click to disable, Ctrl-click to load as selection" xml:space="preserve">
+    <value>图层蒙版：单击编辑，Shift+单击停用，Ctrl+单击载入选区</value>
+  </data>
+  <data name="Layer mask: click to paint on it, Shift-click to disable, Ctrl-click to load as selection…" xml:space="preserve">
+    <value>图层蒙版：单击编辑，Shift+单击停用，Ctrl+单击载入选区…</value>
+  </data>
+  <data name="Layer's Mask" xml:space="preserve">
+    <value>图层蒙版</value>
+  </data>
+  <data name="Layer's Mask…" xml:space="preserve">
+    <value>图层蒙版…</value>
+  </data>
+  <data name="Layer's Pixels" xml:space="preserve">
+    <value>图层像素</value>
+  </data>
+  <data name="Layer's Pixels…" xml:space="preserve">
+    <value>图层像素…</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>图层</value>
+  </data>
+  <data name="Layers…" xml:space="preserve">
+    <value>图层…</value>
+  </data>
+  <data name="Leading" xml:space="preserve">
+    <value>行距</value>
+  </data>
+  <data name="Leading: line height baseline to baseline, in pixels. 0 is Auto: 120% of the size" xml:space="preserve">
+    <value>行距：相邻基线的距离，单位为像素；0 为自动，按字号的 120% 计算</value>
+  </data>
+  <data name="Leading: line height baseline to baseline, in pixels. 0 is Auto: 120% of the size…" xml:space="preserve">
+    <value>行距：相邻基线的距离，单位为像素；0 为自动，按字号的 120% 计算…</value>
+  </data>
+  <data name="Leading…" xml:space="preserve">
+    <value>行距…</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>左</value>
+  </data>
+  <data name="Left…" xml:space="preserve">
+    <value>左…</value>
+  </data>
+  <data name="Lens Correction" xml:space="preserve">
+    <value>镜头校正</value>
+  </data>
+  <data name="Lens Correction…" xml:space="preserve">
+    <value>镜头校正…</value>
+  </data>
+  <data name="Levels" xml:space="preserve">
+    <value>色阶</value>
+  </data>
+  <data name="Levels…" xml:space="preserve">
+    <value>色阶…</value>
+  </data>
+  <data name="Lighten" xml:space="preserve">
+    <value>变亮</value>
+  </data>
+  <data name="Lighten…" xml:space="preserve">
+    <value>变亮…</value>
+  </data>
+  <data name="Lighter Color" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Lighter Color…" xml:space="preserve">
+    <value>浅色…</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>直线</value>
+  </data>
+  <data name="Linear" xml:space="preserve">
+    <value>线性</value>
+  </data>
+  <data name="Linear Burn" xml:space="preserve">
+    <value>线性加深</value>
+  </data>
+  <data name="Linear Burn…" xml:space="preserve">
+    <value>线性加深…</value>
+  </data>
+  <data name="Linear Dodge" xml:space="preserve">
+    <value>线性减淡</value>
+  </data>
+  <data name="Linear Dodge…" xml:space="preserve">
+    <value>线性减淡…</value>
+  </data>
+  <data name="Linear Light" xml:space="preserve">
+    <value>线性光</value>
+  </data>
+  <data name="Linear Light…" xml:space="preserve">
+    <value>线性光…</value>
+  </data>
+  <data name="Linear…" xml:space="preserve">
+    <value>线性…</value>
+  </data>
+  <data name="Line…" xml:space="preserve">
+    <value>直线…</value>
+  </data>
+  <data name="Liquify" xml:space="preserve">
+    <value>液化</value>
+  </data>
+  <data name="Liquify…" xml:space="preserve">
+    <value>液化…</value>
+  </data>
+  <data name="Lock Guides" xml:space="preserve">
+    <value>锁定参考线</value>
+  </data>
+  <data name="Lock Guides…" xml:space="preserve">
+    <value>锁定参考线…</value>
+  </data>
+  <data name="Luminosity" xml:space="preserve">
+    <value>明度</value>
+  </data>
+  <data name="Luminosity…" xml:space="preserve">
+    <value>明度…</value>
+  </data>
+  <data name="Magic (W)" xml:space="preserve">
+    <value>魔棒/对象选择（W）</value>
+  </data>
+  <data name="Magic (W)…" xml:space="preserve">
+    <value>魔棒/对象选择（W）…</value>
+  </data>
+  <data name="Magic Wand" xml:space="preserve">
+    <value>魔棒</value>
+  </data>
+  <data name="Magic Wand…" xml:space="preserve">
+    <value>魔棒…</value>
+  </data>
+  <data name="Marquee" xml:space="preserve">
+    <value>选框</value>
+  </data>
+  <data name="Marquee (M)" xml:space="preserve">
+    <value>选框（M）</value>
+  </data>
+  <data name="Marquee (M)…" xml:space="preserve">
+    <value>选框（M）…</value>
+  </data>
+  <data name="Marquee…" xml:space="preserve">
+    <value>选框…</value>
+  </data>
+  <data name="Merge Down" xml:space="preserve">
+    <value>向下合并</value>
+  </data>
+  <data name="Merge Down…" xml:space="preserve">
+    <value>向下合并…</value>
+  </data>
+  <data name="Merge Group" xml:space="preserve">
+    <value>合并组</value>
+  </data>
+  <data name="Merge Group…" xml:space="preserve">
+    <value>合并组…</value>
+  </data>
+  <data name="Merge Layers" xml:space="preserve">
+    <value>合并图层</value>
+  </data>
+  <data name="Merge Layers…" xml:space="preserve">
+    <value>合并图层…</value>
+  </data>
+  <data name="Motion Blur" xml:space="preserve">
+    <value>动感模糊</value>
+  </data>
+  <data name="Motion Blur…" xml:space="preserve">
+    <value>动感模糊…</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>移动</value>
+  </data>
+  <data name="Move / Transform (V)" xml:space="preserve">
+    <value>移动/变换（V）</value>
+  </data>
+  <data name="Move / Transform (V)…" xml:space="preserve">
+    <value>移动/变换（V）…</value>
+  </data>
+  <data name="Move Selection Pixels" xml:space="preserve">
+    <value>移动选区像素</value>
+  </data>
+  <data name="Move Selection Pixels…" xml:space="preserve">
+    <value>移动选区像素…</value>
+  </data>
+  <data name="Moves every layer in the folder" xml:space="preserve">
+    <value>移动组内所有图层</value>
+  </data>
+  <data name="Moves every layer in the folder…" xml:space="preserve">
+    <value>移动组内所有图层…</value>
+  </data>
+  <data name="Move…" xml:space="preserve">
+    <value>移动…</value>
+  </data>
+  <data name="Multiply" xml:space="preserve">
+    <value>正片叠底</value>
+  </data>
+  <data name="Multiply…" xml:space="preserve">
+    <value>正片叠底…</value>
+  </data>
+  <data name="New Adjustment Layer" xml:space="preserve">
+    <value>新建调整图层</value>
+  </data>
+  <data name="New Adjustment Layer…" xml:space="preserve">
+    <value>新建调整图层…</value>
+  </data>
+  <data name="New Canvas" xml:space="preserve">
+    <value>新建画布</value>
+  </data>
+  <data name="New Canvas…" xml:space="preserve">
+    <value>新建画布…</value>
+  </data>
+  <data name="New Group" xml:space="preserve">
+    <value>新建组</value>
+  </data>
+  <data name="New Group…" xml:space="preserve">
+    <value>新建组…</value>
+  </data>
+  <data name="New Layer" xml:space="preserve">
+    <value>新建图层</value>
+  </data>
+  <data name="New Layer…" xml:space="preserve">
+    <value>新建图层…</value>
+  </data>
+  <data name="New Text" xml:space="preserve">
+    <value>新建文字</value>
+  </data>
+  <data name="New Text…" xml:space="preserve">
+    <value>新建文字…</value>
+  </data>
+  <data name="New canvas (Ctrl+N)" xml:space="preserve">
+    <value>新建画布（Ctrl+N）</value>
+  </data>
+  <data name="New canvas (Ctrl+N)…" xml:space="preserve">
+    <value>新建画布（Ctrl+N）…</value>
+  </data>
+  <data name="No layer selected" xml:space="preserve">
+    <value>未选择图层</value>
+  </data>
+  <data name="No layer selected…" xml:space="preserve">
+    <value>未选择图层…</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="Normal…" xml:space="preserve">
+    <value>正常…</value>
+  </data>
+  <data name="Nothing to trim: no edge is transparent." xml:space="preserve">
+    <value>无需修边：边缘没有透明区域。</value>
+  </data>
+  <data name="Nothing to trim: no edge is transparent.…" xml:space="preserve">
+    <value>无需修边：边缘没有透明区域。…</value>
+  </data>
+  <data name="Nudge" xml:space="preserve">
+    <value>微移</value>
+  </data>
+  <data name="Nudge…" xml:space="preserve">
+    <value>微移…</value>
+  </data>
+  <data name="Object Selection" xml:space="preserve">
+    <value>对象选择</value>
+  </data>
+  <data name="Object Selection…" xml:space="preserve">
+    <value>对象选择…</value>
+  </data>
+  <data name="Older steps are no longer kept" xml:space="preserve">
+    <value>更早的历史记录已释放</value>
+  </data>
+  <data name="Older steps are no longer kept…" xml:space="preserve">
+    <value>更早的历史记录已释放…</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="Opacity…" xml:space="preserve">
+    <value>不透明度…</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Open Image" xml:space="preserve">
+    <value>打开图像</value>
+  </data>
+  <data name="Open Image…" xml:space="preserve">
+    <value>打开图像…</value>
+  </data>
+  <data name="Open Recent" xml:space="preserve">
+    <value>最近打开</value>
+  </data>
+  <data name="Open Recent…" xml:space="preserve">
+    <value>最近打开…</value>
+  </data>
+  <data name="Opened" xml:space="preserve">
+    <value>已打开</value>
+  </data>
+  <data name="Opened…" xml:space="preserve">
+    <value>已打开…</value>
+  </data>
+  <data name="Open…" xml:space="preserve">
+    <value>打开…</value>
+  </data>
+  <data name="Outer Glow" xml:space="preserve">
+    <value>外发光</value>
+  </data>
+  <data name="Outer Glow…" xml:space="preserve">
+    <value>外发光…</value>
+  </data>
+  <data name="Overlay" xml:space="preserve">
+    <value>叠加</value>
+  </data>
+  <data name="Overlay…" xml:space="preserve">
+    <value>叠加…</value>
+  </data>
+  <data name="Painterly" xml:space="preserve">
+    <value>绘画效果</value>
+  </data>
+  <data name="Painterly…" xml:space="preserve">
+    <value>绘画效果…</value>
+  </data>
+  <data name="Pass Through" xml:space="preserve">
+    <value>穿透</value>
+  </data>
+  <data name="Pass Through…" xml:space="preserve">
+    <value>穿透…</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="Paste Into" xml:space="preserve">
+    <value>贴入选区</value>
+  </data>
+  <data name="Paste Into…" xml:space="preserve">
+    <value>贴入选区…</value>
+  </data>
+  <data name="Paste Special" xml:space="preserve">
+    <value>特殊粘贴</value>
+  </data>
+  <data name="Paste Special…" xml:space="preserve">
+    <value>特殊粘贴…</value>
+  </data>
+  <data name="Paste in Place" xml:space="preserve">
+    <value>原位粘贴</value>
+  </data>
+  <data name="Paste in Place…" xml:space="preserve">
+    <value>原位粘贴…</value>
+  </data>
+  <data name="Paste…" xml:space="preserve">
+    <value>粘贴…</value>
+  </data>
+  <data name="Pin Light" xml:space="preserve">
+    <value>点光</value>
+  </data>
+  <data name="Pin Light…" xml:space="preserve">
+    <value>点光…</value>
+  </data>
+  <data name="Pixel Grid (800% and above)" xml:space="preserve">
+    <value>像素网格（800% 及以上）</value>
+  </data>
+  <data name="Pixel Grid (800% and above)…" xml:space="preserve">
+    <value>像素网格（800% 及以上）…</value>
+  </data>
+  <data name="Place Images as Layers" xml:space="preserve">
+    <value>置入图像为图层</value>
+  </data>
+  <data name="Place Images as Layers…" xml:space="preserve">
+    <value>置入图像为图层…</value>
+  </data>
+  <data name="Polygonal Lasso" xml:space="preserve">
+    <value>多边形套索</value>
+  </data>
+  <data name="Polygonal Lasso…" xml:space="preserve">
+    <value>多边形套索…</value>
+  </data>
+  <data name="Positive values tighten the detected outline inward; negative values loosen it outward" xml:space="preserve">
+    <value>正值向内收紧检测轮廓，负值向外扩展</value>
+  </data>
+  <data name="Positive values tighten the detected outline inward; negative values loosen it outward…" xml:space="preserve">
+    <value>正值向内收紧检测轮廓，负值向外扩展…</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="Quit…" xml:space="preserve">
+    <value>退出…</value>
+  </data>
+  <data name="Radial" xml:space="preserve">
+    <value>径向</value>
+  </data>
+  <data name="Radial…" xml:space="preserve">
+    <value>径向…</value>
+  </data>
+  <data name="Rasterize" xml:space="preserve">
+    <value>栅格化</value>
+  </data>
+  <data name="Rasterize Layer" xml:space="preserve">
+    <value>栅格化图层</value>
+  </data>
+  <data name="Rasterize Layer…" xml:space="preserve">
+    <value>栅格化图层…</value>
+  </data>
+  <data name="Rasterize…" xml:space="preserve">
+    <value>栅格化…</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>比例</value>
+  </data>
+  <data name="Ratio…" xml:space="preserve">
+    <value>比例…</value>
+  </data>
+  <data name="Ready when you are" xml:space="preserve">
+    <value>准备就绪</value>
+  </data>
+  <data name="Ready when you are…" xml:space="preserve">
+    <value>准备就绪…</value>
+  </data>
+  <data name="Recent" xml:space="preserve">
+    <value>最近使用</value>
+  </data>
+  <data name="Recent…" xml:space="preserve">
+    <value>最近使用…</value>
+  </data>
+  <data name="Recovered" xml:space="preserve">
+    <value>已恢复</value>
+  </data>
+  <data name="Recovered…" xml:space="preserve">
+    <value>已恢复…</value>
+  </data>
+  <data name="Rectangle" xml:space="preserve">
+    <value>矩形</value>
+  </data>
+  <data name="Rectangle Marquee" xml:space="preserve">
+    <value>矩形选框</value>
+  </data>
+  <data name="Rectangle Marquee…" xml:space="preserve">
+    <value>矩形选框…</value>
+  </data>
+  <data name="Rectangle…" xml:space="preserve">
+    <value>矩形…</value>
+  </data>
+  <data name="Rectangular Marquee" xml:space="preserve">
+    <value>矩形选框</value>
+  </data>
+  <data name="Rectangular Marquee…" xml:space="preserve">
+    <value>矩形选框…</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="Redo {0}" xml:space="preserve">
+    <value>重做：{0}</value>
+  </data>
+  <data name="Redo {0}…" xml:space="preserve">
+    <value>重做：{0}…</value>
+  </data>
+  <data name="Redo…" xml:space="preserve">
+    <value>重做…</value>
+  </data>
+  <data name="Release Clipping Mask" xml:space="preserve">
+    <value>释放剪贴蒙版</value>
+  </data>
+  <data name="Release Clipping Mask…" xml:space="preserve">
+    <value>释放剪贴蒙版…</value>
+  </data>
+  <data name="Remove Background" xml:space="preserve">
+    <value>移除背景</value>
+  </data>
+  <data name="Remove Background…" xml:space="preserve">
+    <value>移除背景…</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="Rename Layer" xml:space="preserve">
+    <value>重命名图层</value>
+  </data>
+  <data name="Rename Layer…" xml:space="preserve">
+    <value>重命名图层…</value>
+  </data>
+  <data name="Rename…" xml:space="preserve">
+    <value>重命名…</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Reset…" xml:space="preserve">
+    <value>重置…</value>
+  </data>
+  <data name="Reveal All" xml:space="preserve">
+    <value>显示全部</value>
+  </data>
+  <data name="Reveal All…" xml:space="preserve">
+    <value>显示全部…</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>右</value>
+  </data>
+  <data name="Right…" xml:space="preserve">
+    <value>右…</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>旋转</value>
+  </data>
+  <data name="Rotate Canvas" xml:space="preserve">
+    <value>旋转画布</value>
+  </data>
+  <data name="Rotate Canvas…" xml:space="preserve">
+    <value>旋转画布…</value>
+  </data>
+  <data name="Rotate…" xml:space="preserve">
+    <value>旋转…</value>
+  </data>
+  <data name="Rounded Rectangle" xml:space="preserve">
+    <value>圆角矩形</value>
+  </data>
+  <data name="Rounded Rectangle…" xml:space="preserve">
+    <value>圆角矩形…</value>
+  </data>
+  <data name="Rulers" xml:space="preserve">
+    <value>标尺</value>
+  </data>
+  <data name="Rulers…" xml:space="preserve">
+    <value>标尺…</value>
+  </data>
+  <data name="Sample all layers" xml:space="preserve">
+    <value>取样所有图层</value>
+  </data>
+  <data name="Sample all layers…" xml:space="preserve">
+    <value>取样所有图层…</value>
+  </data>
+  <data name="Samples the merged image" xml:space="preserve">
+    <value>从合并图像取样</value>
+  </data>
+  <data name="Samples the merged image…" xml:space="preserve">
+    <value>从合并图像取样…</value>
+  </data>
+  <data name="Saturation" xml:space="preserve">
+    <value>饱和度</value>
+  </data>
+  <data name="Saturation…" xml:space="preserve">
+    <value>饱和度…</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Save As…" xml:space="preserve">
+    <value>另存为…</value>
+  </data>
+  <data name="Save Project" xml:space="preserve">
+    <value>保存工程</value>
+  </data>
+  <data name="Save Project…" xml:space="preserve">
+    <value>保存工程…</value>
+  </data>
+  <data name="Save…" xml:space="preserve">
+    <value>保存…</value>
+  </data>
+  <data name="Saving {0}…" xml:space="preserve">
+    <value>正在保存 {0}…</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>缩放</value>
+  </data>
+  <data name="Scale…" xml:space="preserve">
+    <value>缩放…</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>滤色</value>
+  </data>
+  <data name="Screen…" xml:space="preserve">
+    <value>滤色…</value>
+  </data>
+  <data name="Select All" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="Select All…" xml:space="preserve">
+    <value>全选…</value>
+  </data>
+  <data name="Select Subject" xml:space="preserve">
+    <value>选择主体</value>
+  </data>
+  <data name="Select Subject…" xml:space="preserve">
+    <value>选择主体…</value>
+  </data>
+  <data name="Shape (U)" xml:space="preserve">
+    <value>形状（U）</value>
+  </data>
+  <data name="Shape (U)…" xml:space="preserve">
+    <value>形状（U）…</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>锐化</value>
+  </data>
+  <data name="Sharpen…" xml:space="preserve">
+    <value>锐化…</value>
+  </data>
+  <data name="Show in Folder" xml:space="preserve">
+    <value>在文件夹中显示</value>
+  </data>
+  <data name="Show in Folder…" xml:space="preserve">
+    <value>在文件夹中显示…</value>
+  </data>
+  <data name="Show or hide (drag down the column to swipe, Alt-click to show only this layer)" xml:space="preserve">
+    <value>显示或隐藏（沿此列拖动批量切换，Alt+单击仅显示此图层）</value>
+  </data>
+  <data name="Show or hide (drag down the column to swipe, Alt-click to show only this layer)…" xml:space="preserve">
+    <value>显示或隐藏（沿此列拖动批量切换，Alt+单击仅显示此图层）…</value>
+  </data>
+  <data name="Show {0}" xml:space="preserve">
+    <value>显示{0}</value>
+  </data>
+  <data name="Show {0}…" xml:space="preserve">
+    <value>显示{0}…</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="Size…" xml:space="preserve">
+    <value>大小…</value>
+  </data>
+  <data name="Smear (R)" xml:space="preserve">
+    <value>涂抹类工具（R）</value>
+  </data>
+  <data name="Smear (R)…" xml:space="preserve">
+    <value>涂抹类工具（R）…</value>
+  </data>
+  <data name="Smoothing" xml:space="preserve">
+    <value>平滑</value>
+  </data>
+  <data name="Smoothing…" xml:space="preserve">
+    <value>平滑…</value>
+  </data>
+  <data name="Smudge" xml:space="preserve">
+    <value>涂抹</value>
+  </data>
+  <data name="Smudge…" xml:space="preserve">
+    <value>涂抹…</value>
+  </data>
+  <data name="Snap" xml:space="preserve">
+    <value>吸附</value>
+  </data>
+  <data name="Snap To" xml:space="preserve">
+    <value>吸附到</value>
+  </data>
+  <data name="Snap To…" xml:space="preserve">
+    <value>吸附到…</value>
+  </data>
+  <data name="Snap…" xml:space="preserve">
+    <value>吸附…</value>
+  </data>
+  <data name="Soft Light" xml:space="preserve">
+    <value>柔光</value>
+  </data>
+  <data name="Soft Light…" xml:space="preserve">
+    <value>柔光…</value>
+  </data>
+  <data name="Spot Healing" xml:space="preserve">
+    <value>污点修复</value>
+  </data>
+  <data name="Spot Healing Brush" xml:space="preserve">
+    <value>污点修复画笔</value>
+  </data>
+  <data name="Spot Healing Brush (J)" xml:space="preserve">
+    <value>污点修复画笔（J）</value>
+  </data>
+  <data name="Spot Healing Brush (J)…" xml:space="preserve">
+    <value>污点修复画笔（J）…</value>
+  </data>
+  <data name="Spot Healing Brush…" xml:space="preserve">
+    <value>污点修复画笔…</value>
+  </data>
+  <data name="Spot Healing…" xml:space="preserve">
+    <value>污点修复…</value>
+  </data>
+  <data name="Step by {0}" xml:space="preserve">
+    <value>每次调整 {0}</value>
+  </data>
+  <data name="Step by {0}…" xml:space="preserve">
+    <value>每次调整 {0}…</value>
+  </data>
+  <data name="Strength" xml:space="preserve">
+    <value>强度</value>
+  </data>
+  <data name="Strength…" xml:space="preserve">
+    <value>强度…</value>
+  </data>
+  <data name="Stroke" xml:space="preserve">
+    <value>描边</value>
+  </data>
+  <data name="Stroke…" xml:space="preserve">
+    <value>描边…</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>主体</value>
+  </data>
+  <data name="Subject…" xml:space="preserve">
+    <value>主体…</value>
+  </data>
+  <data name="Subtract" xml:space="preserve">
+    <value>减去</value>
+  </data>
+  <data name="Subtract…" xml:space="preserve">
+    <value>减去…</value>
+  </data>
+  <data name="Swap colors (X) · D resets to black and white" xml:space="preserve">
+    <value>交换颜色（X）· 按 D 恢复黑白</value>
+  </data>
+  <data name="Swap colors (X) · D resets to black and white…" xml:space="preserve">
+    <value>交换颜色（X）· 按 D 恢复黑白…</value>
+  </data>
+  <data name="Text Color" xml:space="preserve">
+    <value>文字颜色</value>
+  </data>
+  <data name="Text Color…" xml:space="preserve">
+    <value>文字颜色…</value>
+  </data>
+  <data name="The clipboard has no image." xml:space="preserve">
+    <value>剪贴板中没有图像。</value>
+  </data>
+  <data name="The clipboard has no image.…" xml:space="preserve">
+    <value>剪贴板中没有图像。…</value>
+  </data>
+  <data name="The shape the crop box keeps while you drag it" xml:space="preserve">
+    <value>拖动裁剪框时保持的宽高比</value>
+  </data>
+  <data name="The shape the crop box keeps while you drag it…" xml:space="preserve">
+    <value>拖动裁剪框时保持的宽高比…</value>
+  </data>
+  <data name="This is the state in the file" xml:space="preserve">
+    <value>这是文件中保存的状态</value>
+  </data>
+  <data name="This is the state in the file…" xml:space="preserve">
+    <value>这是文件中保存的状态…</value>
+  </data>
+  <data name="This layer has no pixels" xml:space="preserve">
+    <value>此图层没有像素</value>
+  </data>
+  <data name="This layer has no pixels…" xml:space="preserve">
+    <value>此图层没有像素…</value>
+  </data>
+  <data name="Tolerance" xml:space="preserve">
+    <value>容差</value>
+  </data>
+  <data name="Tolerance…" xml:space="preserve">
+    <value>容差…</value>
+  </data>
+  <data name="Tonal Contrast" xml:space="preserve">
+    <value>色调对比</value>
+  </data>
+  <data name="Tonal Contrast…" xml:space="preserve">
+    <value>色调对比…</value>
+  </data>
+  <data name="Tracking" xml:space="preserve">
+    <value>字距</value>
+  </data>
+  <data name="Tracking: extra space after every character, in pixels" xml:space="preserve">
+    <value>字距：每个字符后的额外间隔，单位为像素</value>
+  </data>
+  <data name="Tracking: extra space after every character, in pixels…" xml:space="preserve">
+    <value>字距：每个字符后的额外间隔，单位为像素…</value>
+  </data>
+  <data name="Tracking…" xml:space="preserve">
+    <value>字距…</value>
+  </data>
+  <data name="Transform" xml:space="preserve">
+    <value>变换</value>
+  </data>
+  <data name="Transform controls" xml:space="preserve">
+    <value>变换控件</value>
+  </data>
+  <data name="Transform controls…" xml:space="preserve">
+    <value>变换控件…</value>
+  </data>
+  <data name="Transform…" xml:space="preserve">
+    <value>变换…</value>
+  </data>
+  <data name="Trim" xml:space="preserve">
+    <value>修边</value>
+  </data>
+  <data name="Trim transparent edges" xml:space="preserve">
+    <value>裁去透明边缘</value>
+  </data>
+  <data name="Trim transparent edges…" xml:space="preserve">
+    <value>裁去透明边缘…</value>
+  </data>
+  <data name="Trim…" xml:space="preserve">
+    <value>修边…</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>文字</value>
+  </data>
+  <data name="Type (T) · click for point text, drag a paragraph box, click text to edit it" xml:space="preserve">
+    <value>文字（T）· 单击输入，拖动创建段落框，单击已有文字进行编辑</value>
+  </data>
+  <data name="Type (T) · click for point text, drag a paragraph box, click text to edit it…" xml:space="preserve">
+    <value>文字（T）· 单击输入，拖动创建段落框，单击已有文字进行编辑…</value>
+  </data>
+  <data name="Type · Drag the box's handles to resize it · Alt+arrows tracking and leading · Ctrl+Enter finishes · Escape cancels" xml:space="preserve">
+    <value>输入文字 · 拖动手柄调整文本框 · Alt+方向键调整字距/行距 · Ctrl+Enter 完成 · Esc 取消</value>
+  </data>
+  <data name="Type · Drag the box's handles to resize it · Alt+arrows tracking and leading · Ctrl+Enter finishes · Escape cancels…" xml:space="preserve">
+    <value>输入文字 · 拖动手柄调整文本框 · Alt+方向键调整字距/行距 · Ctrl+Enter 完成 · Esc 取消…</value>
+  </data>
+  <data name="Type…" xml:space="preserve">
+    <value>文字…</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="Undo {0}" xml:space="preserve">
+    <value>撤销：{0}</value>
+  </data>
+  <data name="Undo {0}…" xml:space="preserve">
+    <value>撤销：{0}…</value>
+  </data>
+  <data name="Undo…" xml:space="preserve">
+    <value>撤销…</value>
+  </data>
+  <data name="Vignette" xml:space="preserve">
+    <value>暗角</value>
+  </data>
+  <data name="Vignette…" xml:space="preserve">
+    <value>暗角…</value>
+  </data>
+  <data name="Vivid Light" xml:space="preserve">
+    <value>亮光</value>
+  </data>
+  <data name="Vivid Light…" xml:space="preserve">
+    <value>亮光…</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>宽度</value>
+  </data>
+  <data name="Width…" xml:space="preserve">
+    <value>宽度…</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>缩放</value>
+  </data>
+  <data name="Zoom (Z)" xml:space="preserve">
+    <value>缩放（Z）</value>
+  </data>
+  <data name="Zoom (Z)…" xml:space="preserve">
+    <value>缩放（Z）…</value>
+  </data>
+  <data name="Zoom In" xml:space="preserve">
+    <value>放大</value>
+  </data>
+  <data name="Zoom In…" xml:space="preserve">
+    <value>放大…</value>
+  </data>
+  <data name="Zoom Out" xml:space="preserve">
+    <value>缩小</value>
+  </data>
+  <data name="Zoom Out…" xml:space="preserve">
+    <value>缩小…</value>
+  </data>
+  <data name="Zoom in (Ctrl++)" xml:space="preserve">
+    <value>放大（Ctrl++）</value>
+  </data>
+  <data name="Zoom in (Ctrl++)…" xml:space="preserve">
+    <value>放大（Ctrl++）…</value>
+  </data>
+  <data name="Zoom out (Ctrl+-)" xml:space="preserve">
+    <value>缩小（Ctrl+-）</value>
+  </data>
+  <data name="Zoom out (Ctrl+-)…" xml:space="preserve">
+    <value>缩小（Ctrl+-）…</value>
+  </data>
+  <data name="Zoom…" xml:space="preserve">
+    <value>缩放…</value>
+  </data>
+  <data name="_Edit" xml:space="preserve">
+    <value>编辑(_E)</value>
+  </data>
+  <data name="_Edit…" xml:space="preserve">
+    <value>编辑(_E)…</value>
+  </data>
+  <data name="_File" xml:space="preserve">
+    <value>文件(_F)</value>
+  </data>
+  <data name="_File…" xml:space="preserve">
+    <value>文件(_F)…</value>
+  </data>
+  <data name="_Filter" xml:space="preserve">
+    <value>滤镜(_T)</value>
+  </data>
+  <data name="_Filter…" xml:space="preserve">
+    <value>滤镜(_T)…</value>
+  </data>
+  <data name="_Help" xml:space="preserve">
+    <value>帮助(_H)</value>
+  </data>
+  <data name="_Help…" xml:space="preserve">
+    <value>帮助(_H)…</value>
+  </data>
+  <data name="_Image" xml:space="preserve">
+    <value>图像(_I)</value>
+  </data>
+  <data name="_Image…" xml:space="preserve">
+    <value>图像(_I)…</value>
+  </data>
+  <data name="_Layer" xml:space="preserve">
+    <value>图层(_L)</value>
+  </data>
+  <data name="_Layer…" xml:space="preserve">
+    <value>图层(_L)…</value>
+  </data>
+  <data name="_Select" xml:space="preserve">
+    <value>选择(_S)</value>
+  </data>
+  <data name="_Select…" xml:space="preserve">
+    <value>选择(_S)…</value>
+  </data>
+  <data name="_View" xml:space="preserve">
+    <value>视图(_V)</value>
+  </data>
+  <data name="_View…" xml:space="preserve">
+    <value>视图(_V)…</value>
+  </data>
+  <data name="_Window" xml:space="preserve">
+    <value>窗口(_W)</value>
+  </data>
+  <data name="_Window…" xml:space="preserve">
+    <value>窗口(_W)…</value>
+  </data>
+  <data name="{0} AIs connected" xml:space="preserve">
+    <value>{0} 个 AI 已连接</value>
+  </data>
+  <data name="{0} AIs connected…" xml:space="preserve">
+    <value>{0} 个 AI 已连接…</value>
+  </data>
+  <data name="{0} image" xml:space="preserve">
+    <value>{0} 图像</value>
+  </data>
+  <data name="{0} image…" xml:space="preserve">
+    <value>{0} 图像…</value>
+  </data>
+  <data name="{0}{1} · click and hold for {2}" xml:space="preserve">
+    <value>{0}{1} · 长按切换到 {2}</value>
+  </data>
+  <data name="{0}{1} · click and hold for {2}…" xml:space="preserve">
+    <value>{0}{1} · 长按切换到 {2}…</value>
+  </data>
+  <data name="F_ilter" xml:space="preserve">
+    <value>滤镜(_T)</value>
+  </data>
+  <data name="F_ilter…" xml:space="preserve">
+    <value>滤镜(_T)…</value>
+  </data>
+  <data name="Grain" xml:space="preserve">
+    <value>颗粒</value>
+  </data>
+  <data name="Grain…" xml:space="preserve">
+    <value>颗粒…</value>
+  </data>
+  <data name="Transform Layer" xml:space="preserve">
+    <value>变换图层</value>
+  </data>
+  <data name="Transform Layer…" xml:space="preserve">
+    <value>变换图层…</value>
+  </data>
+  <data name="Duplicate Layer / Layer via Copy" xml:space="preserve">
+    <value>复制图层/通过拷贝的图层</value>
+  </data>
+  <data name="Duplicate Layer / Layer via Copy…" xml:space="preserve">
+    <value>复制图层/通过拷贝的图层…</value>
+  </data>
+  <data name="Add Layer Mask" xml:space="preserve">
+    <value>添加图层蒙版</value>
+  </data>
+  <data name="Add Layer Mask…" xml:space="preserve">
+    <value>添加图层蒙版…</value>
+  </data>
+  <data name="Invert Layer Mask" xml:space="preserve">
+    <value>反相图层蒙版</value>
+  </data>
+  <data name="Invert Layer Mask…" xml:space="preserve">
+    <value>反相图层蒙版…</value>
+  </data>
+  <data name="Apply Layer Mask" xml:space="preserve">
+    <value>应用图层蒙版</value>
+  </data>
+  <data name="Apply Layer Mask…" xml:space="preserve">
+    <value>应用图层蒙版…</value>
+  </data>
+  <data name="Group Selected Layers" xml:space="preserve">
+    <value>将所选图层编组</value>
+  </data>
+  <data name="Group Selected Layers…" xml:space="preserve">
+    <value>将所选图层编组…</value>
+  </data>
+  <data name="Ungroup" xml:space="preserve">
+    <value>取消编组</value>
+  </data>
+  <data name="Ungroup…" xml:space="preserve">
+    <value>取消编组…</value>
+  </data>
+  <data name="Move Layer Up" xml:space="preserve">
+    <value>上移图层</value>
+  </data>
+  <data name="Move Layer Up…" xml:space="preserve">
+    <value>上移图层…</value>
+  </data>
+  <data name="Move Layer Down" xml:space="preserve">
+    <value>下移图层</value>
+  </data>
+  <data name="Move Layer Down…" xml:space="preserve">
+    <value>下移图层…</value>
+  </data>
+  <data name="Merge Visible" xml:space="preserve">
+    <value>合并可见图层</value>
+  </data>
+  <data name="Merge Visible…" xml:space="preserve">
+    <value>合并可见图层…</value>
+  </data>
+  <data name="Stamp Visible" xml:space="preserve">
+    <value>盖印可见图层</value>
+  </data>
+  <data name="Stamp Visible…" xml:space="preserve">
+    <value>盖印可见图层…</value>
+  </data>
+  <data name="Delete Effect" xml:space="preserve">
+    <value>删除效果</value>
+  </data>
+  <data name="Delete Effect…" xml:space="preserve">
+    <value>删除效果…</value>
+  </data>
+  <data name="Rotate Layer 90° Clockwise" xml:space="preserve">
+    <value>顺时针旋转图层 90°</value>
+  </data>
+  <data name="Rotate Layer 90° Clockwise…" xml:space="preserve">
+    <value>顺时针旋转图层 90°…</value>
+  </data>
+  <data name="Rotate Layer 90° Counterclockwise" xml:space="preserve">
+    <value>逆时针旋转图层 90°</value>
+  </data>
+  <data name="Rotate Layer 90° Counterclockwise…" xml:space="preserve">
+    <value>逆时针旋转图层 90°…</value>
+  </data>
+  <data name="Rotate Layer 180°" xml:space="preserve">
+    <value>旋转图层 180°</value>
+  </data>
+  <data name="Rotate Layer 180°…" xml:space="preserve">
+    <value>旋转图层 180°…</value>
+  </data>
+  <data name="Flip Layer Horizontal" xml:space="preserve">
+    <value>水平翻转图层</value>
+  </data>
+  <data name="Flip Layer Horizontal…" xml:space="preserve">
+    <value>水平翻转图层…</value>
+  </data>
+  <data name="Flip Layer Vertical" xml:space="preserve">
+    <value>垂直翻转图层</value>
+  </data>
+  <data name="Flip Layer Vertical…" xml:space="preserve">
+    <value>垂直翻转图层…</value>
+  </data>
+  <data name="Rotate Canvas 90° Clockwise" xml:space="preserve">
+    <value>顺时针旋转画布 90°</value>
+  </data>
+  <data name="Rotate Canvas 90° Clockwise…" xml:space="preserve">
+    <value>顺时针旋转画布 90°…</value>
+  </data>
+  <data name="Rotate Canvas 90° Counterclockwise" xml:space="preserve">
+    <value>逆时针旋转画布 90°</value>
+  </data>
+  <data name="Rotate Canvas 90° Counterclockwise…" xml:space="preserve">
+    <value>逆时针旋转画布 90°…</value>
+  </data>
+  <data name="Flip Canvas Horizontal" xml:space="preserve">
+    <value>水平翻转画布</value>
+  </data>
+  <data name="Flip Canvas Horizontal…" xml:space="preserve">
+    <value>水平翻转画布…</value>
+  </data>
+  <data name="Flip Canvas Vertical" xml:space="preserve">
+    <value>垂直翻转画布</value>
+  </data>
+  <data name="Flip Canvas Vertical…" xml:space="preserve">
+    <value>垂直翻转画布…</value>
+  </data>
+  <data name="Fit Canvas" xml:space="preserve">
+    <value>适合画布</value>
+  </data>
+  <data name="Fit Canvas…" xml:space="preserve">
+    <value>适合画布…</value>
+  </data>
+  <data name="Show Transform Controls" xml:space="preserve">
+    <value>显示变换控件</value>
+  </data>
+  <data name="Show Transform Controls…" xml:space="preserve">
+    <value>显示变换控件…</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="Show…" xml:space="preserve">
+    <value>显示…</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="Hide…" xml:space="preserve">
+    <value>隐藏…</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Delete…" xml:space="preserve">
+    <value>删除…</value>
+  </data>
+  <data name="Delete Selected Layers" xml:space="preserve">
+    <value>删除所选图层</value>
+  </data>
+  <data name="Delete Selected Layers…" xml:space="preserve">
+    <value>删除所选图层…</value>
+  </data>
+  <data name="Move Out of Folder" xml:space="preserve">
+    <value>移出组</value>
+  </data>
+  <data name="Move Out of Folder…" xml:space="preserve">
+    <value>移出组…</value>
+  </data>
+  <data name="Reveal All (White)" xml:space="preserve">
+    <value>显示全部（白色）</value>
+  </data>
+  <data name="Reveal All (White)…" xml:space="preserve">
+    <value>显示全部（白色）…</value>
+  </data>
+  <data name="Hide All (Black)" xml:space="preserve">
+    <value>隐藏全部（黑色）</value>
+  </data>
+  <data name="Hide All (Black)…" xml:space="preserve">
+    <value>隐藏全部（黑色）…</value>
+  </data>
+  <data name="Select Mask" xml:space="preserve">
+    <value>选择蒙版</value>
+  </data>
+  <data name="Select Mask…" xml:space="preserve">
+    <value>选择蒙版…</value>
+  </data>
+  <data name="Select Pixels" xml:space="preserve">
+    <value>选择像素</value>
+  </data>
+  <data name="Select Pixels…" xml:space="preserve">
+    <value>选择像素…</value>
+  </data>
+  <data name="Hide Layer" xml:space="preserve">
+    <value>隐藏图层</value>
+  </data>
+  <data name="Hide Layer…" xml:space="preserve">
+    <value>隐藏图层…</value>
+  </data>
+  <data name="Show Layer" xml:space="preserve">
+    <value>显示图层</value>
+  </data>
+  <data name="Show Layer…" xml:space="preserve">
+    <value>显示图层…</value>
+  </data>
+  <data name="Layer effects: stroke, drop shadow, color overlay, inner shadow, outer glow, inner glow" xml:space="preserve">
+    <value>图层效果：描边、投影、颜色叠加、内阴影、外发光、内发光</value>
+  </data>
+  <data name="Layer effects: stroke, drop shadow, color overlay, inner shadow, outer glow, inner glow…" xml:space="preserve">
+    <value>图层效果：描边、投影、颜色叠加、内阴影、外发光、内发光…</value>
+  </data>
+  <data name="New layer (Ctrl+Shift+N)" xml:space="preserve">
+    <value>新建图层（Ctrl+Shift+N）</value>
+  </data>
+  <data name="New layer (Ctrl+Shift+N)…" xml:space="preserve">
+    <value>新建图层（Ctrl+Shift+N）…</value>
+  </data>
+  <data name="Group selected layers (Ctrl+G)" xml:space="preserve">
+    <value>编组所选图层（Ctrl+G）</value>
+  </data>
+  <data name="Group selected layers (Ctrl+G)…" xml:space="preserve">
+    <value>编组所选图层（Ctrl+G）…</value>
+  </data>
+  <data name="Add layer mask (Alt: hide all)" xml:space="preserve">
+    <value>添加图层蒙版（Alt：隐藏全部）</value>
+  </data>
+  <data name="Add layer mask (Alt: hide all)…" xml:space="preserve">
+    <value>添加图层蒙版（Alt：隐藏全部）…</value>
+  </data>
+  <data name="Delete layer, mask or effect" xml:space="preserve">
+    <value>删除图层、蒙版或效果</value>
+  </data>
+  <data name="Delete layer, mask or effect…" xml:space="preserve">
+    <value>删除图层、蒙版或效果…</value>
+  </data>
+  <data name="Missing font" xml:space="preserve">
+    <value>字体缺失</value>
+  </data>
+  <data name="Missing font…" xml:space="preserve">
+    <value>字体缺失…</value>
+  </data>
+  <data name="Font ‘{0}’ is not installed. A system font is used for display; choose an installed font to replace it." xml:space="preserve">
+    <value>未安装字体“{0}”。当前使用系统字体显示；请选择已安装的字体进行替换。</value>
+  </data>
+  <data name="Font ‘{0}’ is not installed. A system font is used for display; choose an installed font to replace it.…" xml:space="preserve">
+    <value>未安装字体“{0}”。当前使用系统字体显示；请选择已安装的字体进行替换。…</value>
+  </data>
+  <data name="Copied 1 layer" xml:space="preserve">
+    <value>已复制 1 个图层</value>
+  </data>
+  <data name="Copied 1 layer…" xml:space="preserve">
+    <value>已复制 1 个图层…</value>
+  </data>
+  <data name="Copied {0} layers" xml:space="preserve">
+    <value>已复制 {0} 个图层</value>
+  </data>
+  <data name="Copied {0} layers…" xml:space="preserve">
+    <value>已复制 {0} 个图层…</value>
+  </data>
+  <data name="Copied {0} × {1} px" xml:space="preserve">
+    <value>已复制 {0} × {1} 像素</value>
+  </data>
+  <data name="Copied {0} × {1} px…" xml:space="preserve">
+    <value>已复制 {0} × {1} 像素…</value>
+  </data>
+  <data name="Composa project" xml:space="preserve">
+    <value>Composa 工程</value>
+  </data>
+  <data name="Composa project…" xml:space="preserve">
+    <value>Composa 工程…</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>图像</value>
+  </data>
+  <data name="Images…" xml:space="preserve">
+    <value>图像…</value>
+  </data>
+  <data name="Camera RAW" xml:space="preserve">
+    <value>相机 RAW</value>
+  </data>
+  <data name="Camera RAW…" xml:space="preserve">
+    <value>相机 RAW…</value>
+  </data>
+  <data name="Color lookup tables" xml:space="preserve">
+    <value>颜色查找表</value>
+  </data>
+  <data name="Color lookup tables…" xml:space="preserve">
+    <value>颜色查找表…</value>
+  </data>
+  <data name="Color lookup table" xml:space="preserve">
+    <value>颜色查找表</value>
+  </data>
+  <data name="Color lookup table…" xml:space="preserve">
+    <value>颜色查找表…</value>
+  </data>
+  <data name="Projects and images" xml:space="preserve">
+    <value>工程和图像</value>
+  </data>
+  <data name="Projects and images…" xml:space="preserve">
+    <value>工程和图像…</value>
+  </data>
+  <data name="Save Look" xml:space="preserve">
+    <value>保存调色预设</value>
+  </data>
+  <data name="Save Look…" xml:space="preserve">
+    <value>保存调色预设…</value>
+  </data>
+  <data name="Load Color Lookup Table" xml:space="preserve">
+    <value>载入颜色查找表</value>
+  </data>
+  <data name="Load Color Lookup Table…" xml:space="preserve">
+    <value>载入颜色查找表…</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>文字</value>
+  </data>
+  <data name="Text…" xml:space="preserve">
+    <value>文字…</value>
+  </data>
+  <data name="Fill Text" xml:space="preserve">
+    <value>填充文字</value>
+  </data>
+  <data name="Fill Text…" xml:space="preserve">
+    <value>填充文字…</value>
+  </data>
+  <data name="Text Style" xml:space="preserve">
+    <value>文字样式</value>
+  </data>
+  <data name="Text Style…" xml:space="preserve">
+    <value>文字样式…</value>
+  </data>
+  <data name="Select Layer" xml:space="preserve">
+    <value>选择图层</value>
+  </data>
+  <data name="Select Layer…" xml:space="preserve">
+    <value>选择图层…</value>
+  </data>
+  <data name="Group Layers" xml:space="preserve">
+    <value>图层编组</value>
+  </data>
+  <data name="Group Layers…" xml:space="preserve">
+    <value>图层编组…</value>
+  </data>
+  <data name="Reorder Layers" xml:space="preserve">
+    <value>重排图层</value>
+  </data>
+  <data name="Reorder Layers…" xml:space="preserve">
+    <value>重排图层…</value>
+  </data>
+  <data name="Move Layer" xml:space="preserve">
+    <value>移动图层</value>
+  </data>
+  <data name="Move Layer…" xml:space="preserve">
+    <value>移动图层…</value>
+  </data>
+  <data name="Layer Mask" xml:space="preserve">
+    <value>图层蒙版</value>
+  </data>
+  <data name="Layer Mask…" xml:space="preserve">
+    <value>图层蒙版…</value>
+  </data>
+  <data name="Mask" xml:space="preserve">
+    <value>蒙版</value>
+  </data>
+  <data name="Mask…" xml:space="preserve">
+    <value>蒙版…</value>
+  </data>
+  <data name="New Guide" xml:space="preserve">
+    <value>新建参考线</value>
+  </data>
+  <data name="New Guide…" xml:space="preserve">
+    <value>新建参考线…</value>
+  </data>
+  <data name="Move Guide" xml:space="preserve">
+    <value>移动参考线</value>
+  </data>
+  <data name="Move Guide…" xml:space="preserve">
+    <value>移动参考线…</value>
+  </data>
+  <data name="Delete Guide" xml:space="preserve">
+    <value>删除参考线</value>
+  </data>
+  <data name="Delete Guide…" xml:space="preserve">
+    <value>删除参考线…</value>
+  </data>
+  <data name="Select Rectangle" xml:space="preserve">
+    <value>矩形选区</value>
+  </data>
+  <data name="Select Rectangle…" xml:space="preserve">
+    <value>矩形选区…</value>
+  </data>
+  <data name="Select Ellipse" xml:space="preserve">
+    <value>椭圆选区</value>
+  </data>
+  <data name="Select Ellipse…" xml:space="preserve">
+    <value>椭圆选区…</value>
+  </data>
+  <data name="Invert Selection" xml:space="preserve">
+    <value>反向选区</value>
+  </data>
+  <data name="Invert Selection…" xml:space="preserve">
+    <value>反向选区…</value>
+  </data>
+  <data name="Menus" xml:space="preserve">
+    <value>菜单</value>
+  </data>
+  <data name="Menus…" xml:space="preserve">
+    <value>菜单…</value>
+  </data>
+  <data name="Tools and Canvas" xml:space="preserve">
+    <value>工具与画布</value>
+  </data>
+  <data name="Tools and Canvas…" xml:space="preserve">
+    <value>工具与画布…</value>
+  </data>
+  <data name="Move tool" xml:space="preserve">
+    <value>移动工具</value>
+  </data>
+  <data name="Move tool…" xml:space="preserve">
+    <value>移动工具…</value>
+  </data>
+  <data name="Marquee tool (again switches Rectangle and Ellipse)" xml:space="preserve">
+    <value>选框工具（再次按下切换矩形/椭圆）</value>
+  </data>
+  <data name="Marquee tool (again switches Rectangle and Ellipse)…" xml:space="preserve">
+    <value>选框工具（再次按下切换矩形/椭圆）…</value>
+  </data>
+  <data name="Lasso tool (again switches Freehand and Polygonal)" xml:space="preserve">
+    <value>套索工具（再次按下切换自由/多边形）</value>
+  </data>
+  <data name="Lasso tool (again switches Freehand and Polygonal)…" xml:space="preserve">
+    <value>套索工具（再次按下切换自由/多边形）…</value>
+  </data>
+  <data name="Magic tool" xml:space="preserve">
+    <value>魔棒/对象选择工具</value>
+  </data>
+  <data name="Magic tool…" xml:space="preserve">
+    <value>魔棒/对象选择工具…</value>
+  </data>
+  <data name="Brush tool" xml:space="preserve">
+    <value>画笔工具</value>
+  </data>
+  <data name="Brush tool…" xml:space="preserve">
+    <value>画笔工具…</value>
+  </data>
+  <data name="Smear tool (again switches its mode)" xml:space="preserve">
+    <value>涂抹类工具（再次按下切换模式）</value>
+  </data>
+  <data name="Smear tool (again switches its mode)…" xml:space="preserve">
+    <value>涂抹类工具（再次按下切换模式）…</value>
+  </data>
+  <data name="Shape tool (again switches the shape)" xml:space="preserve">
+    <value>形状工具（再次按下切换形状）</value>
+  </data>
+  <data name="Shape tool (again switches the shape)…" xml:space="preserve">
+    <value>形状工具（再次按下切换形状）…</value>
+  </data>
+  <data name="Hand tool" xml:space="preserve">
+    <value>抓手工具</value>
+  </data>
+  <data name="Hand tool…" xml:space="preserve">
+    <value>抓手工具…</value>
+  </data>
+  <data name="Zoom tool" xml:space="preserve">
+    <value>缩放工具</value>
+  </data>
+  <data name="Zoom tool…" xml:space="preserve">
+    <value>缩放工具…</value>
+  </data>
+  <data name="Type tool" xml:space="preserve">
+    <value>文字工具</value>
+  </data>
+  <data name="Type tool…" xml:space="preserve">
+    <value>文字工具…</value>
+  </data>
+  <data name="Crop tool" xml:space="preserve">
+    <value>裁剪工具</value>
+  </data>
+  <data name="Crop tool…" xml:space="preserve">
+    <value>裁剪工具…</value>
+  </data>
+  <data name="Eyedropper tool" xml:space="preserve">
+    <value>吸管工具</value>
+  </data>
+  <data name="Eyedropper tool…" xml:space="preserve">
+    <value>吸管工具…</value>
+  </data>
+  <data name="Drag to paint · Alt-click picks a color · Shift-click draws a line · [ ] size · { } hardness · 1–0 opacity" xml:space="preserve">
+    <value>拖动绘画 · Alt+单击取色 · Shift+单击画直线 · [ ] 大小 · { } 硬度 · 1–0 不透明度</value>
+  </data>
+  <data name="Drag to paint · Alt-click picks a color · Shift-click draws a line · [ ] size · { } hardness · 1–0 opacity…" xml:space="preserve">
+    <value>拖动绘画 · Alt+单击取色 · Shift+单击画直线 · [ ] 大小 · { } 硬度 · 1–0 不透明度…</value>
+  </data>
+  <data name="Drag to erase · Shift-click draws a line · [ ] size · { } hardness · 1–0 opacity" xml:space="preserve">
+    <value>拖动擦除 · Shift+单击画直线 · [ ] 大小 · { } 硬度 · 1–0 不透明度</value>
+  </data>
+  <data name="Drag to erase · Shift-click draws a line · [ ] size · { } hardness · 1–0 opacity…" xml:space="preserve">
+    <value>拖动擦除 · Shift+单击画直线 · [ ] 大小 · { } 硬度 · 1–0 不透明度…</value>
+  </data>
+  <data name="Drag to draw from foreground to transparent · Drag an end to adjust · Shift snaps to 45° · Enter applies · Escape cancels" xml:space="preserve">
+    <value>拖动绘制前景色到透明渐变 · 拖动端点调整 · Shift 吸附到 45° · Enter 应用 · Esc 取消</value>
+  </data>
+  <data name="Drag to draw from foreground to transparent · Drag an end to adjust · Shift snaps to 45° · Enter applies · Escape cancels…" xml:space="preserve">
+    <value>拖动绘制前景色到透明渐变 · 拖动端点调整 · Shift 吸附到 45° · Enter 应用 · Esc 取消…</value>
+  </data>
+  <data name="Drag to draw from foreground to background · Drag an end to adjust · Shift snaps to 45° · Enter applies · Escape cancels" xml:space="preserve">
+    <value>拖动绘制前景色到背景色渐变 · 拖动端点调整 · Shift 吸附到 45° · Enter 应用 · Esc 取消</value>
+  </data>
+  <data name="Drag to draw from foreground to background · Drag an end to adjust · Shift snaps to 45° · Enter applies · Escape cancels…" xml:space="preserve">
+    <value>拖动绘制前景色到背景色渐变 · 拖动端点调整 · Shift 吸附到 45° · Enter 应用 · Esc 取消…</value>
+  </data>
+  <data name="Drag to push pixels · [ ] size · 1–0 strength" xml:space="preserve">
+    <value>拖动推动像素 · [ ] 大小 · 1–0 强度</value>
+  </data>
+  <data name="Drag to push pixels · [ ] size · 1–0 strength…" xml:space="preserve">
+    <value>拖动推动像素 · [ ] 大小 · 1–0 强度…</value>
+  </data>
+  <data name="Drag to blur · [ ] size · 1–0 strength" xml:space="preserve">
+    <value>拖动模糊 · [ ] 大小 · 1–0 强度</value>
+  </data>
+  <data name="Drag to blur · [ ] size · 1–0 strength…" xml:space="preserve">
+    <value>拖动模糊 · [ ] 大小 · 1–0 强度…</value>
+  </data>
+  <data name="Drag to smudge · [ ] size · 1–0 strength" xml:space="preserve">
+    <value>拖动涂抹 · [ ] 大小 · 1–0 强度</value>
+  </data>
+  <data name="Drag to smudge · [ ] size · 1–0 strength…" xml:space="preserve">
+    <value>拖动涂抹 · [ ] 大小 · 1–0 强度…</value>
+  </data>
+  <data name="Drag to dodge · [ ] size · 1–0 strength" xml:space="preserve">
+    <value>拖动减淡 · [ ] 大小 · 1–0 强度</value>
+  </data>
+  <data name="Drag to dodge · [ ] size · 1–0 strength…" xml:space="preserve">
+    <value>拖动减淡 · [ ] 大小 · 1–0 强度…</value>
+  </data>
+  <data name="Drag to burn · [ ] size · 1–0 strength" xml:space="preserve">
+    <value>拖动加深 · [ ] 大小 · 1–0 强度</value>
+  </data>
+  <data name="Drag to burn · [ ] size · 1–0 strength…" xml:space="preserve">
+    <value>拖动加深 · [ ] 大小 · 1–0 强度…</value>
+  </data>
+  <data name="Local development build" xml:space="preserve">
+    <value>本地开发版本</value>
+  </data>
+  <data name="Local development build…" xml:space="preserve">
+    <value>本地开发版本…</value>
+  </data>
+  <data name="No automatic updates" xml:space="preserve">
+    <value>不自动更新</value>
+  </data>
+  <data name="No automatic updates…" xml:space="preserve">
+    <value>不自动更新…</value>
+  </data>
+  <data name="Edit {0}…" xml:space="preserve">
+    <value>编辑{0}…</value>
+  </data>
+  <data name="Edit {0}……" xml:space="preserve">
+    <value>编辑{0}……</value>
+  </data>
+</root>

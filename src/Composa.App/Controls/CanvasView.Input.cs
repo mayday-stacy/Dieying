@@ -162,6 +162,7 @@ public sealed partial class CanvasView
         Focus();
         if (session == null || drag != Drag.None && !(drag == Drag.Lasso && session.LassoKind == LassoKind.Polygonal)) return;
         var point = e.GetCurrentPoint(this);
+        if (point.Properties.IsLeftButtonPressed) CancelImeComposition();
         pressScreen = cursorScreen = point.Position;
         pressDocument = currentDocument = ToDocument(point.Position);
         dragButton = point.Properties.IsMiddleButtonPressed ? MouseButton.Middle : point.Properties.IsRightButtonPressed ? MouseButton.Right : MouseButton.Left;

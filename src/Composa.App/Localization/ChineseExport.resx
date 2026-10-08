@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Original size" xml:space="preserve"><value>原始尺寸</value></data>
+  <data name="Transparency background" xml:space="preserve"><value>透明区域背景</value></data>
+  <data name="Transparency is preserved." xml:space="preserve"><value>保留透明区域。</value></data>
+  <data name="Export size does not change your project." xml:space="preserve"><value>导出尺寸不会改变工程尺寸。</value></data>
+  <data name="Export size must fit within {0:N0} pixels a side and {1} megapixels." xml:space="preserve"><value>导出尺寸每边不能超过 {0:N0} 像素，总计不能超过 {1} 百万像素。</value></data>
+  <data name="Preview unavailable: {0}" xml:space="preserve"><value>无法预览：{0}</value></data>
+  <data name="Finish the current drag before exporting." xml:space="preserve"><value>请先完成当前拖动，再导出。</value></data>
+  <data name="Finish the current edit before exporting." xml:space="preserve"><value>请先完成当前编辑，再导出。</value></data>
+  <data name="Exported {0} × {1} px" xml:space="preserve"><value>已导出 {0} × {1} 像素</value></data>
+</root>

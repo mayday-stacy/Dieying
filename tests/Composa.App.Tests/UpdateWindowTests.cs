@@ -40,7 +40,12 @@ public sealed class UpdateWindowTests : IDisposable
 
     private sealed class Source(ReleaseInfo release) : IReleaseSource
     {
-        public Task<ReleaseInfo?> Latest(CancellationToken cancel) => Task.FromResult<ReleaseInfo?>(release);
+        public int Calls { get; private set; }
+        public Task<ReleaseInfo?> Latest(CancellationToken cancel)
+        {
+            Calls++;
+            return Task.FromResult<ReleaseInfo?>(release);
+        }
     }
 
     private ReleaseInfo Release() => new(Tag, "https://github.com/dvdstelt/Composa/releases/tag/" + Tag, false,
@@ -62,7 +67,7 @@ public sealed class UpdateWindowTests : IDisposable
         public List<string> Revealed { get; } = [];
     }
 
-    private (MainWindow Window, Programs Programs) Open(InstallKind kind, HttpMessageHandler? http = null)
+    private (MainWindow Window, Programs Programs) Open(InstallKind kind, HttpMessageHandler? http = null, UpdateChannel channel = UpdateChannel.GitHub, Source? source = null)
     {
         var programs = new Programs();
         var window = new MainWindow
@@ -71,7 +76,8 @@ public sealed class UpdateWindowTests : IDisposable
             Height = 800,
             Updates = new UpdateEnvironment
             {
-                Source = new Source(Release()),
+                Channel = channel,
+                Source = source ?? new Source(Release()),
                 Http = http ?? Files(),
                 Folder = () => folder,
                 Kind = () => kind,
@@ -115,6 +121,36 @@ public sealed class UpdateWindowTests : IDisposable
         var (window, _) = Open(InstallKind.Developer);
         CheckForUpdates(window);
         Assert.Equal(["Release notes", "Skip this version"], window.UpdateNotice.Buttons);
+    }
+
+    [AvaloniaFact]
+    public void A_local_build_explains_rebuilding_without_checking_or_downloading()
+    {
+        var source = new Source(Release());
+        var http = Files();
+        var (window, programs) = Open(InstallKind.WindowsZip, http, UpdateChannel.Local, source);
+        var help = window.GetLogicalDescendants().OfType<Menu>().First().Items.OfType<MenuItem>().Single(m => m.Header as string == "_Help");
+        help.RaiseEvent(new RoutedEventArgs(MenuItem.SubmenuOpenedEvent));
+        var automatic = help.Items.OfType<MenuItem>().Single(m => m.Header as string == "Check for Updates Automatically");
+        Assert.False(automatic.IsEnabled);
+
+        var manual = help.Items.OfType<MenuItem>().Single(m => m.Header as string == "Check for Updates…");
+        Assert.True(manual.IsEnabled);
+        manual.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+        var prompt = WaitForDialog(window);
+        var message = string.Join("\n", prompt.GetLogicalDescendants().OfType<TextBlock>().Select(t => t.Text));
+        Assert.Contains("local development build", message);
+        Assert.Contains("source checkout and rebuild", message);
+        Assert.DoesNotContain("latest version", message);
+        Assert.DoesNotContain("package manager", message);
+        Assert.Equal(0, source.Calls);
+        Assert.Empty(http.Requests);
+        Assert.Empty(programs.Ran);
+        Assert.Empty(programs.Opened);
+        Assert.Equal(UpdateNotice.Phase.Hidden, window.UpdateNotice.State);
+        Assert.True(Screenshots.Save(prompt, "20-update-window-local"));
+        Press(prompt, "OK");
+        window.Close();
     }
 
     [AvaloniaFact]

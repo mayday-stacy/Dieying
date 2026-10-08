@@ -9,12 +9,16 @@ namespace Composa.App;
 /// <summary>Small builders that keep code-built layouts readable.</summary>
 public static class Ui
 {
-    public static TextBlock Label(string text, IBrush? brush = null, double? size = null, FontWeight weight = FontWeight.Normal)
+    public static TextBlock Label(string text, IBrush? brush = null, double? size = null, FontWeight weight = FontWeight.Normal, bool localize = true)
     {
-        var block = new TextBlock { Text = text, Foreground = brush ?? Palette.Foreground, FontWeight = weight };
+        var block = new TextBlock { Text = localize ? L10n.Text(text) : text, Foreground = brush ?? Palette.Foreground, FontWeight = weight };
         if (size is { } s) block.FontSize = s;
         return block;
     }
+
+    /// <summary>A user's name, path or document content, which must never be looked up as interface text.</summary>
+    public static TextBlock RawLabel(string text, IBrush? brush = null, double? size = null, FontWeight weight = FontWeight.Normal) =>
+        Label(text, brush, size, weight, localize: false);
 
     public static StackPanel Row(double spacing, params Control[] children)
     {
@@ -33,14 +37,14 @@ public static class Ui
     public static Button IconButton(Icons.Icon icon, string tip, Action click, double size = 16)
     {
         var button = new Button { Content = Icons.Create(icon, size), Classes = { "flat" } };
-        ToolTip.SetTip(button, tip);
+        ToolTip.SetTip(button, L10n.Text(tip));
         button.Click += (_, _) => click();
         return button;
     }
 
     public static Button TextButton(string text, Action click, bool accent = false)
     {
-        var button = new Button { Content = text, MinWidth = 72, HorizontalContentAlignment = HorizontalAlignment.Center };
+        var button = new Button { Content = L10n.Text(text), MinWidth = 72, HorizontalContentAlignment = HorizontalAlignment.Center };
         if (accent) button.Classes.Add("accent");
         button.Click += (_, _) => click();
         return button;
@@ -48,15 +52,15 @@ public static class Ui
 
     public static CheckBox Check(string text, bool value, Action<bool> changed)
     {
-        var box = new CheckBox { Content = text, IsChecked = value };
+        var box = new CheckBox { Content = L10n.Text(text), IsChecked = value };
         box.IsCheckedChanged += (_, _) => changed(box.IsChecked == true);
         return box;
     }
 
-    public static ComboBox Combo<T>(IEnumerable<T> items, T selected, Func<T, string> label, Action<T> changed, double width = 130)
+    public static ComboBox Combo<T>(IEnumerable<T> items, T selected, Func<T, string> label, Action<T> changed, double width = 130, bool localize = true)
     {
         var list = items.ToList();
-        var combo = new ComboBox { ItemsSource = list.Select(label).ToList(), SelectedIndex = list.IndexOf(selected), Width = width };
+        var combo = new ComboBox { ItemsSource = list.Select(item => localize ? L10n.Text(label(item)) : label(item)).ToList(), SelectedIndex = list.IndexOf(selected), Width = width };
         combo.SelectionChanged += (_, _) => { if (combo.SelectedIndex >= 0) changed(list[combo.SelectedIndex]); };
         return combo;
     }
@@ -86,7 +90,7 @@ public static class Ui
         label.Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.SizeWestEast);
         // Only what a control draws is hit; a label without a background would take the pointer on its glyphs alone.
         if (label is TextBlock { Background: null } text) text.Background = Brushes.Transparent;
-        ToolTip.SetTip(label, "Drag to change the value (Alt: finer)");
+        ToolTip.SetTip(label, L10n.Text("Drag to change the value (Alt: finer)"));
         ToolTip.SetShowDelay(label, 450);
         double pressX = 0, lastX = 0, start = 0, travel = 0;
         bool pressed = false, dragging = false;
@@ -136,7 +140,7 @@ public static class Ui
     public static Controls.SliderField SliderField(string label, double value, double min, double max, Action<double> changed, double step = 1, string format = "0", double width = 120,
         IReadOnlyList<Avalonia.Media.Color>? track = null, double? reset = null)
     {
-        var field = new Controls.SliderField(label, value, min, max, step, format) { Width = width, Track = track, Reset = reset };
+        var field = new Controls.SliderField(L10n.Text(label), value, min, max, step, format) { Width = width, Track = track, Reset = reset };
         field.Changed += changed;
         return field;
     }

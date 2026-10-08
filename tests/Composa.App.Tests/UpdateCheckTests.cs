@@ -69,8 +69,8 @@ public class UpdateCheckTests
     /// the nearest tag, so it is stable on the day of a release and a pre-release the day after,
     /// and a test built on it would pass or fail depending on the tag rather than the logic.
     /// </summary>
-    private static UpdateCheck Check(Source source, Settings? settings = null, string running = "1.0.0", Func<DateTime>? now = null)
-        => new(source, settings ?? Fresh(), now, running);
+    private static UpdateCheck Check(Source source, Settings? settings = null, string running = "1.0.0", Func<DateTime>? now = null, UpdateChannel channel = UpdateChannel.GitHub)
+        => new(source, settings ?? Fresh(), now, running, channel);
 
     [Fact]
     public async Task A_newer_release_is_offered()
@@ -206,11 +206,46 @@ public class UpdateCheckTests
         Assert.Equal(UpdateOutcome.Failed, result.Outcome);
     }
 
-    /// <summary>A developer build is not a package, so it checks; a .deb or .rpm build does not.</summary>
-    [Fact]
-    public void A_build_with_no_channel_set_checks_by_itself()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task A_local_build_never_queries_releases(bool manual)
     {
-        Assert.Equal(UpdateChannel.GitHub, UpdateCheck.Channel);
-        Assert.True(Check(new Source()).RunsAutomatically);
+        var settings = Fresh();
+        var source = new Source(Release("v1.1.0"));
+        var check = Check(source, settings, channel: UpdateChannel.Local);
+
+        Assert.False(check.RunsAutomatically);
+        var result = await check.Run(manual);
+
+        Assert.Equal(UpdateOutcome.Disabled, result.Outcome);
+        Assert.False(result.ShouldNotify);
+        Assert.Equal(0, source.Calls);
+        Assert.Null(settings.LastUpdateCheck);
+    }
+
+    [Theory]
+    [InlineData(null, UpdateChannel.Local)]
+    [InlineData("", UpdateChannel.Local)]
+    [InlineData("github", UpdateChannel.GitHub)]
+    [InlineData("unknown", UpdateChannel.Local)]
+    [InlineData("managed", UpdateChannel.Managed)]
+    [InlineData("MANAGED", UpdateChannel.Managed)]
+    [InlineData("local", UpdateChannel.Local)]
+    [InlineData("LOCAL", UpdateChannel.Local)]
+    public void Build_metadata_selects_the_update_channel(string? value, UpdateChannel expected)
+        => Assert.Equal(expected, UpdateCheck.ParseChannel(value));
+
+    /// <summary>A build without an explicit channel cannot suggest the upstream app as a fork update.</summary>
+    [Fact]
+    public async Task A_build_with_no_channel_never_queries_upstream()
+    {
+        var channel = UpdateCheck.ParseChannel(null);
+        Assert.Equal(UpdateChannel.Local, channel);
+        var source = new Source();
+        var check = Check(source, channel: channel);
+        Assert.False(check.RunsAutomatically);
+        Assert.Equal(UpdateOutcome.Disabled, (await check.Run(manual: true)).Outcome);
+        Assert.Equal(0, source.Calls);
     }
 }

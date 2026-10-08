@@ -2,6 +2,7 @@ using Composa.Editing;
 using Composa.Filters;
 using Composa.IO;
 using Composa.Model;
+using Composa.Rendering;
 using Composa.Text;
 using SkiaSharp;
 using static Composa.Core.Tests.TestImages;
@@ -105,6 +106,136 @@ public class TextLayoutTests
     }
 
     [Fact]
+    public void Missing_glyphs_use_a_system_fallback_for_both_measurement_and_pixels()
+    {
+        // Prefer Chinese, the common case on Windows. A Linux runner without CJK fonts can exercise the same
+        // missing-glyph path with another installed script; no font files are downloaded by the test or editor.
+        TextStyle? style = null;
+        SKTypeface? fallback = null;
+        string character = "";
+        foreach (var codepoint in new[] { 0x4E2D, 0x1F600, 0x05D0, 0x03A9 })
+        {
+            foreach (var family in new[] { "Arial", Family, "Liberation Sans", "DejaVu Sans" })
+            {
+                var candidate = new TextStyle { FontFamily = family, Size = 48, Tracking = 3 };
+                using var primary = new SKFont(TextLayout.TypefaceFor(candidate), 48);
+                if (primary.ContainsGlyph(codepoint)) continue;
+                var matched = SKFontManager.Default.MatchCharacter(family, SKFontStyle.Normal, null, codepoint);
+                if (matched == null) continue;
+                using var match = new SKFont(matched, 48);
+                if (!match.ContainsGlyph(codepoint)) continue;
+                character = char.ConvertFromUtf32(codepoint);
+                style = candidate with { Text = "A" + character + "B" };
+                fallback = matched;
+                break;
+            }
+            if (style != null) break;
+        }
+        Assert.NotNull(style);
+        Assert.NotNull(fallback);
+        using var primaryFont = new SKFont(TextLayout.TypefaceFor(style), 48) { Subpixel = true, Edging = SKFontEdging.Antialias, Hinting = SKFontHinting.None };
+        using var fallbackFont = new SKFont(fallback, 48) { Subpixel = true, Edging = SKFontEdging.Antialias, Hinting = SKFontHinting.None };
+        var layout = new TextLayout(style);
+        var line = Assert.Single(layout.Lines);
+        var firstWidth = primaryFont.GetGlyphWidths(primaryFont.GetGlyphs("A")).Single() + 3;
+        var fallbackWidth = fallbackFont.GetGlyphWidths(fallbackFont.GetGlyphs(character)).Single() + 3;
+        Assert.Equal(firstWidth, line.Positions[1], 0.001);
+        Assert.Equal(firstWidth + fallbackWidth, line.Positions[1 + character.Length], 0.001);
+
+        using var actual = layout.Render();
+        using var expected = Pixels.NewColor(layout.Width, layout.Height);
+        using (var canvas = new SKCanvas(expected))
+        using (var paint = new SKPaint { IsAntialias = true, Color = SKColors.Black })
+        {
+            canvas.DrawText("A", line.X, line.Baseline, SKTextAlign.Left, primaryFont, paint);
+            canvas.DrawText(character, line.X + firstWidth, line.Baseline, SKTextAlign.Left, fallbackFont, paint);
+            canvas.DrawText("B", line.X + firstWidth + fallbackWidth, line.Baseline, SKTextAlign.Left, primaryFont, paint);
+        }
+        Assert.True(expected.GetPixelSpan().SequenceEqual(actual.GetPixelSpan()), "The fallback glyph must be drawn at the same position used by the caret.");
+        Assert.Equal(style.FontFamily, layout.Style.FontFamily); // Fallback does not rewrite the person's font choice.
+    }
+
+    [Theory]
+    [InlineData("😀")]
+    [InlineData("𠀀")]
+    public void Pointer_and_vertical_carets_never_land_inside_a_surrogate_pair(string character)
+    {
+        var layout = new TextLayout(new TextStyle { Text = "A" + character + "B\nA" + character + "B", Size = 24, FontFamily = Family });
+        var (x, top, bottom) = layout.CaretAt(3);
+        Assert.Equal(3, layout.IndexAt(new SKPoint(x, (top + bottom) / 2)));
+        Assert.Equal(8, layout.IndexOnAdjacentLine(3, 1));
+        for (var px = 0f; px < layout.Width; px += 0.5f)
+        {
+            var index = layout.IndexAt(new SKPoint(px, (top + bottom) / 2));
+            Assert.NotEqual(2, index);
+        }
+    }
+
+    [Fact]
+    public void A_character_wider_than_its_paragraph_still_wraps_as_a_whole_surrogate_pair()
+    {
+        var layout = new TextLayout(new TextStyle { Text = "𠀀😀", Size = 48, FontFamily = Family, BoxWidth = TextStyle.MinBox, BoxHeight = 200 });
+        Assert.Equal("[𠀀][😀]", layout.ToString());
+    }
+
+    [Theory]
+    [MemberData(nameof(TextEditorTests.Graphemes), MemberType = typeof(TextEditorTests))]
+    public void Hit_testing_vertical_movement_and_selection_geometry_use_whole_graphemes(string element)
+    {
+        var layout = new TextLayout(new TextStyle { Text = "A" + element + "B\nA" + element + "B", Size = 24, FontFamily = Family });
+        var after = 1 + element.Length;
+        var (x, top, bottom) = layout.CaretAt(after);
+        Assert.Equal(after, layout.IndexAt(new SKPoint(x, (top + bottom) / 2)));
+        Assert.Equal(after + element.Length + 3, layout.IndexOnAdjacentLine(after, 1));
+        for (var px = 0f; px < layout.Width; px += 0.5f)
+            Assert.Contains(layout.IndexAt(new SKPoint(px, (top + bottom) / 2)), new[] { 0, 1, after, after + 1 });
+        for (var index = 2; index < after; index++) Assert.Equal(layout.CaretAt(1), layout.CaretAt(index));
+
+        // A supplied UTF-16 range touching part of a cluster highlights it as a whole.
+        Assert.Equal(Assert.Single(layout.SelectionRects(1, after)), Assert.Single(layout.SelectionRects(2, after)));
+        Assert.Equal(Assert.Single(layout.SelectionRects(1, after)), Assert.Single(layout.SelectionRects(1, 2)));
+    }
+
+    [Theory]
+    [MemberData(nameof(TextEditorTests.Graphemes), MemberType = typeof(TextEditorTests))]
+    public void Wrapping_never_splits_an_overwide_grapheme(string element)
+    {
+        var layout = new TextLayout(new TextStyle { Text = element + element, Size = 48, FontFamily = Family, BoxWidth = TextStyle.MinBox, BoxHeight = 200 });
+        Assert.Equal($"[{element}][{element}]", layout.ToString());
+    }
+
+    [Theory]
+    [InlineData("甲乙，丙丁。")]
+    [InlineData("甲（乙丙）丁")]
+    [InlineData("甲乙？！丙丁")]
+    [InlineData("甲《乙丙》丁")]
+    public void Chinese_wraps_keep_closing_punctuation_off_the_start_and_opening_punctuation_off_the_end(string text)
+    {
+        var style = new TextStyle { Text = text, Size = 40, FontFamily = Family };
+        var unwrapped = new TextLayout(style);
+        // Exactly two characters fit; the naive break would strand either the comma or opening bracket.
+        var boxWidth = Math.Ceiling(unwrapped.Lines[0].Positions[2]) + 2 * TextLayout.Padding;
+        var layout = new TextLayout(style with { BoxWidth = boxWidth, BoxHeight = 400 });
+        Assert.Equal(1, layout.Lines[0].End);
+        Assert.All(layout.Lines, line =>
+        {
+            Assert.DoesNotContain(text[line.Start], "，。？！）》");
+            Assert.DoesNotContain(text[line.End - 1], "（《");
+        });
+        Assert.Equal(text, string.Concat(layout.Lines.Select(line => text.Substring(line.Start, line.Length))));
+    }
+
+    [Fact]
+    public void A_box_narrower_than_punctuation_pairs_still_consumes_text_and_keeps_the_pairs_together()
+    {
+        var layout = new TextLayout(new TextStyle { Text = "（甲），《乙》！", Size = 48, FontFamily = Family, BoxWidth = TextStyle.MinBox, BoxHeight = 200 });
+        Assert.Equal("[（甲），][《乙》！]", layout.ToString());
+        Assert.All(layout.Lines, line => Assert.True(line.Length > 0));
+        using var bitmap = layout.Render();
+        Assert.Equal((int)TextStyle.MinBox, bitmap.Width);
+    }
+
+    [Fact]
     public void Layer_names_come_from_the_first_words()
     {
         Assert.Equal("Text", new TextStyle { Text = "  \n " }.LayerName());
@@ -115,6 +246,38 @@ public class TextLayoutTests
 
 public class TextEditorTests
 {
+    [Fact]
+    public void Rejected_oversized_paste_preserves_redo_and_selection_without_a_history_step()
+    {
+        var editor = new TextEditor(new TextStyle { Text = "底稿" });
+        editor.SelectAll();
+        editor.Insert("原文");
+        Assert.True(editor.Undo());
+        var before = (editor.Text, editor.Caret, editor.Anchor);
+        Assert.True(editor.CanRedo);
+        var changes = 0;
+        editor.Changed += () => changes++;
+
+        editor.Insert(new string('中', TextStyle.MaxLength + 1));
+
+        Assert.Equal(before, (editor.Text, editor.Caret, editor.Anchor));
+        Assert.Equal(0, changes);
+        Assert.False(editor.CanUndo);
+        Assert.True(editor.CanRedo);
+        Assert.True(editor.Redo());
+        Assert.Equal("原文", editor.Text);
+    }
+
+    public static TheoryData<string> Graphemes => new()
+    {
+        "e\u0301",          // A combining accent.
+        "👍🏽",              // An emoji with a skin-tone modifier.
+        "👨‍👩‍👧‍👦",         // A family joined by zero-width joiners.
+        "🇨🇳",              // A pair of regional indicators.
+        "1️⃣",              // Variation selector plus enclosing keycap.
+        "✈️"                // An emoji variation selector.
+    };
+
     [Fact]
     public void Typing_selecting_and_deleting()
     {
@@ -173,6 +336,115 @@ public class TextEditorTests
         Assert.Equal(3, editor.Caret);
         editor.Backspace();
         Assert.Equal("ab", editor.Text);
+    }
+
+    [Theory]
+    [InlineData("😀")]
+    [InlineData("𠀀")]
+    public void Clicking_after_a_surrogate_pair_then_backspacing_deletes_the_whole_character(string character)
+    {
+        var editor = new TextEditor(new TextStyle { Text = "A" + character + "B" });
+        var (x, top, bottom) = editor.Layout.CaretAt(3);
+        editor.ClickAt(new SKPoint(x, (top + bottom) / 2), select: false);
+        Assert.Equal(3, editor.Caret);
+        editor.Backspace();
+        Assert.Equal("AB", editor.Text);
+        Assert.True(editor.Undo());
+        Assert.Equal("A" + character + "B", editor.Text);
+    }
+
+    [Fact]
+    public void Direct_caret_placement_cannot_split_a_surrogate_pair()
+    {
+        var editor = new TextEditor(new TextStyle { Text = "A𠀀B" });
+        editor.MoveTo(2, select: false);
+        Assert.Equal(1, editor.Caret);
+        editor.Delete();
+        Assert.Equal("AB", editor.Text);
+    }
+
+    [Theory]
+    [MemberData(nameof(Graphemes))]
+    public void Arrows_backspace_delete_and_undo_preserve_graphemes(string element)
+    {
+        var editor = new TextEditor(new TextStyle { Text = "A" + element + "B" });
+        editor.MoveTo(1, select: false);
+        editor.MoveHorizontal(1, select: false);
+        Assert.Equal(1 + element.Length, editor.Caret);
+        editor.MoveHorizontal(-1, select: false);
+        Assert.Equal(1, editor.Caret);
+        editor.Delete();
+        Assert.Equal("AB", editor.Text);
+        Assert.True(editor.Undo());
+        Assert.Equal("A" + element + "B", editor.Text);
+        editor.MoveTo(1 + element.Length, select: false);
+        editor.Backspace();
+        Assert.Equal("AB", editor.Text);
+        Assert.True(editor.Undo());
+        Assert.Equal(1 + element.Length, editor.Caret);
+        Assert.Equal("A" + element + "B", editor.Text);
+    }
+
+    [Theory]
+    [MemberData(nameof(Graphemes))]
+    public void Partial_utf16_selections_expand_to_whole_graphemes_in_either_direction(string element)
+    {
+        var editor = new TextEditor(new TextStyle { Text = "A" + element + "B" });
+        for (var index = 2; index < 1 + element.Length; index++)
+        {
+            editor.MoveTo(index, select: false);
+            Assert.Equal(1, editor.Caret);
+        }
+        editor.MoveTo(1, select: false);
+        editor.MoveTo(2, select: true);
+        Assert.Equal(element, editor.SelectedText);
+        editor.SetColor(0xFFFF0000);
+        Assert.Equal([new TextColorRun(1, element.Length, 0xFFFF0000)], editor.Style.ColorRuns);
+        editor.MoveTo(1 + element.Length, select: false);
+        editor.MoveTo(2, select: true);
+        Assert.Equal(element, editor.SelectedText);
+        editor.Insert("中");
+        Assert.Equal("A中B", editor.Text);
+        Assert.True(editor.Undo());
+        Assert.Equal(element, editor.SelectedText);
+        Assert.Equal(1, editor.Caret);
+        Assert.Equal(1 + element.Length, editor.Anchor);
+    }
+
+    [Fact]
+    public void Inserting_a_joiner_resegments_both_neighbors_and_undo_restores_the_original_boundaries()
+    {
+        var editor = new TextEditor(new TextStyle { Text = "👩💻" });
+        editor.MoveTo(2, select: false);
+        editor.Insert("\u200D");
+        Assert.Equal("👩‍💻", editor.Text);
+        Assert.Equal(editor.Text.Length, editor.Caret);
+        editor.MoveHorizontal(-1, select: false);
+        Assert.Equal(0, editor.Caret);
+        Assert.True(editor.Undo());
+        Assert.Equal("👩💻", editor.Text);
+        Assert.Equal(2, editor.Caret);
+        Assert.True(editor.Redo());
+        Assert.Equal("👩‍💻", editor.Text);
+        editor.Delete();
+        Assert.Equal("", editor.Text);
+    }
+
+    [Fact]
+    public void Word_navigation_and_deletion_treat_combining_marks_as_part_of_their_word()
+    {
+        var editor = new TextEditor(new TextStyle { Text = "cafe\u0301 world" });
+        Assert.Equal(5, editor.Layout.WordEnd(0));
+        Assert.Equal(0, editor.Layout.WordStart(5));
+        editor.SelectWordAt(3);
+        Assert.Equal("cafe\u0301", editor.SelectedText);
+        editor.MoveTo(0, select: false);
+        editor.Delete(word: true);
+        Assert.Equal(" world", editor.Text);
+        Assert.True(editor.Undo());
+        editor.MoveTo(5, select: false);
+        editor.Backspace(word: true);
+        Assert.Equal(" world", editor.Text);
     }
 }
 

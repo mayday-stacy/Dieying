@@ -20,6 +20,10 @@ on:
       - '**/*.targets'
       - 'global.json'
       - '.gitattributes'
+      - 'README.md'
+      - 'README.zh-CN.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
   workflow_dispatch:
 
 permissions:
@@ -34,6 +38,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install validators
         run: sudo apt-get update && sudo apt-get install -y desktop-file-utils appstream
@@ -53,6 +59,8 @@ jobs:
   # was the first thing to discover that they did not run on a clean checkout. x86-64 only: arm64
   # differs in the runner rather than in the scripts, and is covered by the release workflow.
   packages:
+    # The retained upstream installers share Composa's IDs. This fork currently ships a portable Windows build.
+    if: ${{ false }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -91,6 +99,7 @@ jobs:
   # must not be the first thing to run these scripts. The installer needs Inno Setup, which is
   # Windows only, so this runs there. x64 only, as on Linux; arm64 differs only in the RID.
   packages-windows:
+    if: ${{ false }}
     runs-on: windows-latest
     defaults:
       run:
@@ -123,5 +132,36 @@ jobs:
         with:
           name: composa-win-x64
           path: dist/*
+          retention-days: 7
+          if-no-files-found: error
+
+  # Keep the native PowerShell entry point usable from a clean Windows checkout,
+  # independently of the Git Bash release packaging above.
+  packages-windows-powershell:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # MinVer needs the tags.
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Build the local portable edition with PowerShell
+        run: ./scripts/windows.ps1 -Action Publish -Runtime win-x64 -Zip
+
+      - name: Validate test result handling
+        run: ./scripts/tests/windows-test-reports.ps1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dieying-win-x64
+          path: |
+            dist/*.zip
+            dist/*.zip.sha256
           retention-days: 7
           if-no-files-found: error

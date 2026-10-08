@@ -4,7 +4,7 @@ Filter > Camera Raw Filter opens a grading panel for the active layer, modelled 
 
 The groups below can be opened and closed. A group that has changes shows an eye, which switches the group off and on without clearing its sliders, so you can compare with and without it. OK applies the grade as it is shown, and the last grade is remembered for the rest of the session. Every slider can be reset to a fresh grade's value.
 
-Save Look… at the bottom of the panel writes the grade as a `.cube` lookup table, at 33 points, that any editor with a Color Lookup can load, Composa's own included, so a grade made here can go to Lightroom or DaVinci Resolve. A table can only change a color by its color, so Light, Color, Color Grading, Curve, Color Mixer and Calibration go in; Effects, Detail and Optics change pixels by their neighbours or their place and are left out, and the panel and the file say so. The button is disabled while nothing that a table can hold is set, and saving leaves the panel open.
+Save Look… at the bottom of the panel writes the grade as a `.cube` lookup table, at 33 points, that any editor with a Color Lookup can load, Dieying's own included, so a grade made here can go to Lightroom or DaVinci Resolve. A table can only change a color by its color, so Light, Color, Color Grading, Curve, Color Mixer and Calibration go in; Effects, Detail and Optics change pixels by their neighbours or their place and are left out, and the panel and the file say so. The button is disabled while nothing that a table can hold is set, and saving leaves the panel open.
 
 ## Light
 

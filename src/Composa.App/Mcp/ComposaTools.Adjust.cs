@@ -181,7 +181,7 @@ public sealed partial class ComposaTools
         Filter(document, layer, new FilterSettings { Kind = FilterKind.LensCorrection, Distortion = Math.Clamp(distortion, -100, 100) });
 
     [McpServerTool(Name = "filter_remove_background")]
-    [Description("Remove Background. With detect 'any' or 'person' a model run on this machine finds the subject and the layer gets a mask hiding everything else, which can be painted on afterwards; with 'plain' the near-uniform backdrop connected to the layer's edges is erased, and tolerance 0 to 100 says how different a pixel may be from it and still go. Left out, detect follows the choice in Composa's Object Selection options. A model that is not available here falls back to 'plain'.")]
+    [Description("Remove Background. With detect 'any' or 'person' a model run on this machine finds the subject and the layer gets a mask hiding everything else, which can be painted on afterwards; with 'plain' the near-uniform backdrop connected to the layer's edges is erased, and tolerance 0 to 100 says how different a pixel may be from it and still go. Left out, detect follows the choice in the Object Selection options. A model that is not available here falls back to 'plain'.")]
     public Task<string> FilterRemoveBackground(double tolerance = 20, [Description("any, person or plain")] string? detect = null, [Description(TargetLayer)] string? layer = null, int? document = null) => OnUi(async () =>
     {
         var s = Editable(document);

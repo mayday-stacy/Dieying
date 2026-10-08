@@ -1,0 +1,1041 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <data name="OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Don't Save" xml:space="preserve">
+    <value>不保存</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>创建</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="Export…" xml:space="preserve">
+    <value>导出…</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Auto" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>自定</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="Restore Defaults" xml:space="preserve">
+    <value>恢复默认值</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="New Canvas" xml:space="preserve">
+    <value>新建画布</value>
+  </data>
+  <data name="Canvas Size" xml:space="preserve">
+    <value>画布大小</value>
+  </data>
+  <data name="Image Size" xml:space="preserve">
+    <value>图像大小</value>
+  </data>
+  <data name="Export JPEG" xml:space="preserve">
+    <value>导出 JPEG</value>
+  </data>
+  <data name="Unsaved Changes" xml:space="preserve">
+    <value>未保存的更改</value>
+  </data>
+  <data name="Save changes to &quot;{0}&quot; before closing?" xml:space="preserve">
+    <value>关闭前是否保存对“{0}”的更改？</value>
+  </data>
+  <data name="Before / After" xml:space="preserve">
+    <value>调整前 / 调整后</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>预设</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>宽度</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>高度</value>
+  </data>
+  <data name="Background" xml:space="preserve">
+    <value>背景</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>透明</value>
+  </data>
+  <data name="White" xml:space="preserve">
+    <value>白色</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>黑色</value>
+  </data>
+  <data name="Background color" xml:space="preserve">
+    <value>背景色</value>
+  </data>
+  <data name="Clipboard" xml:space="preserve">
+    <value>剪贴板</value>
+  </data>
+  <data name="Instagram Square" xml:space="preserve">
+    <value>Instagram 正方形</value>
+  </data>
+  <data name="Instagram Portrait" xml:space="preserve">
+    <value>Instagram 竖图</value>
+  </data>
+  <data name="Instagram Story" xml:space="preserve">
+    <value>Instagram 快拍</value>
+  </data>
+  <data name="YouTube Thumb" xml:space="preserve">
+    <value>YouTube 缩略图</value>
+  </data>
+  <data name="A4 at 300 ppi" xml:space="preserve">
+    <value>A4，300 ppi</value>
+  </data>
+  <data name="Photo 6000 × 4000" xml:space="preserve">
+    <value>照片 6000 × 4000</value>
+  </data>
+  <data name="Current size: {0} × {1} px" xml:space="preserve">
+    <value>当前大小：{0} × {1} 像素</value>
+  </data>
+  <data name="Relative" xml:space="preserve">
+    <value>相对</value>
+  </data>
+  <data name="Anchor" xml:space="preserve">
+    <value>定位</value>
+  </data>
+  <data name="Constrain proportions" xml:space="preserve">
+    <value>约束比例</value>
+  </data>
+  <data name="Resolution" xml:space="preserve">
+    <value>分辨率</value>
+  </data>
+  <data name="pixels/inch" xml:space="preserve">
+    <value>像素/英寸</value>
+  </data>
+  <data name="pixels" xml:space="preserve">
+    <value>像素</value>
+  </data>
+  <data name="px" xml:space="preserve">
+    <value>像素</value>
+  </data>
+  <data name="Resample" xml:space="preserve">
+    <value>重新采样</value>
+  </data>
+  <data name="Nearest Neighbor" xml:space="preserve">
+    <value>邻近（硬边缘）</value>
+  </data>
+  <data name="Enhance" xml:space="preserve">
+    <value>增强</value>
+  </data>
+  <data name="Every pixel becomes a hard-edged block, which keeps pixel art crisp." xml:space="preserve">
+    <value>每个像素放大为边缘清晰的色块，保持像素画的锐利效果。</value>
+  </data>
+  <data name=" The picture is resampled as Automatic does." xml:space="preserve">
+    <value> 将使用“自动”方式重新采样图像。</value>
+  </data>
+  <data name="Enhance only applies when enlarging; at this size the picture is resampled as Automatic does." xml:space="preserve">
+    <value>增强仅适用于放大；当前大小将使用“自动”方式重新采样。</value>
+  </data>
+  <data name="A model run on this machine enlarges each photo layer four times, inventing fine detail that was not there, then fits it to the new size. It takes about a second per 65,000 pixels of each layer; text and shapes are redrawn instead, and masks are resampled." xml:space="preserve">
+    <value>本地模型先将每个照片图层放大四倍并生成新的细节，再适配目标大小。每个图层每 65,000 像素约需一秒；文字和形状会重新绘制，蒙版会重新采样。</value>
+  </data>
+  <data name="Smooth when shrinking, sharp cubic when enlarging." xml:space="preserve">
+    <value>缩小时平滑处理，放大时使用锐利的双三次采样。</value>
+  </data>
+  <data name="How the pixels are resampled: Automatic for most pictures, Nearest Neighbor for pixel art, Enhance to invent detail with a model while enlarging" xml:space="preserve">
+    <value>重新采样方式：一般图像选“自动”，像素画选“邻近”，放大时用模型生成细节选“增强”。</value>
+  </data>
+  <data name="Measuring…" xml:space="preserve">
+    <value>正在计算…</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>品质</value>
+  </data>
+  <data name="Drag to change the value (Alt: finer)" xml:space="preserve">
+    <value>拖动更改数值（按住 Alt 可精细调整）</value>
+  </data>
+  <data name="Keyboard Shortcuts" xml:space="preserve">
+    <value>键盘快捷键</value>
+  </data>
+  <data name="Search shortcuts" xml:space="preserve">
+    <value>搜索快捷键</value>
+  </data>
+  <data name="Press keys…" xml:space="preserve">
+    <value>请按下组合键…</value>
+  </data>
+  <data name="Menus" xml:space="preserve">
+    <value>菜单</value>
+  </data>
+  <data name="Tools and Canvas" xml:space="preserve">
+    <value>工具与画布</value>
+  </data>
+  <data name="{0} is assigned to both {1} and {2}." xml:space="preserve">
+    <value>{0} 同时分配给了“{1}”和“{2}”。</value>
+  </data>
+  <data name="Click a shortcut, then press its new key combination; Escape stops recording and Backspace clears it. Brush size and hardness ([ ] and { }), the opacity digits, Space to pan and the modifier-and-mouse gestures are fixed." xml:space="preserve">
+    <value>点击快捷键后按下新的组合键；Esc 停止录入，Backspace 清除。画笔大小和硬度（[ ] 与 { }）、不透明度数字键、空格平移及修饰键配合鼠标的操作保持固定。</value>
+  </data>
+  <data name="Grid Settings" xml:space="preserve">
+    <value>网格设置</value>
+  </data>
+  <data name="Grid Color" xml:space="preserve">
+    <value>网格颜色</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="Style" xml:space="preserve">
+    <value>样式</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="Gridline every" xml:space="preserve">
+    <value>网格线间隔</value>
+  </data>
+  <data name="Subdivisions" xml:space="preserve">
+    <value>子网格数</value>
+  </data>
+  <data name="A subdivision every {0:0.##} pixels." xml:space="preserve">
+    <value>每 {0:0.##} 像素一个子网格。</value>
+  </data>
+  <data name="Use gridlines every {0}-{1} pixels and {2}-{3} subdivisions, no more than the pixels between gridlines." xml:space="preserve">
+    <value>网格线间隔须为 {0}–{1} 像素，子网格数须为 {2}–{3}，且不超过网格线之间的像素数。</value>
+  </data>
+  <data name="Choose a custom grid color" xml:space="preserve">
+    <value>选择自定网格颜色</value>
+  </data>
+  <data name="Light Gray" xml:space="preserve">
+    <value>浅灰色</value>
+  </data>
+  <data name="Light Blue" xml:space="preserve">
+    <value>浅蓝色</value>
+  </data>
+  <data name="Light Red" xml:space="preserve">
+    <value>浅红色</value>
+  </data>
+  <data name="Medium Blue" xml:space="preserve">
+    <value>中蓝色</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>绿色</value>
+  </data>
+  <data name="Yellow" xml:space="preserve">
+    <value>黄色</value>
+  </data>
+  <data name="Magenta" xml:space="preserve">
+    <value>洋红色</value>
+  </data>
+  <data name="Cyan" xml:space="preserve">
+    <value>青色</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>红色</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="Lines" xml:space="preserve">
+    <value>实线</value>
+  </data>
+  <data name="Dashed Lines" xml:space="preserve">
+    <value>虚线</value>
+  </data>
+  <data name="Dots" xml:space="preserve">
+    <value>点线</value>
+  </data>
+  <data name="Trim" xml:space="preserve">
+    <value>裁切</value>
+  </data>
+  <data name="Based On" xml:space="preserve">
+    <value>基于</value>
+  </data>
+  <data name="Trim Away" xml:space="preserve">
+    <value>裁去</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>上</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>下</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>左</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>右</value>
+  </data>
+  <data name="Top Left Pixel Color" xml:space="preserve">
+    <value>左上角像素颜色</value>
+  </data>
+  <data name="Bottom Right Pixel Color" xml:space="preserve">
+    <value>右下角像素颜色</value>
+  </data>
+  <data name="Transparent Pixels" xml:space="preserve">
+    <value>透明像素</value>
+  </data>
+  <data name="{0} × {1} pixels, developed at 16 bits per channel" xml:space="preserve">
+    <value>{0} × {1} 像素，以每通道 16 位处理</value>
+  </data>
+  <data name="Develop {0}" xml:space="preserve">
+    <value>处理 RAW：{0}</value>
+  </data>
+  <data name="Exposure (EV)" xml:space="preserve">
+    <value>曝光（EV）</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>色温</value>
+  </data>
+  <data name="Tint" xml:space="preserve">
+    <value>色调</value>
+  </data>
+  <data name="Cooler to warmer, and green to magenta, away from the camera's own white balance." xml:space="preserve">
+    <value>在相机原始白平衡的基础上，调整冷暖及绿—洋红色偏移。</value>
+  </data>
+  <data name="This adjustment has no settings." xml:space="preserve">
+    <value>此调整没有可设置的参数。</value>
+  </data>
+  <data name="Exposure" xml:space="preserve">
+    <value>曝光</value>
+  </data>
+  <data name="Offset" xml:space="preserve">
+    <value>位移</value>
+  </data>
+  <data name="Gamma" xml:space="preserve">
+    <value>伽马</value>
+  </data>
+  <data name="Brightness" xml:space="preserve">
+    <value>亮度</value>
+  </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>对比度</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="Roughness" xml:space="preserve">
+    <value>粗糙度</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>半径</value>
+  </data>
+  <data name="Angle" xml:space="preserve">
+    <value>角度</value>
+  </data>
+  <data name="Distance" xml:space="preserve">
+    <value>距离</value>
+  </data>
+  <data name="Distribution" xml:space="preserve">
+    <value>分布</value>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>平均分布</value>
+  </data>
+  <data name="Gaussian" xml:space="preserve">
+    <value>高斯分布</value>
+  </data>
+  <data name="Monochromatic" xml:space="preserve">
+    <value>单色</value>
+  </data>
+  <data name="Channel" xml:space="preserve">
+    <value>通道</value>
+  </data>
+  <data name="Input black" xml:space="preserve">
+    <value>输入黑场</value>
+  </data>
+  <data name="Input white" xml:space="preserve">
+    <value>输入白场</value>
+  </data>
+  <data name="Output black" xml:space="preserve">
+    <value>输出黑场</value>
+  </data>
+  <data name="Output white" xml:space="preserve">
+    <value>输出白场</value>
+  </data>
+  <data name="Midtones" xml:space="preserve">
+    <value>中间调</value>
+  </data>
+  <data name="Click to add a point, drag to move it, drag it off the graph to remove it." xml:space="preserve">
+    <value>点击添加控制点，拖动移动，拖出曲线图即可删除。</value>
+  </data>
+  <data name="Hue" xml:space="preserve">
+    <value>色相</value>
+  </data>
+  <data name="Saturation" xml:space="preserve">
+    <value>饱和度</value>
+  </data>
+  <data name="Lightness" xml:space="preserve">
+    <value>明度</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>范围</value>
+  </data>
+  <data name="Master" xml:space="preserve">
+    <value>全图</value>
+  </data>
+  <data name="Colorize" xml:space="preserve">
+    <value>着色</value>
+  </data>
+  <data name="Reds" xml:space="preserve">
+    <value>红色</value>
+  </data>
+  <data name="Yellows" xml:space="preserve">
+    <value>黄色</value>
+  </data>
+  <data name="Greens" xml:space="preserve">
+    <value>绿色</value>
+  </data>
+  <data name="Cyans" xml:space="preserve">
+    <value>青色</value>
+  </data>
+  <data name="Blues" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="Magentas" xml:space="preserve">
+    <value>洋红色</value>
+  </data>
+  <data name="Color the result while keeping its tones, for a sepia or a cyanotype" xml:space="preserve">
+    <value>保留明暗层次并着色，可获得棕褐色或蓝晒效果</value>
+  </data>
+  <data name="Shadows" xml:space="preserve">
+    <value>阴影</value>
+  </data>
+  <data name="Highlights" xml:space="preserve">
+    <value>高光</value>
+  </data>
+  <data name="Cyan / Red" xml:space="preserve">
+    <value>青 / 红</value>
+  </data>
+  <data name="Magenta / Green" xml:space="preserve">
+    <value>洋红 / 绿</value>
+  </data>
+  <data name="Yellow / Blue" xml:space="preserve">
+    <value>黄 / 蓝</value>
+  </data>
+  <data name="Preserve Luminosity" xml:space="preserve">
+    <value>保持明度</value>
+  </data>
+  <data name="Put each pixel's brightness back afterwards, so only the color moves" xml:space="preserve">
+    <value>恢复每个像素的亮度，只改变颜色</value>
+  </data>
+  <data name="Shadows…" xml:space="preserve">
+    <value>阴影…</value>
+  </data>
+  <data name="Highlights…" xml:space="preserve">
+    <value>高光…</value>
+  </data>
+  <data name="Use Foreground/Background" xml:space="preserve">
+    <value>使用前景色/背景色</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>反向</value>
+  </data>
+  <data name="Load File…" xml:space="preserve">
+    <value>加载文件…</value>
+  </data>
+  <data name="Color Lookup" xml:space="preserve">
+    <value>颜色查找</value>
+  </data>
+  <data name="{0} could not be read. {1}" xml:space="preserve">
+    <value>无法读取“{0}”。{1}</value>
+  </data>
+  <data name="Fine Mono" xml:space="preserve">
+    <value>细腻黑白</value>
+  </data>
+  <data name="Muted Chrome" xml:space="preserve">
+    <value>柔和色彩</value>
+  </data>
+  <data name="Standard Slide" xml:space="preserve">
+    <value>标准反转片</value>
+  </data>
+  <data name="Vivid Slide" xml:space="preserve">
+    <value>鲜艳反转片</value>
+  </data>
+  <data name="Black and white with smooth, finely graded tones." xml:space="preserve">
+    <value>黑白效果，色调平滑、层次细腻。</value>
+  </data>
+  <data name="Softened color with restrained highlights and a cool cast." xml:space="preserve">
+    <value>柔和色彩、收敛的高光与冷色调。</value>
+  </data>
+  <data name="Natural, balanced color with a little extra contrast." xml:space="preserve">
+    <value>自然均衡的色彩，略微增强对比度。</value>
+  </data>
+  <data name="Saturated color and strong contrast, as for landscapes." xml:space="preserve">
+    <value>饱和色彩与强烈对比，适合风景。</value>
+  </data>
+  <data name="Vignette" xml:space="preserve">
+    <value>暗角</value>
+  </data>
+  <data name="Vignette Color" xml:space="preserve">
+    <value>暗角颜色</value>
+  </data>
+  <data name="Choose the vignette color" xml:space="preserve">
+    <value>选择暗角颜色</value>
+  </data>
+  <data name="Midpoint" xml:space="preserve">
+    <value>中点</value>
+  </data>
+  <data name="Roundness" xml:space="preserve">
+    <value>圆度</value>
+  </data>
+  <data name="Feather" xml:space="preserve">
+    <value>羽化</value>
+  </data>
+  <data name="Blends the color into the edges while keeping the center. On an empty layer it paints across the whole canvas." xml:space="preserve">
+    <value>将颜色混入边缘并保留中心。用于空图层时会覆盖整个画布。</value>
+  </data>
+  <data name="Remove Distortion" xml:space="preserve">
+    <value>移除畸变</value>
+  </data>
+  <data name="Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion)." xml:space="preserve">
+    <value>正值校正向外弯曲的桶形畸变，负值校正向内弯曲的枕形畸变。</value>
+  </data>
+  <data name="Brush Size" xml:space="preserve">
+    <value>画笔大小</value>
+  </data>
+  <data name="Passes" xml:space="preserve">
+    <value>绘制轮数</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>细节</value>
+  </data>
+  <data name="Repaints the layer in brush strokes that follow the picture's edges, the largest brush first and each smaller one only where the picture still differs. A brush size of 0 fits the brush to the picture. Gaps between strokes stay transparent." xml:space="preserve">
+    <value>沿图像边缘方向以笔触重新绘制图层。先用大画笔，再在仍有差异处用小画笔补充。画笔大小为 0 时自动适配图像；笔触间隙保持透明。</value>
+  </data>
+  <data name="Impressionist" xml:space="preserve">
+    <value>印象派</value>
+  </data>
+  <data name="Expressionist" xml:space="preserve">
+    <value>表现派</value>
+  </data>
+  <data name="Colorist Wash" xml:space="preserve">
+    <value>彩色水洗</value>
+  </data>
+  <data name="Pointillist" xml:space="preserve">
+    <value>点彩派</value>
+  </data>
+  <data name="Choose the {0} color" xml:space="preserve">
+    <value>选择{0}颜色</value>
+  </data>
+  <data name="{0} Color" xml:space="preserve">
+    <value>{0}颜色</value>
+  </data>
+  <data name="Pixel Size" xml:space="preserve">
+    <value>像素大小</value>
+  </data>
+  <data name="Text Size" xml:space="preserve">
+    <value>文字大小</value>
+  </data>
+  <data name="Cell Size" xml:space="preserve">
+    <value>单元大小</value>
+  </data>
+  <data name="Characters" xml:space="preserve">
+    <value>字符</value>
+  </data>
+  <data name="The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" xml:space="preserve">
+    <value>输入用于绘制的字符，顺序不限；各位置选择墨量最符合其明暗的字符</value>
+  </data>
+  <data name="Tones" xml:space="preserve">
+    <value>色阶数</value>
+  </data>
+  <data name="Diffusion" xml:space="preserve">
+    <value>扩散</value>
+  </data>
+  <data name="Density" xml:space="preserve">
+    <value>密度</value>
+  </data>
+  <data name="Colors" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>暗色</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>亮度</value>
+  </data>
+  <data name="Pixel Shape" xml:space="preserve">
+    <value>像素形状</value>
+  </data>
+  <data name="Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen" xml:space="preserve">
+    <value>将大像素绘成实心方块，或点阵屏幕般的圆点</value>
+  </data>
+  <data name="Light on Dark" xml:space="preserve">
+    <value>暗底亮色</value>
+  </data>
+  <data name="Draw the marks for the light tones on the dark color, like a glowing screen" xml:space="preserve">
+    <value>在暗色底上绘制亮色标记，类似发光屏幕</value>
+  </data>
+  <data name="Turns the layer into dithered pixels. Diffusion and Bayer styles quantize to a number of tones; halftone shapes, Mac patterns and ASCII draw marks that cover as much of each cell as the tone calls for. Pixel Size makes chunky pixels. Density adds or removes ink before dithering." xml:space="preserve">
+    <value>将图层转换为抖动像素。扩散和 Bayer 样式将颜色量化为若干色阶；半调形状、Mac 图案与 ASCII 按明暗决定单元覆盖面积。“像素大小”控制颗粒大小，“密度”控制抖动前的墨量。</value>
+  </data>
+  <data name="Atkinson (Classic Mac)" xml:space="preserve">
+    <value>Atkinson（经典 Mac）</value>
+  </data>
+  <data name="Halftone Dots" xml:space="preserve">
+    <value>半调圆点</value>
+  </data>
+  <data name="Halftone Lines" xml:space="preserve">
+    <value>半调线条</value>
+  </data>
+  <data name="Halftone Diamonds" xml:space="preserve">
+    <value>半调菱形</value>
+  </data>
+  <data name="Mac Patterns" xml:space="preserve">
+    <value>Mac 图案</value>
+  </data>
+  <data name="Black &amp; White" xml:space="preserve">
+    <value>黑白</value>
+  </data>
+  <data name="Two Colors" xml:space="preserve">
+    <value>双色</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>原色</value>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>方形</value>
+  </data>
+  <data name="Circle" xml:space="preserve">
+    <value>圆形</value>
+  </data>
+  <data name="Tolerance" xml:space="preserve">
+    <value>容差</value>
+  </data>
+  <data name="Detect" xml:space="preserve">
+    <value>检测方式</value>
+  </data>
+  <data name="Any subject" xml:space="preserve">
+    <value>任意主体</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>人像</value>
+  </data>
+  <data name="Plain backdrop" xml:space="preserve">
+    <value>纯色背景</value>
+  </data>
+  <data name="Removes the plain backdrop connected to the layer's edges by making it transparent. Raise the tolerance to take more." xml:space="preserve">
+    <value>将与图层边缘相连的纯色背景变为透明。增大容差可移除更多区域。</value>
+  </data>
+  <data name="A model run on this machine finds the subject and hides everything else behind a layer mask, so a wrong edge can be painted back." xml:space="preserve">
+    <value>本地模型识别主体，并用图层蒙版隐藏其余区域；边缘有误时可以用画笔恢复。</value>
+  </data>
+  <data name="A model for any subject or for a person, or the plain backdrop touching the layer's edges" xml:space="preserve">
+    <value>使用任意主体模型、人像模型，或检测与图层边缘相连的纯色背景</value>
+  </data>
+  <data name="A mask is edited by erasing, so only the plain backdrop applies" xml:space="preserve">
+    <value>蒙版通过擦除编辑，因此只适用纯色背景检测</value>
+  </data>
+  <data name="Color Range" xml:space="preserve">
+    <value>色彩范围</value>
+  </data>
+  <data name="Fuzziness" xml:space="preserve">
+    <value>颜色容差</value>
+  </data>
+  <data name="Invert" xml:space="preserve">
+    <value>反相</value>
+  </data>
+  <data name="Click the image to select that color" xml:space="preserve">
+    <value>点击图像选择该颜色</value>
+  </data>
+  <data name="Click the image to add that color to the selection (or Shift-click with any eyedropper)" xml:space="preserve">
+    <value>点击图像将该颜色加入选区（也可使用任意吸管按住 Shift 点击）</value>
+  </data>
+  <data name="Click the image to take that color out of the selection (or Alt-click with any eyedropper)" xml:space="preserve">
+    <value>点击图像将该颜色从选区移除（也可使用任意吸管按住 Alt 点击）</value>
+  </data>
+  <data name="How far a color may be from the picked ones and still be selected" xml:space="preserve">
+    <value>控制与已取样颜色相差多大的颜色仍会被选中</value>
+  </data>
+  <data name="Select everything except those colors, such as all but a green screen" xml:space="preserve">
+    <value>选择这些颜色之外的区域，例如绿幕以外的全部内容</value>
+  </data>
+  <data name="Shift-click adds a color, Alt-click takes one away. {0:N0} pixels selected." xml:space="preserve">
+    <value>按住 Shift 点击添加颜色，按住 Alt 点击移除颜色。已选中 {0:N0} 个像素。</value>
+  </data>
+  <data name="Click the image to pick the color to select." xml:space="preserve">
+    <value>点击图像，拾取要选择的颜色。</value>
+  </data>
+  <data name="…and {0} more." xml:space="preserve">
+    <value>……以及另外 {0} 项。</value>
+  </data>
+  <data name="Composa will convert these {0} features. Nothing is applied until you continue." xml:space="preserve">
+    <value>Composa 将转换以下 {0} 功能。继续后才会应用转换。</value>
+  </data>
+  <data name="Open {0}?" xml:space="preserve">
+    <value>打开“{0}”？</value>
+  </data>
+  <data name="Baked into the look, bottom to top:" xml:space="preserve">
+    <value>按从下到上的顺序写入颜色查找表：</value>
+  </data>
+  <data name="Left out, because a look can only change colors:" xml:space="preserve">
+    <value>以下项目无法写入，因为颜色查找表只能改变颜色：</value>
+  </data>
+  <data name="{0} points" xml:space="preserve">
+    <value>{0} 点</value>
+  </data>
+  <data name="Export Look" xml:space="preserve">
+    <value>导出颜色查找表</value>
+  </data>
+  <data name="has a layer mask" xml:space="preserve">
+    <value>含有图层蒙版</value>
+  </data>
+  <data name="is clipped to the layer below" xml:space="preserve">
+    <value>剪贴到下方图层</value>
+  </data>
+  <data name="is inside a group" xml:space="preserve">
+    <value>位于组内</value>
+  </data>
+  <data name="reads the pixels around each pixel" xml:space="preserve">
+    <value>依赖周围像素</value>
+  </data>
+  <data name="changes from place to place" xml:space="preserve">
+    <value>效果随位置变化</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Outside" xml:space="preserve">
+    <value>外部</value>
+  </data>
+  <data name="Inside" xml:space="preserve">
+    <value>内部</value>
+  </data>
+  <data name="Blur" xml:space="preserve">
+    <value>模糊</value>
+  </data>
+  <data name="Stroke" xml:space="preserve">
+    <value>描边</value>
+  </data>
+  <data name="Drop Shadow" xml:space="preserve">
+    <value>投影</value>
+  </data>
+  <data name="Inner Shadow" xml:space="preserve">
+    <value>内阴影</value>
+  </data>
+  <data name="Color Overlay" xml:space="preserve">
+    <value>颜色叠加</value>
+  </data>
+  <data name="Outer Glow" xml:space="preserve">
+    <value>外发光</value>
+  </data>
+  <data name="Inner Glow" xml:space="preserve">
+    <value>内发光</value>
+  </data>
+  <data name="Camera Raw Filter" xml:space="preserve">
+    <value>Camera Raw 滤镜</value>
+  </data>
+  <data name="Click a pixel that should be neutral to set the white balance from it" xml:space="preserve">
+    <value>点击应为中性色的像素，以此设置白平衡</value>
+  </data>
+  <data name="Switch this group off or on without clearing its sliders" xml:space="preserve">
+    <value>停用或启用此组，保留滑块数值</value>
+  </data>
+  <data name="Brightens or darkens the whole picture, in stops of light" xml:space="preserve">
+    <value>以曝光档数为单位调亮或调暗整个图像</value>
+  </data>
+  <data name="Makes light and dark tones more or less different, mostly around the middle" xml:space="preserve">
+    <value>主要调整中间调附近明暗之间的差异</value>
+  </data>
+  <data name="Whites" xml:space="preserve">
+    <value>白色</value>
+  </data>
+  <data name="Blacks" xml:space="preserve">
+    <value>黑色</value>
+  </data>
+  <data name="Sets the brightest point" xml:space="preserve">
+    <value>设置最亮点</value>
+  </data>
+  <data name="Sets the darkest point" xml:space="preserve">
+    <value>设置最暗点</value>
+  </data>
+  <data name="Shifts the picture from blue to yellow" xml:space="preserve">
+    <value>在蓝色和黄色之间偏移图像色调</value>
+  </data>
+  <data name="Shifts the picture from green to magenta" xml:space="preserve">
+    <value>在绿色和洋红之间偏移图像色调</value>
+  </data>
+  <data name="White Balance" xml:space="preserve">
+    <value>白平衡</value>
+  </data>
+  <data name="Auto balances the average color; Custom follows Temperature and Tint. Click the thumbnail to set them from one pixel." xml:space="preserve">
+    <value>“自动”平衡平均颜色；“自定”使用色温与色调。点击缩略图可根据单个像素设置白平衡。</value>
+  </data>
+  <data name="Vibrance" xml:space="preserve">
+    <value>自然饱和度</value>
+  </data>
+  <data name="Strengthens quiet colors more than strong ones, and protects skin tones" xml:space="preserve">
+    <value>重点增强较淡的颜色，同时保护肤色</value>
+  </data>
+  <data name="Color Grading" xml:space="preserve">
+    <value>色彩分级</value>
+  </data>
+  <data name="Around the color wheel" xml:space="preserve">
+    <value>沿色相环调整</value>
+  </data>
+  <data name="How strongly the tint takes; 0 leaves this wheel off" xml:space="preserve">
+    <value>控制着色强度；0 表示停用此色轮</value>
+  </data>
+  <data name="Luminance" xml:space="preserve">
+    <value>明亮度</value>
+  </data>
+  <data name="Overlap" xml:space="preserve">
+    <value>重叠</value>
+  </data>
+  <data name="Blending" xml:space="preserve">
+    <value>混合</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>平衡</value>
+  </data>
+  <data name="How much the three tonal wheels overlap" xml:space="preserve">
+    <value>控制三个明暗色轮之间的重叠程度</value>
+  </data>
+  <data name="Negative favors the shadows, positive the highlights" xml:space="preserve">
+    <value>负值偏向阴影，正值偏向高光</value>
+  </data>
+  <data name="Highlight Priority" xml:space="preserve">
+    <value>高光优先</value>
+  </data>
+  <data name="Color Priority" xml:space="preserve">
+    <value>颜色优先</value>
+  </data>
+  <data name="Paint Overlay" xml:space="preserve">
+    <value>颜色覆盖</value>
+  </data>
+  <data name="Effects" xml:space="preserve">
+    <value>效果</value>
+  </data>
+  <data name="Texture" xml:space="preserve">
+    <value>纹理</value>
+  </data>
+  <data name="Adds or softens small detail" xml:space="preserve">
+    <value>增强或柔化细微纹理</value>
+  </data>
+  <data name="Clarity" xml:space="preserve">
+    <value>清晰度</value>
+  </data>
+  <data name="Adds or softens contrast along broader shapes" xml:space="preserve">
+    <value>增强或柔化较大形状边缘的对比度</value>
+  </data>
+  <data name="Dehaze" xml:space="preserve">
+    <value>去朦胧</value>
+  </data>
+  <data name="Clears haze when raised, adds it when lowered" xml:space="preserve">
+    <value>提高以去除雾气，降低以增加雾气</value>
+  </data>
+  <data name="Glow" xml:space="preserve">
+    <value>光晕</value>
+  </data>
+  <data name="Bloom" xml:space="preserve">
+    <value>泛光</value>
+  </data>
+  <data name="Halation" xml:space="preserve">
+    <value>光晕溢色</value>
+  </data>
+  <data name="Spreads a glow from the bright areas" xml:space="preserve">
+    <value>从明亮区域向外扩散光晕</value>
+  </data>
+  <data name="How bright an area must be to glow; idle until Glow is raised" xml:space="preserve">
+    <value>控制多亮的区域才产生光晕；需先提高“光晕”</value>
+  </data>
+  <data name="Spread" xml:space="preserve">
+    <value>扩展</value>
+  </data>
+  <data name="How far the glow reaches; idle until Glow is raised" xml:space="preserve">
+    <value>控制光晕扩展距离；需先提高“光晕”</value>
+  </data>
+  <data name="Warmth" xml:space="preserve">
+    <value>暖色</value>
+  </data>
+  <data name="Cool to warm; Halation stays red" xml:space="preserve">
+    <value>从冷色到暖色；光晕溢色保持红色</value>
+  </data>
+  <data name="Darkens or lightens the edges; the center does not change" xml:space="preserve">
+    <value>调暗或调亮边缘，中心保持不变</value>
+  </data>
+  <data name="Protects bright edges while the vignette darkens (Highlight Priority)" xml:space="preserve">
+    <value>暗角变暗时保护明亮边缘（高光优先）</value>
+  </data>
+  <data name="Grain" xml:space="preserve">
+    <value>颗粒</value>
+  </data>
+  <data name="Curve" xml:space="preserve">
+    <value>曲线</value>
+  </data>
+  <data name="Parametric" xml:space="preserve">
+    <value>参数曲线</value>
+  </data>
+  <data name="Lights" xml:space="preserve">
+    <value>亮调</value>
+  </data>
+  <data name="Darks" xml:space="preserve">
+    <value>暗调</value>
+  </data>
+  <data name="Refine Saturation" xml:space="preserve">
+    <value>细调饱和度</value>
+  </data>
+  <data name="How much the curve also changes saturation" xml:space="preserve">
+    <value>控制曲线对饱和度的影响程度</value>
+  </data>
+  <data name="Point" xml:space="preserve">
+    <value>点曲线</value>
+  </data>
+  <data name="Color Mixer" xml:space="preserve">
+    <value>混色器</value>
+  </data>
+  <data name="Adjust" xml:space="preserve">
+    <value>调整</value>
+  </data>
+  <data name="Sharpening" xml:space="preserve">
+    <value>锐化</value>
+  </data>
+  <data name="Masking" xml:space="preserve">
+    <value>蒙版</value>
+  </data>
+  <data name="Keeps sharpening to the edges" xml:space="preserve">
+    <value>仅在边缘应用锐化</value>
+  </data>
+  <data name="Noise Reduction" xml:space="preserve">
+    <value>减少杂色</value>
+  </data>
+  <data name="Smoothness" xml:space="preserve">
+    <value>平滑度</value>
+  </data>
+  <data name="Optics" xml:space="preserve">
+    <value>光学</value>
+  </data>
+  <data name="Remove Chromatic Aberration" xml:space="preserve">
+    <value>移除色差</value>
+  </data>
+  <data name="Enable Lens Profile Corrections" xml:space="preserve">
+    <value>启用镜头配置文件校正</value>
+  </data>
+  <data name="Distortion" xml:space="preserve">
+    <value>畸变</value>
+  </data>
+  <data name="Profile strength; a rendered layer carries no lens data, so this scales a generic correction" xml:space="preserve">
+    <value>配置文件强度；栅格图层不含镜头数据，因此调整的是通用校正强度</value>
+  </data>
+  <data name="Vignetting" xml:space="preserve">
+    <value>晕影</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>手动</value>
+  </data>
+  <data name="Positive straightens lines that bow outward, negative lines that bow inward" xml:space="preserve">
+    <value>正值校正向外弯曲的线条，负值校正向内弯曲的线条</value>
+  </data>
+  <data name="Defringe" xml:space="preserve">
+    <value>去边</value>
+  </data>
+  <data name="Purple Amount" xml:space="preserve">
+    <value>紫色数量</value>
+  </data>
+  <data name="Purple Hue Low" xml:space="preserve">
+    <value>紫色色相下限</value>
+  </data>
+  <data name="Purple Hue High" xml:space="preserve">
+    <value>紫色色相上限</value>
+  </data>
+  <data name="Green Amount" xml:space="preserve">
+    <value>绿色数量</value>
+  </data>
+  <data name="Green Hue Low" xml:space="preserve">
+    <value>绿色色相下限</value>
+  </data>
+  <data name="Green Hue High" xml:space="preserve">
+    <value>绿色色相上限</value>
+  </data>
+  <data name="Brightens the corners to counter lens falloff" xml:space="preserve">
+    <value>调亮四角以补偿镜头边缘失光</value>
+  </data>
+  <data name="Calibration" xml:space="preserve">
+    <value>校准</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>处理版本</value>
+  </data>
+  <data name="Version {0}" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="Shadow Tint" xml:space="preserve">
+    <value>阴影色调</value>
+  </data>
+  <data name="Green to magenta in the shadows" xml:space="preserve">
+    <value>调整阴影中的绿—洋红色偏移</value>
+  </data>
+  <data name="Red Primary" xml:space="preserve">
+    <value>红原色</value>
+  </data>
+  <data name="Green Primary" xml:space="preserve">
+    <value>绿原色</value>
+  </data>
+  <data name="Blue Primary" xml:space="preserve">
+    <value>蓝原色</value>
+  </data>
+  <data name="Earliest response. Hue, saturation and shadow tint move about half as far as Version 6." xml:space="preserve">
+    <value>最早的处理方式。色相、饱和度和阴影色调的调整幅度约为版本 6 的一半。</value>
+  </data>
+  <data name="A little stronger than Version 1. The sliders below still fall well short of the current look." xml:space="preserve">
+    <value>比版本 1 略强，但下方滑块的作用仍明显弱于当前版本。</value>
+  </data>
+  <data name="Firmer color than Version 2. Primary shifts stay gentler than the current process." xml:space="preserve">
+    <value>颜色比版本 2 更强；原色调整仍比当前处理版本温和。</value>
+  </data>
+  <data name="The 2012 response. Calibration reaches most of the strength used by Version 6." xml:space="preserve">
+    <value>2012 版处理方式。校准强度接近版本 6。</value>
+  </data>
+  <data name="Close to the current process, with slightly softer primary and shadow shifts." xml:space="preserve">
+    <value>接近当前处理方式，原色和阴影偏移稍弱。</value>
+  </data>
+  <data name="Current default. The calibration sliders below apply at full strength." xml:space="preserve">
+    <value>当前默认处理方式。下方校准滑块按完整强度应用。</value>
+  </data>
+  <data name="Save Look…" xml:space="preserve">
+    <value>保存颜色查找表…</value>
+  </data>
+  <data name="Saved {0} without {1}" xml:space="preserve">
+    <value>已保存 {0}，未包含：{1}</value>
+  </data>
+  <data name="Saved {0}" xml:space="preserve">
+    <value>已保存 {0}</value>
+  </data>
+  <data name="Couldn't save the look" xml:space="preserve">
+    <value>无法保存颜色查找表</value>
+  </data>
+  <data name="Saves the grade as a .cube lookup table for other editors. Effects, Detail and Optics change pixels by their neighbours or their place and are left out." xml:space="preserve">
+    <value>将调色结果保存为其他编辑器可用的 .cube 颜色查找表。“效果”“细节”和“光学”依赖周围像素或位置，因此不包含在表中。</value>
+  </data>
+  <data name="The model runtime did not load on this machine." xml:space="preserve">
+    <value>此设备未能加载模型运行时。</value>
+  </data>
+  <data name="The subject detection runtime did not load on this machine, so the plain backdrop was used instead." xml:space="preserve">
+    <value>此设备未能加载主体检测运行时，已改用纯色背景检测。</value>
+  </data>
+</root>

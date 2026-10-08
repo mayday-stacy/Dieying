@@ -57,7 +57,7 @@ public static class ShortcutsDialog
         var problem = Ui.Label("", new SolidColorBrush(Color.Parse("#FFB454")));
         problem.TextWrapping = TextWrapping.Wrap;
         problem.MaxWidth = 560;
-        var search = new TextBox { PlaceholderText = "Search shortcuts", Width = 300 };
+        var search = new TextBox { PlaceholderText = L10n.Text("Search shortcuts"), Width = 300 };
         var rows = new StackPanel { Spacing = 2 };
         DialogWindow? dialog = null;
 
@@ -69,7 +69,7 @@ public static class ShortcutsDialog
                 var gesture = draft[shortcut.Id];
                 if (gesture == null) continue;
                 var key = gesture.ToString();
-                if (seen.TryGetValue(key, out var other)) return $"{Shortcut.Label(gesture)} is assigned to both {other} and {shortcut.Title}.";
+                if (seen.TryGetValue(key, out var other)) return L10n.Format("{0} is assigned to both {1} and {2}.", Shortcut.Label(gesture), L10n.Text(other), L10n.Text(shortcut.Title));
                 seen[key] = shortcut.Title;
             }
             return null;
@@ -80,7 +80,7 @@ public static class ShortcutsDialog
             foreach (var shortcut in listed)
             {
                 var button = buttons[shortcut.Id];
-                button.Content = recording == shortcut ? "Press keys…" : Shortcut.Label(draft[shortcut.Id]);
+                button.Content = recording == shortcut ? L10n.Text("Press keys…") : L10n.Text(Shortcut.Label(draft[shortcut.Id]));
                 button.Classes.Set("accent", recording == shortcut);
             }
             var text = Problem();
@@ -95,7 +95,7 @@ public static class ShortcutsDialog
             var filter = search.Text?.Trim() ?? "";
             foreach (var group in new[] { "Menus", "Tools and Canvas" })
             {
-                var matching = listed.Where(s => s.Group == group && (filter.Length == 0 || s.Title.Contains(filter, StringComparison.OrdinalIgnoreCase))).ToList();
+                var matching = listed.Where(s => s.Group == group && (filter.Length == 0 || s.Title.Contains(filter, StringComparison.OrdinalIgnoreCase) || L10n.Text(s.Title).Contains(filter, StringComparison.OrdinalIgnoreCase))).ToList();
                 if (matching.Count == 0) continue;
                 var heading = Ui.Label(group, weight: FontWeight.SemiBold);
                 heading.Margin = new Thickness(0, 8, 0, 4);
@@ -121,7 +121,7 @@ public static class ShortcutsDialog
         var restore = Ui.TextButton("Restore Defaults", () => { foreach (var shortcut in listed) draft[shortcut.Id] = shortcut.Default; recording = null; Refresh(); });
         var notes = new TextBlock
         {
-            Text = "Click a shortcut, then press its new key combination; Escape stops recording and Backspace clears it. Brush size and hardness ([ ] and { }), the opacity digits, Space to pan and the modifier-and-mouse gestures are fixed.",
+            Text = L10n.Text("Click a shortcut, then press its new key combination; Escape stops recording and Backspace clears it. Brush size and hardness ([ ] and { }), the opacity digits, Space to pan and the modifier-and-mouse gestures are fixed."),
             Foreground = Palette.Secondary, TextWrapping = TextWrapping.Wrap, MaxWidth = 590
         };
         var body = Ui.Column(10, notes, Ui.Row(10, search, restore), scroll, problem);

@@ -6,7 +6,7 @@ Most tools take a `document` parameter: the tab number as `list_documents` repor
 
 ## Documents
 
-**list_documents**: the documents open in Composa, numbered as their tabs are, with their size, layer count and whether they have unsaved changes. No parameters.
+**list_documents**: the documents open in Dieying, numbered as their tabs are, with their size, layer count and whether they have unsaved changes. No parameters.
 
 **describe_document**: the canvas size and resolution, the selection's bounds, and the layer stack top layer first, with each layer's kind, id, position and size, visibility, opacity, blend mode, mask, clipping and effects. Parameters: `document`.
 
@@ -74,7 +74,7 @@ The selection tools take `mode`: replace (the default), add, subtract or interse
 
 **select_subject**: the subject of the whole picture. Parameters: `mode`; `detect`.
 
-Both take `detect`: `any` runs the U²-Net model on the machine Composa runs on, for any subject; `person` runs MODNet, for people with soft hair; `plain` takes everything that is not the near-uniform backdrop touching the picture's edges, which is fast and exact on product shots and defeated by busy backgrounds. Left out, the Detect choice in Composa's Object Selection options applies. A model that is not available falls back to `plain`.
+Both take `detect`: `any` runs the U²-Net model on the machine Dieying runs on, for any subject; `person` runs MODNet, for people with soft hair; `plain` takes everything that is not the near-uniform backdrop touching the picture's edges, which is fast and exact on product shots and defeated by busy backgrounds. Left out, the Detect choice in Dieying's Object Selection options applies. A model that is not available falls back to `plain`.
 
 **select_color_range**: every pixel near the given colors anywhere in the picture, as Select > Color Range does. Parameters: `colors`, a list of colors as `#RRGGBB` or names; `exclude`, colors to leave out; `fuzziness` from 0 to 200, 40 by default; `invert`, to select everything else; `mode`.
 

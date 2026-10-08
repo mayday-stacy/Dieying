@@ -25,7 +25,7 @@ public static class RawDevelopDialog
             Width = PreviewWidth, Height = PreviewHeight, CornerRadius = new CornerRadius(6), Background = new SolidColorBrush(Color.Parse("#1C1C1C")),
             Child = image, ClipToBounds = true
         };
-        var info = Ui.Label($"{raw.Width} × {raw.Height} pixels, developed at 16 bits per channel", Palette.Secondary);
+        var info = Ui.Label(L10n.Format("{0} × {1} pixels, developed at 16 bits per channel", raw.Width, raw.Height), Palette.Secondary);
 
         // Each slider move develops a preview on a worker; only the newest request is shown, older ones are dropped.
         var revision = 0;
@@ -64,7 +64,7 @@ public static class RawDevelopDialog
         note.MaxWidth = PreviewWidth;
 
         var body = Ui.Column(12, frame, info, exposure, temperature, tint, Ui.Row(12, reset, note));
-        var dialog = new DialogWindow($"Develop {fileName}", body, "Import");
+        var dialog = new DialogWindow(L10n.Format("Develop {0}", fileName), body, "Import");
         dialog.Opened += (_, _) => Render();
         var accepted = await dialog.Ask(owner);
         timer.Stop();

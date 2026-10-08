@@ -40,7 +40,7 @@ public sealed partial class ComposaTools(MainWindow window)
     }
 
     [McpServerTool(Name = "list_documents", ReadOnly = true, Idempotent = true)]
-    [Description("The documents open in Composa, numbered as their tabs are. Other tools take that number as `document`; leave it out for the active one.")]
+    [Description("The documents open in " + AppInfo.Name + ", numbered as their tabs are. Other tools take that number as `document`; leave it out for the active one.")]
     public Task<string> ListDocuments() => OnUi(() =>
     {
         var sessions = window.Sessions;
@@ -344,7 +344,7 @@ public sealed partial class ComposaTools(MainWindow window)
     private EditorSession Session(int? document)
     {
         var sessions = window.Sessions;
-        if (sessions.Count == 0) throw new McpException("No document is open in Composa.");
+        if (sessions.Count == 0) throw new McpException($"No document is open in {AppInfo.Name}.");
         if (document is { } number)
         {
             if (number < 1 || number > sessions.Count) throw new McpException($"There is no document {number}; list_documents shows {sessions.Count}.");

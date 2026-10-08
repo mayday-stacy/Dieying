@@ -124,6 +124,7 @@ public sealed partial class CanvasView
     /// <summary>Starts typing in an existing text layer (from the Layers panel or the Edit Text command).</summary>
     public void EditText(Layer layer)
     {
+        CancelImeComposition();
         if (session?.EditText(layer) is not { } editor) return;
         editor.MoveToDocumentEdge(end: true, select: false);
         Focus();
@@ -139,9 +140,13 @@ public sealed partial class CanvasView
     private bool HandleTextKey(TextEditor editor, KeyEventArgs e)
     {
         if (session == null) return false;
+        if (IsImeComposing) return false; // The platform owns candidate navigation, cancellation and commit.
         var shift = e.KeyModifiers.HasFlag(KeyModifiers.Shift);
         var control = e.KeyModifiers.HasFlag(KeyModifiers.Control);
         var alt = e.KeyModifiers.HasFlag(KeyModifiers.Alt);
+        // AltGr is reported as Ctrl+Alt on several layouts. A printable symbol belongs to TextInput,
+        // even when its physical letter is also an editing shortcut (Polish AltGr+A, for example).
+        if (control && alt && e.KeySymbol?.Any(c => !char.IsControl(c)) == true) return false;
         var step = shift ? 10 : 1;
         switch (e.Key)
         {
@@ -206,9 +211,10 @@ public sealed partial class CanvasView
     protected override void OnTextInput(TextInputEventArgs e)
     {
         base.OnTextInput(e);
-        if (session?.TextEdit is not { } editor || string.IsNullOrEmpty(e.Text)) return;
+        if (!IsFocused || session?.TextEdit is not { } editor || string.IsNullOrEmpty(e.Text)) return;
         var text = new string(e.Text.Where(c => c >= ' ' || c == '\n').ToArray());
         if (text.Length == 0) return;
+        textInputClient?.ClearPreview();
         editor.Insert(text);
         e.Handled = true;
     }
@@ -242,12 +248,15 @@ public sealed partial class CanvasView
                 canvas.DrawRect(rect, line);
             });
         }
-        if (session.TextEdit is not { } editor || session.TextEditLayer is not { Pixels: { } pixels } layer) return;
+        if (session.TextEdit is not { } editor || (textInputClient?.PreviewLayer ?? session.TextEditLayer) is not { Pixels: { } pixels } layer) return;
         var toView = layer.Matrix.PostConcat(view);
         var corners = layer.Transform.Corners(pixels.Width, pixels.Height).Select(p => view.MapPoint(p)).ToArray();
-        var layout = editor.Layout;
-        var selection = editor.HasSelection ? layout.SelectionRects(editor.SelectionStart, editor.SelectionEnd) : [];
-        var caret = editor.HasSelection || antsPhase % 8 >= 4 ? null : (ValueTuple<float, float, float>?)layout.CaretAt(editor.Caret);
+        var composition = textInputClient is { IsComposing: true } client ? client : null;
+        var layout = composition?.PreviewLayout ?? editor.Layout;
+        var selection = composition == null && editor.HasSelection ? layout.SelectionRects(editor.SelectionStart, editor.SelectionEnd) : [];
+        var underlines = composition != null ? layout.SelectionRects(composition.PreviewStart, composition.PreviewEnd) : [];
+        var caret = composition != null ? layout.CaretAt(composition.PreviewCaret)
+            : editor.HasSelection || antsPhase % 8 >= 4 ? null : (ValueTuple<float, float, float>?)layout.CaretAt(editor.Caret);
         // Text that overflowed a paragraph box is clipped, and so is its caret.
         if (caret is { Item2: var caretTop } && layout.Style.IsBox && caretTop > layout.Height - TextLayout.Padding) caret = null;
         var overflows = layout.Overflows;
@@ -276,6 +285,8 @@ public sealed partial class CanvasView
                     canvas.DrawPath(quad, fill);
                 }
             }
+            foreach (var rect in underlines)
+                canvas.DrawLine(toView.MapPoint(rect.Left, rect.Bottom), toView.MapPoint(rect.Right, rect.Bottom), line);
             if (caret is { } c)
             {
                 var (x, top, bottom) = c;

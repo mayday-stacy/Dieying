@@ -68,6 +68,38 @@ public class TextEditingTests
     }
 
     [AvaloniaFact]
+    public void AltGr_symbols_do_not_run_ctrl_shortcuts_or_consume_platform_text_input()
+    {
+        var layer = session.AddText(new SKPoint(80, 120), session.TextDefaults with { Text = "Base" });
+        window.Canvas.EditText(layer);
+        var editor = session.TextEdit!;
+        editor.MoveTo(1, select: false);
+        editor.MoveTo(3, select: true);
+
+        foreach (var (key, symbol) in new[] { (Key.A, "ą"), (Key.Z, "ż"), (Key.E, "€"), (Key.V, "@") })
+        {
+            var args = new KeyEventArgs
+            {
+                RoutedEvent = InputElement.KeyDownEvent,
+                Key = key,
+                KeySymbol = symbol,
+                KeyModifiers = KeyModifiers.Control | KeyModifiers.Alt
+            };
+            window.Canvas.RaiseEvent(args);
+            Assert.False(args.Handled); // X11 would otherwise suppress the following TextInput.
+            Assert.Equal("Base", editor.Text);
+            Assert.Equal("as", editor.SelectedText);
+            Assert.False(editor.CanUndo);
+        }
+
+        window.KeyTextInput("ą");
+        Assert.Equal("Bąe", editor.Text);
+        Assert.True(editor.Undo());
+        Assert.Equal("Base", editor.Text);
+        Assert.Equal("as", editor.SelectedText);
+    }
+
+    [AvaloniaFact]
     public void Clicking_starts_point_text_that_is_typed_live_and_committed_with_ctrl_enter()
     {
         Click(80, 120);

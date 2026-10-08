@@ -1,8 +1,33 @@
 # Changelog
 
-All notable changes to Composa are recorded here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+Dieying changes are recorded first; the Composa release history below is preserved as upstream provenance. It does not represent past Dieying releases. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased] — Dieying
+
+### Added
+
+- Independent Dieying application identity and executable, English/Simplified Chinese UI, separate settings/recovery and MCP connection, with read-only settings compatibility for the earlier `image-editor-dev` development name.
+- Native PowerShell commands for building, testing, running, preparing pinned local models and generating a Windows portable ZIP with a SHA-256 sidecar.
+- Canvas IME preedit and candidate positioning, cancellation without modifying committed text, font fallback and missing-font notices, grapheme-aware text navigation/deletion and common Chinese punctuation wrapping rules.
+- Shared PNG/JPEG/WebP export controls for dimensions, proportions, encoded preview and file size, independent JPEG/WebP quality and JPEG white/black matte.
+- Windows and Chinese composition regressions, including project round trips, IME resource lifetime, identity isolation, export behavior and test-runner result validation.
+
+### Changed
+
+- All development/script builds default to the local update channel; they do not contact or install upstream Composa releases. Update compatibility tests inject their own fake environments.
+- Export uses a document snapshot and background encoding/writing, preserves document size and saved state, waits when closing and keeps existing files intact on a failed write.
+- Upstream installers and public release automation are disabled for the independent fork. Documentation now describes Dieying's portable/source workflow and preserves upstream credit, project format and MCP resource compatibility.
+- The Windows test command retains a separate log and TRX for each project and fails on missing, inconsistent or zero-test reports.
+
+### Fixed
+
+- Released temporary IME preview bitmaps without disposing pixels shared with committed document history.
+- Preserved text selection and redo history when an oversized paste is refused.
+- Distinguished live recovery sessions by process ID and start time after executable renaming.
+
+## Upstream Composa history
+
+The entries below are retained from Composa at the fork baseline. Features, download/update behavior and release claims in these historical entries describe upstream at that time; see the current README for Dieying behavior.
 
 ## [1.4.0] - 2026-10-03
 

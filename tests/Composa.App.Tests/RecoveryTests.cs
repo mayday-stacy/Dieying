@@ -26,6 +26,15 @@ public class RecoveryTests
             // This process is alive, so its own copies are not "abandoned".
             Assert.Empty(recovery.FindAbandoned());
 
+            // PIDs are reused. An entry from an earlier process with our PID is still abandoned.
+            var infoPath = Directory.GetFiles(folder, "*.json")[0];
+            var originalInfo = File.ReadAllText(infoPath);
+            var reusedPid = System.Text.Json.Nodes.JsonNode.Parse(originalInfo)!;
+            reusedPid["ProcessStartedUtc"] = DateTime.UnixEpoch;
+            File.WriteAllText(infoPath, reusedPid.ToJsonString());
+            Assert.Single(recovery.FindAbandoned());
+            File.WriteAllText(infoPath, originalInfo);
+
             // A copy left by a process that no longer exists is.
             var info = Directory.GetFiles(folder, "*.json")[0];
             File.WriteAllText(info, File.ReadAllText(info).Replace($"\"ProcessId\":{Environment.ProcessId}", "\"ProcessId\":2147483600"));

@@ -105,6 +105,15 @@ public class ReleaseAssetsTests
         Assert.Equal("composa_1.2.0_amd64.deb", ReleaseAssets.Offered(UpdateChannel.GitHub, InstallKind.Deb, Architecture.X64, release)?.Name);
     }
 
+    [Theory]
+    [InlineData(InstallKind.WindowsInstaller)]
+    [InlineData(InstallKind.WindowsZip)]
+    public async Task A_local_build_is_offered_no_file(InstallKind kind)
+    {
+        var release = await Parse(V120);
+        Assert.Null(ReleaseAssets.Offered(UpdateChannel.Local, kind, Architecture.X64, release));
+    }
+
     [Fact]
     public async Task A_developer_build_is_offered_no_file()
     {

@@ -1,4 +1,11 @@
-# Agent notes for Composa
+# Agent notes for Dieying
+
+Dieying is the independent fork at `mayday-stacy/Dieying`. Keep Composa's source namespaces,
+project filenames, `.cmps` format and provenance; the product executable is `dieying` and its
+MCP override is `DIEYING_MCP_PIPE`. The inherited architecture notes below still use Composa's
+names. Use `scripts/windows.ps1` for Windows build/test/portable packaging; upstream installer
+recipes and public release automation are disabled. Keep `UpdateChannel=local` until Dieying's
+own release and asset verification path is configured. See `RELEASING.md` for the current process.
 
 ## What this is
 
